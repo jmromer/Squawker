@@ -14,15 +14,22 @@ gem 'jbuilder', '1.0.2'       # Build JSON APIs with ease. Read more: https://gi
 
 group :development, :test do
   gem 'pry-rails'             # use pry for rails console
+  gem 'annotate'              # annotate models
+
   gem 'better_errors'         # better errors, duh
   gem 'binding_of_caller'     # REPL in better errors
   gem 'debugger'              # for debugging
+
   gem 'rspec-rails', '2.13.1' # rspec as alternative TDD language
   gem 'guard-rspec', '2.5.0'  # guard to automate rspec
   gem 'spork-rails', '4.0.0'  # spork and dependcies to speed up guard
   gem 'guard-spork', '1.5.0'  # use `spork --bootstrap` to bootstrap spork configuration
   gem 'childprocess', '0.3.6'
-  gem 'growl', '1.0.3'        # for growl notifications on osx
+
+  gem 'autotest'
+  gem 'autotest-rails'        # for automated testing with growl
+  gem 'autotest-growl'
+  gem 'autotest-fsevent'
 end
 
 group :test do
