@@ -37,6 +37,7 @@ end
 group :test do
   gem 'selenium-webdriver', '2.35.1'  # Capybara dependency
   gem 'capybara', '2.1.0'             # Simulates user interaction with application
+  gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
 
 group :doc do
