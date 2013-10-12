@@ -4,7 +4,8 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag "application", media: "all",
                             "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag  "application",
+                                "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
   </head>
@@ -13,7 +14,7 @@
     <div class="container">
 
       <% flash.each do |key, value| %>
-              <div class="alert alert-<%= key %>"><%= value %></div>
+        <%= content_tag(:div, value, class: 'alert alert-#{key}') %>
       <% end %>
 
       <%= yield %>
