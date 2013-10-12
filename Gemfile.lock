@@ -37,6 +37,7 @@ GEM
     autotest-growl (0.2.16)
     autotest-rails (4.1.2)
       ZenTest (~> 4.5)
+    bcrypt-ruby (3.0.1)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -219,6 +220,7 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-rails
+  bcrypt-ruby (= 3.0.1)
   better_errors
   binding_of_caller
   bootstrap-sass (= 2.3.2.0)
