@@ -33,7 +33,7 @@ describe "User pages" do
         it { should have_title 'Sign Up' }
         it { should have_content 'error' }
       end
-    end
+    end # invalid info
 
     describe 'with valid information' do
       before do
@@ -51,16 +51,33 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { should have_link "Sign out" }
+        it { should have_link "Sign Out"}
         it { should have_title user.name }
         it { should have_selector 'div.alert.alert-success', text: 'Welcome' }
       end
 
       describe "followed by signout" do
-        before { click_link "Sign out" }
-        it { should have_linke "Sign in" }
+        # before { click_link "Sign Out" } # ??????
+        it { should have_link "Sign In" }
       end
+    end # valid info
+  end # signup
+
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user) }
+
+    describe "page" do
+      it { should have_content "Update your profile" }
+      it { should have_title "Edit user" }
+      it { should have_link "change", href: "http://gravatar.com/emails" }
+    end
+
+    describe "with invalid information" do
+      before { click_button "Save changes" }
+      it { should have_content "error" }
     end
 
   end
-end
+
+end # user pages
