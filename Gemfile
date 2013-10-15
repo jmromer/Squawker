@@ -35,6 +35,8 @@ group :development, :test do
   gem 'autotest-rails'        # for automated testing with growl
   gem 'autotest-growl'
   gem 'autotest-fsevent'
+
+  gem 'meta_request'
 end
 
 group :test do
