@@ -10,7 +10,6 @@ describe User do
   end
 
   subject { @user }
-
   it { should respond_to :name }
   it { should respond_to :email }
   it { should respond_to :password_digest }
@@ -19,6 +18,7 @@ describe User do
   it { should respond_to :remember_token }
   it { should respond_to :authenticate }
   it { should respond_to :admin }
+  it { should respond_to :microposts }
   it { should be_valid }
   it { should_not be_admin }
 
@@ -84,7 +84,6 @@ describe User do
     end
   end
 
-
   # Email Format
   describe "when email format is invalid" do
       it "should be invalid" do
@@ -95,26 +94,64 @@ describe User do
           expect(@user).not_to be_valid
         end
       end
+  end
+
+  describe "when email format is valid" do
+    it "should be valid" do
+      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+      addresses.each do |valid_address|
+        @user.email = valid_address
+        expect(@user).to be_valid
+      end
+    end
+  end
+
+  # Email Uniqueness
+  describe "when email address is already taken" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.save
     end
 
-    describe "when email format is valid" do
-      it "should be valid" do
-        addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
-        addresses.each do |valid_address|
-          @user.email = valid_address
-          expect(@user).to be_valid
-        end
+    it { should_not be_valid }
+  end
+
+  # Microposts
+  describe 'micropost associations' do
+
+    before { @user.save }
+
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+
+    let!(:newer_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+
+    it 'should have the right microposts in the right order' do
+      expect(@user.microposts.to_a).to eq [newer_micropost, older_micropost]
+    end
+
+    it 'should destroy associated microposts' do
+      microposts = @user.microposts.to_a
+      @user.destroy
+      expect(microposts).not_to be_empty
+      microposts.each do |micropost|
+        expect(Micropost.where(id: micropost.id)).to be_empty
       end
     end
 
-    # Email Uniqueness
-
-    describe "when email address is already taken" do
-      before do
-        user_with_same_email = @user.dup
-        user_with_same_email.save
+    describe 'status' do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
 
-      it { should_not be_valid }
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
     end
+
+  end # micropost associations
+
 end
