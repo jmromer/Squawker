@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
       # password and password_confirmation attributes,
       # and matching validation for those two, among other things
 
+  has_many :microposts, dependent: :destroy
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
