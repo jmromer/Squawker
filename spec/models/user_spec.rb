@@ -142,7 +142,16 @@ describe User do
       end
     end
 
-  end # micropost associations
+    describe 'status' do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
+      end
 
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
+
+  end # micropost associations
 
 end
