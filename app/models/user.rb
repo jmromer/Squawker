@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
       # and matching validation for those two, among other things
 
   has_many :microposts, dependent: :destroy
+  has_many :relationships, dependent: :destroy, foreign_key: "follower_id"
+  has_many :followed_users, through: :relationships, source: :followed
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
