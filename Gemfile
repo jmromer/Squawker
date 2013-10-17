@@ -3,15 +3,15 @@ ruby '2.0.0'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.0.0'
-gem 'pg', '0.15.1'
+gem 'pg'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
-gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails'
-gem 'bootstrap-glyphicons'
+# gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails'
+# gem 'bootstrap-glyphicons'
 
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
@@ -27,9 +27,9 @@ group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
 
-group :production do
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor', '0.0.2'
+group :production, :staging do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
