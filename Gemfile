@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-#ruby-gemset=railstutorial_rails_4_0
+#ruby-gemset=NewsFlash
 
 gem 'rails', '4.0.0'
 gem 'pg'
@@ -26,8 +25,7 @@ group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
 
-group :production, :staging do
-  gem 'pg'
+group :production do
   gem 'rails_12factor'
 end
 
@@ -58,3 +56,6 @@ group :test do
   gem 'capybara', '2.1.0'             # Simulates user interaction
   gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
+
+
+ruby '2.0.0'
