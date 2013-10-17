@@ -9,6 +9,16 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
+/* Reset user agent styles */
+html, body, section, article, header, div, p, h3, img, a, time {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 /* universal */
 html {
   overflow-y: scroll;
@@ -89,14 +99,15 @@ footer {
     }
   }
   small {
-    float: left;
+    float: right;
   }
   ul {
-    float: right;
+    float: left;
     list-style: none;
+    margin-left: 0px;
     li {
       float: left;
-      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }
@@ -229,9 +240,13 @@ aside {
 
 .micropost-gravatar {
   display: block;
+  float: left;
+  width: 45px;
 }
 
 .micropost-content {
+  display: block;
+  margin-left: 45px;
   .text {
     display: block;
   }
@@ -305,4 +320,20 @@ aside {
 
 
 
+/* contact form, about text */
 
+.static-page-block {
+  width: 500px;
+  margin: auto;
+  position: relative;
+}
+
+
+
+/* clearfix */
+
+.group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
