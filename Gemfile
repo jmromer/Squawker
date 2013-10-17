@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 #ruby-gemset=NewsFlash
 
 gem 'rails', '4.0.0'
@@ -55,6 +56,3 @@ group :test do
   gem 'capybara', '2.1.0'             # Simulates user interaction
   gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
-
-
-ruby '2.0.0'
