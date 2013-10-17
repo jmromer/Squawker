@@ -16,7 +16,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
-gem 'less-rails'
 gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
 gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'jbuilder', '1.0.2'       # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
