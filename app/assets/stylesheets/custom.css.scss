@@ -204,6 +204,19 @@ input {
 
 /* microposts */
 
+.gravatar {
+  float: left;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+
 .microposts {
   list-style: none;
   margin: 10px 0 0 0;
@@ -213,21 +226,24 @@ input {
     border-top: 1px solid #e8e8e8;
   }
 }
-.content {
+
+.micropost-gravatar {
   display: block;
 }
-.timestamp {
-  color: $grayLight;
-}
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
+
+.micropost-content {
+  .timestamp {
+    color: $grayLight;
+    text-align: right;
+    font-size: 12px;
   }
+  .text {
+    display: block;
+  }
+}
+
+.trashcan {
+  margin-top: -3px;
 }
 
 
