@@ -13,6 +13,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
+gem 'therubyracer', platforms: :ruby  # for less-rails
 gem 'less-rails'
 gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
 gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -27,8 +28,6 @@ group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
 end
-
-# gem 'therubyracer', platforms: :ruby  # See http://j.mp/163fN1X for more supported runtimes
 
 group :development, :test do
   gem 'pry-rails'             # use pry for rails console
