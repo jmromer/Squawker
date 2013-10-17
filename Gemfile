@@ -10,6 +10,9 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
+gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails'
+gem 'bootstrap-glyphicons'
+
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
