@@ -11,7 +11,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module SampleApp
+module NewsFlash
   class Application < Rails::Application
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
