@@ -232,14 +232,14 @@ aside {
 }
 
 .micropost-content {
-  .timestamp {
-    color: $grayLight;
-    text-align: right;
-    font-size: 12px;
-  }
   .text {
     display: block;
   }
+}
+.timestamp {
+  color: $grayLight;
+  text-align: right;
+  font-size: 12px;
 }
 
 .trashcan {
