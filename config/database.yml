@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: sample_app_development
+  database: newsflash_development
   host: localhost
 
 
@@ -12,13 +12,13 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: sample_app_test
+  database: newsflash_test
   host: localhost
 
 production:
   adapter: postgresql
   encoding: utf8
-  database: sample_app_production
+  database: newsflash_production
   pool: 5
   username:
   password:
