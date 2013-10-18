@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :set_friendly_return_page,  only: :home
+
   def home
     if signed_in?
       @micropost = current_user.microposts.build

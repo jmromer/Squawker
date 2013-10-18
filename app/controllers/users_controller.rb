@@ -2,8 +2,9 @@ class UsersController < ApplicationController
   before_action :signed_in_user,
                 only: [:index, :edit, :update, :destroy, :following, :followers]
 
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :correct_user,  only: [:edit, :update]
+  before_action :admin_user,    only: :destroy
+  before_action :set_friendly_return_page,  only: :show
 
   def index
     @users = User.paginate(page: params[:page])
@@ -23,10 +24,6 @@ class UsersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @user = User.find(params[:id])
   end
 
   def edit
@@ -54,7 +51,6 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(page: params[:page], per_page: 20)
   end
 
-
   def following
     @title = "Following"
     @user = User.find(params[:id])
@@ -68,9 +64,6 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page], per_page: 20)
     render 'show_follow'
   end
-
-
-
 
 
   private

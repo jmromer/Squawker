@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+  validates :remember_token, uniqueness: true
 
   has_secure_password
       # provides presence validation,
