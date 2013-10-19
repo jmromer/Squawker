@@ -67,10 +67,8 @@ p {
   margin-right: 10px;
   font-size: 1.7em;
   color: white;
-//  text-transform: uppercase;
   letter-spacing: -0.5px;
   padding-top: 9px;
-//  font-weight: bold;
   line-height: 1;
   &:hover {
     color: white;
@@ -129,6 +127,10 @@ input {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
+}
+
+#follow_form {
+  padding-top: 10px;
 }
 
 
