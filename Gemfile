@@ -2,10 +2,6 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 #ruby-gemset=NewsFlash
 
-gem 'rails', '4.0.0'
-gem 'pg'
-gem 'bootstrap-sass', '2.3.2.0'
-gem 'newrelic_rpm'
 
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
@@ -19,6 +15,11 @@ gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
 gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'jbuilder', '1.0.2'       # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+
+gem 'rails', '4.0.0'
+gem 'pg'
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'newrelic_rpm'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -46,7 +47,7 @@ group :development, :test do
   gem 'autotest'
   gem 'autotest-rails'        # for automated testing with growl
   gem 'autotest-growl'
-  gem 'autotest-fsevent'
+  # gem 'autotest-fsevent'
 
   gem 'meta_request'
 end
