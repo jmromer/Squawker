@@ -109,7 +109,7 @@ describe "User pages" do
       end
 
       describe "followed by signout" do
-        # before { click_link "Sign Out" } # ??????
+        # before { click_link "Sign Out" } # ?
         it { should have_link "Sign In" }
       end
     end # valid info
