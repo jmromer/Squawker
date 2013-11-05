@@ -5,11 +5,16 @@
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
 
-      <%= f.label      :email %>
-      <%= f.text_field :email %>
+      <p>
+        Email
+        <%= f.text_field :email %>
+      </p>
 
-      <%= f.label          :password %>
-      <%= f.password_field :password %>
+      <p>
+        Password
+        <span id="forgot-password"><%= link_to "forgot your password?", "#" %></span>
+        <%= f.password_field :password %>
+      </p>
 
       <p>Keep me logged in <%= f.check_box :remember_me %></p>
 
