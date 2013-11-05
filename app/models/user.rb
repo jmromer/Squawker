@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, length: { minimum: 6 }, on: :create
-  validates :password_confirmation, presence: true, on: :create
+  validates :password, length: { minimum: 6 }
+  validates :password_confirmation, presence: true
   validates :remember_token, uniqueness: true
   validates :password_reset_token, uniqueness: true
 
@@ -48,9 +48,10 @@ class User < ActiveRecord::Base
 
 
   def send_password_reset
+    # self.update_attributes!(password_reset_token: User.new_token, password_reset_at: Time.zone.now)
     self.password_reset_token = User.new_token
     self.password_reset_at = Time.zone.now
-    save!
+    self.save!(validate: false)
     UserMailer.password_reset(self).deliver
   end
 
