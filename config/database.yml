@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: newsflash_development
+  database: squawker_development
   host: localhost
 
 
@@ -12,13 +12,13 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: newsflash_test
+  database: squawker_test
   host: localhost
 
 production:
   adapter: postgresql
   encoding: utf8
-  database: newsflash_production
+  database: squawker_production
   pool: 5
   username:
   password:

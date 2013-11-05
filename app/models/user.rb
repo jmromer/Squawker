@@ -2,14 +2,16 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean          default(FALSE)
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  email                :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  password_digest      :string(255)
+#  remember_token       :string(255)
+#  admin                :boolean          default(FALSE)
+#  password_reset_token :string(255)
+#  password_reset_at    :datetime
 #
 
 class User < ActiveRecord::Base
@@ -23,9 +25,10 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 6 }, on: :create
+  validates :password_confirmation, presence: true, on: :create
   validates :remember_token, uniqueness: true
+  validates :password_reset_token, uniqueness: true
 
   has_secure_password
       # provides presence validation,
@@ -44,7 +47,13 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
 
 
-  def User.new_remember_token
+  def send_password_reset
+    self.password_reset_token = User.new_token
+    self.password_reset_at = Time.zone.now
+    save!
+  end
+
+  def User.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -71,7 +80,7 @@ class User < ActiveRecord::Base
   private
 
     def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+      self.remember_token = User.encrypt(User.new_token)
     end
 end
 

@@ -11,19 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016144734) do
+ActiveRecord::Schema.define(version: 20131105202451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "squawks", force: true do |t|
-    t.string   "content"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "squawks", ["user_id", "created_at"], name: "index_squawks_on_user_id_and_created_at", using: :btree
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"
@@ -36,6 +27,15 @@ ActiveRecord::Schema.define(version: 20131016144734) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "squawks", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "squawks", ["user_id", "created_at"], name: "index_squawks_on_user_id_and_created_at", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 20131016144734) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                default: false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
