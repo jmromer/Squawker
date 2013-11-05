@@ -1,4 +1,4 @@
-NewsFlash::Application.routes.draw do
+Squawker::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :squawks,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

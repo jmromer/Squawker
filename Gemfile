@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-#ruby-gemset=NewsFlash
+#ruby-gemset=Squawker
 
 
 gem 'bcrypt-ruby', '3.0.1'
@@ -57,3 +57,6 @@ group :test do
   gem 'capybara', '2.1.0'             # Simulates user interaction
   gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
+
+
+

@@ -25,6 +25,6 @@ def secure_token
   end
 end
 
-NewsFlash::Application.config.secret_key_base = secure_token
+Squawker::Application.config.secret_key_base = secure_token
 
 

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-NewsFlash::Application.load_tasks
+Squawker::Application.load_tasks
