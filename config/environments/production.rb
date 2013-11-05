@@ -77,4 +77,7 @@ Squawker::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Base URL for links in mailers
+  config.action_mailer.default_url_options = { host: "squawker.jakeromer.com" }
 end
