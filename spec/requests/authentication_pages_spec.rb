@@ -98,15 +98,15 @@ describe 'Authentication' do
 
       end
 
-      describe "in the Microposts controller" do
+      describe "in the Squawks controller" do
 
         describe "submitting to the create action" do
-          before { post microposts_path }
+          before { post squawks_path }
           specify { expect(response).to redirect_to(signin_path) }
         end
 
         describe "submitting to the destroy action" do
-          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+          before { delete squawk_path(FactoryGirl.create(:squawk)) }
           specify { expect(response).to redirect_to(signin_path) }
         end
       end

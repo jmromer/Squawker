@@ -5037,7 +5037,7 @@ input {
   clear: both;
   display: table; }
 
-/* microposts */
+/* squawks */
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -5047,22 +5047,22 @@ aside textarea {
   height: 100px;
   margin-bottom: 10px; }
 
-.microposts {
+.squawks {
   list-style: none !important;
   margin: 10px 0 0 0; }
-  .microposts li {
+  .squawks li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8; }
 
-.micropost-gravatar {
+.squawk-gravatar {
   display: block;
   float: left;
   width: 45px; }
 
-.micropost-content {
+.squawk-content {
   display: block;
   margin-left: 45px; }
-  .micropost-content .text {
+  .squawk-content .text {
     display: block; }
 
 .timestamp {

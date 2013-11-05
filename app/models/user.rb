@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
       # password and password_confirmation attributes,
       # and matching validation for those two, among other things
 
-  has_many :microposts, dependent: :destroy
+  has_many :squawks, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
 
@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    Micropost.from_users_followed_by(self)
+    Squawk.from_users_followed_by(self)
   end
 
   def following?(other_user)

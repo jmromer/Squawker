@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: microposts
+# Table name: squawks
 #
 #  id         :integer          not null, primary key
 #  content    :string(255)
@@ -9,9 +9,9 @@
 #  updated_at :datetime
 #
 
-class Micropost < ActiveRecord::Base
+class Squawk < ActiveRecord::Base
   validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 140 }
+  validates :content, presence: true, length: { maximum: 1400 }
 
   belongs_to :user
   default_scope -> { order ('created_at DESC') }

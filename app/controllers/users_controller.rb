@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to Sqawker!"
       redirect_to @user
     else
       render :new
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page], per_page: 20)
+    @squawks = @user.squawks.paginate(page: params[:page], per_page: 20)
   end
 
   def following

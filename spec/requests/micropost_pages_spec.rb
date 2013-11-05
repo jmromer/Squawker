@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe "Micropost pages" do
+describe "Squawk pages" do
 
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 
-  describe "micropost creation" do
+  describe "squawk creation" do
     before { visit root_path }
 
     describe "with invalid information" do
 
-      it "should not create a micropost" do
-        expect { click_button "Post" }.not_to change(Micropost, :count)
+      it "should not create a squawk" do
+        expect { click_button "Post" }.not_to change(Squawk, :count)
       end
 
       describe "error messages" do
@@ -24,23 +24,23 @@ describe "Micropost pages" do
 
     describe "with valid information" do
 
-      before { fill_in 'micropost_content', with: "Lorem ipsum" }
-      it "should create a micropost" do
-        expect { click_button "Post" }.to change(Micropost, :count).by(1)
+      before { fill_in 'squawk_content', with: "Lorem ipsum" }
+      it "should create a squawk" do
+        expect { click_button "Post" }.to change(Squawk, :count).by(1)
       end
     end
   end
 
-  describe "micropost destruction" do
-    before { FactoryGirl.create(:micropost, user: user) }
+  describe "squawk destruction" do
+    before { FactoryGirl.create(:squawk, user: user) }
 
     describe "as correct user" do
       before { visit root_path }
 
-      it "should delete a micropost" do
+      it "should delete a squawk" do
         expect do
           find('.delete-item').click
-        end.to change(Micropost, :count).by(-1)
+        end.to change(Squawk, :count).by(-1)
       end
     end
   end

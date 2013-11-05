@@ -1,9 +1,9 @@
 <li id="<%= feed_item.id %>" class="group">
-  <div class="micropost-gravatar">
+  <div class="squawk-gravatar">
     <%= link_to gravatar_for(feed_item.user, {size: 35}), feed_item.user %>
   </div>
 
-  <div class="micropost-content">
+  <div class="squawk-content">
     <span class="user"><%= link_to feed_item.user.name, feed_item.user %></span>
     <span class="timestamp"><%= time_ago_in_words(feed_item.created_at) %> ago</span>
     <span class="text"><%= feed_item.content %>

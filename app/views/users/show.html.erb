@@ -18,14 +18,14 @@
 
   <div class="span8">
     <%#= render 'follow_form' if signed_in? %>
-    <% if @user.microposts.any? %>
-    <h3>Your Posts (<%= @user.microposts.count %>)</h3>
-    <ol class="microposts">
-      <%= render @microposts %>
+    <% if @user.squawks.any? %>
+    <h3>Your Posts (<%= @user.squawks.count %>)</h3>
+    <ol class="squawks">
+      <%= render @squawks %>
     </ol>
 
     <div class="paginate">
-      <%= will_paginate @microposts %>
+      <%= will_paginate @squawks %>
     </div>
 
     <% end %>

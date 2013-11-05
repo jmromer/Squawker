@@ -1,11 +1,11 @@
-class MicropostsController < ApplicationController
+class SquawksController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
   def create
-    @micropost = current_user.microposts.build(micropost_params)
+    @squawk = current_user.squawks.build(squawk_params)
 
-    if @micropost.save
+    if @squawk.save
       flash[:success] = "Posted!"
       redirect_to root_url
     else
@@ -15,17 +15,17 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
+    @squawk.destroy
     redirect_to session[:return_to]
   end
 
   private
-    def micropost_params
-      params.require(:micropost).permit(:content)
+    def squawk_params
+      params.require(:squawk).permit(:content)
     end
 
     def correct_user
-      @micropost = current_user.microposts.find(params[:id])
+      @squawk = current_user.squawks.find(params[:id])
     rescue
       redirect_to root_url
     end

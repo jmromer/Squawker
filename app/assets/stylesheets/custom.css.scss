@@ -178,7 +178,7 @@ input {
 }
 
 
-/* microposts */
+/* squawks */
 
 .gravatar {
   float: left;
@@ -193,7 +193,7 @@ aside {
 }
 
 
-.microposts {
+.squawks {
   list-style: none !important;
   margin: 10px 0 0 0;
 
@@ -203,13 +203,13 @@ aside {
   }
 }
 
-.micropost-gravatar {
+.squawk-gravatar {
   display: block;
   float: left;
   width: 45px;
 }
 
-.micropost-content {
+.squawk-content {
   display: block;
   margin-left: 45px;
   .text {
