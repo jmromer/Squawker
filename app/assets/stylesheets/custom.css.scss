@@ -2,6 +2,12 @@
 
 /* mixins, variables, etc */
 $grayMediumLight: #eaeaea;
+$grayLight:  gray;
+$grayLighter: gray;
+$grayMediumLight:  gray;
+$gray:  gray;
+$grayDarker:  gray;
+$blue: blue;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -72,11 +78,9 @@ body {
 #edit-profile-form {
   margin: auto;
   width: 500px;
-
   .span4 {
     width: 100px;
   }
-
   .span8 {
     width: 350px;
     margin-left: 0px;
@@ -111,7 +115,6 @@ textarea {
 #all-users {
   margin: auto;
   width: 760px;
-
   .pagination {
     text-align: center;
   }
@@ -189,7 +192,6 @@ footer {
 
 
 /* forms */
-
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -230,11 +232,9 @@ input {
 #edit-gravatar {
   width: 100px;
   float: left;
-
   img {
     margin-top: 10px;
   }
-
   a {
     float: right;
     margin-top: 5px;
@@ -254,7 +254,6 @@ input {
 .users {
   list-style: none;
   margin: 0;
-
   li {
     display: inline-block;
     width: 250px;
@@ -264,7 +263,6 @@ input {
     &:last-child {
       border-bottom: 1px solid $grayLighter;
     }
-
     img {
       display: block;
     }
@@ -289,7 +287,6 @@ input {
 
 
 /* clearfix */
-
 .group:after {
   content: "";
   clear: both;
@@ -298,7 +295,6 @@ input {
 
 
 /* squawks */
-
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -347,7 +343,7 @@ aside {
 
 /* sidebar */
 aside {
-  section {
+ section {
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:first-child {
@@ -404,7 +400,6 @@ aside {
 }
 
 /* contact form, about text */
-
 .static-page-block {
   width: 500px;
   margin: auto;
