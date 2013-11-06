@@ -31,12 +31,18 @@ body {
     font-size: 150px;
     color: white;
     text-align: center;
-    margin-top: 120px;
+    margin: 120px 0px 0px -45px !important;
     text-transform: lowercase;
-    margin-left: -45px;
   }
   h2 {
+    letter-spacing: normal;
+    width: 250px;
+    margin: 0px auto 20px auto;
     color: $grayLight;
+  }
+  a {
+    font-weight: 300;
+    letter-spacing: normal;
   }
 }
 
@@ -161,6 +167,7 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
+  padding-bottom: 70px;
   border-top: 1px solid $grayMediumLight;
   width: 750px;
   margin-left: auto;
@@ -406,5 +413,30 @@ aside {
   h2 {
     font-size: 24px;
     color: inherit;
+    margin: 30px auto 10px auto;
+  }
+  p {
+    margin: 10px auto;
+    a {
+      color: #3f738d;
+      &:hover {
+        color: rgb(0, 136, 204);
+        text-decoration: none;
+      }
+    }
+  }
+  #capslock {
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0px auto;
+    padding: 0px 0px;
+  }
+  .squawker {
+    font-variant: small-caps;
+    font-weight: bold;
+  }
+  .keep-together {
+    white-space: nowrap;
   }
 }
