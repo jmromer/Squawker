@@ -226,9 +226,6 @@ input {
 #edit-gravatar {
   width: 100px;
   float: left;
-  img {
-    margin-top: 10px;
-  }
   a {
     float: right;
     margin-top: 5px;
@@ -292,6 +289,7 @@ input {
 .gravatar {
   float: left;
   margin-right: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
 }
 aside {
