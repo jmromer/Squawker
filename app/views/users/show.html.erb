@@ -19,9 +19,8 @@
   </aside>
 
   <div class="span8">
-    <%#= render 'follow_form' if signed_in? %>
     <% if @user.squawks.any? %>
-    <h3>Your Squawks (<%= @user.squawks.count %>)</h3>
+    <h3>your squawks (<%= @user.squawks.count %>)</h3>
     <ol class="squawks">
       <%= render @squawks %>
     </ol>

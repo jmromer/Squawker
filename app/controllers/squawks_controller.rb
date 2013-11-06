@@ -6,7 +6,7 @@ class SquawksController < ApplicationController
     @squawk = current_user.squawks.build(squawk_params)
 
     if @squawk.save
-      flash[:success] = "Squawked!"
+      flash[:success] = "SQUAWK!"
       redirect_to root_url
     else
       @feed_items = []

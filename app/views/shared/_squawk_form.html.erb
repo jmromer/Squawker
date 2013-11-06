@@ -1,8 +1,8 @@
 <%= form_for(@squawk) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content,
-                    placeholder: "New post..." %>
+    <%= f.text_field :content,
+                    placeholder: "squawk it!" %>
   </div>
-  <%= f.submit "Squawk", class: "btn btn-large btn-primary" %>
+  <%#= f.submit "squawk it!", class: "btn btn-primary", id: "submit-squawk" %>
 <% end %>
