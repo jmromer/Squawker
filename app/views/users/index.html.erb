@@ -1,14 +1,16 @@
 <% provide :title, "All Users" %>
 <h1>All Users</h1>
 
-<div class="paginate">
-  <%= will_paginate %>
-</div>
+<div id="all-users">
+  <div class="paginate">
+    <%= will_paginate %>
+  </div>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
 
-<div class="paginate">
-  <%= will_paginate %>
+  <div class="paginate">
+    <%= will_paginate %>
+  </div>
 </div>

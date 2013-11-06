@@ -5,7 +5,9 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @user %>
+        <span class="show-gravatar">
+          <%= gravatar_for @user %>
+        </span>
         <%= @user.name %>
       </h1>
     </section>
@@ -19,7 +21,7 @@
   <div class="span8">
     <%#= render 'follow_form' if signed_in? %>
     <% if @user.squawks.any? %>
-    <h3>Your Posts (<%= @user.squawks.count %>)</h3>
+    <h3>Your Squawks (<%= @user.squawks.count %>)</h3>
     <ol class="squawks">
       <%= render @squawks %>
     </ol>

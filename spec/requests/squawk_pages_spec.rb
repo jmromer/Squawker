@@ -13,11 +13,11 @@ describe "Squawk pages" do
     describe "with invalid information" do
 
       it "should not create a squawk" do
-        expect { click_button "Post" }.not_to change(Squawk, :count)
+        expect { click_button "Squawk" }.not_to change(Squawk, :count)
       end
 
       describe "error messages" do
-        before { click_button "Post" }
+        before { click_button "Squawk" }
         it { should have_content('error') }
       end
     end
@@ -26,7 +26,7 @@ describe "Squawk pages" do
 
       before { fill_in 'squawk_content', with: "Lorem ipsum" }
       it "should create a squawk" do
-        expect { click_button "Post" }.to change(Squawk, :count).by(1)
+        expect { click_button "Squawk" }.to change(Squawk, :count).by(1)
       end
     end
   end

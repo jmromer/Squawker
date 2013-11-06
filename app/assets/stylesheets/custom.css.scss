@@ -17,6 +17,75 @@ html {
 
 body {
   padding-top: 60px;
+  margin: auto;
+}
+
+.container {
+  width: 730px;
+}
+
+.hero-unit {
+  height: 450px;
+  background: url(bird.jpg);
+  h1 {
+    font-size: 130px;
+    text-align: center;
+    color: white;
+    margin-top: 110px;
+  }
+  h2 {
+    color: $grayLight;
+  }
+}
+
+.navbar {
+  background-image: linear-gradient(to bottom, rgb(34, 34, 34), rgb(17, 17, 17));
+  background-repeat: repeat-x;
+  border-color: rgb(37, 37, 37);
+}
+
+.navbar-inner {
+  width: 940px;
+  margin: auto;
+  .container {
+    width: 730px !important;
+    margin: auto;
+    padding: 0px 30px 0px 50px;
+  }
+}
+
+.row {
+    width: 750px;
+    margin: auto;
+}
+
+.span4 {
+  width: 220px;
+  margin-top: 15px;
+}
+
+.span8 {
+  width: 470px;
+  margin-left: 30px;
+}
+
+#edit-profile-form {
+  margin: auto;
+  width: 500px;
+
+  .span4 {
+    width: 100px;
+  }
+
+  .span8 {
+    width: 350px;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}
+
+.offset3 {
+  margin-left: 150px;
 }
 
 section {
@@ -25,13 +94,26 @@ section {
 
 textarea {
   resize: vertical;
+  height: 32px !important;
 }
-
 
 .center {
   text-align: center;
   h1 {
     margin-bottom: 10px;
+  }
+}
+
+.show-gravatar {
+  width: 100px;
+}
+
+#all-users {
+  margin: auto;
+  width: 760px;
+
+  .pagination {
+    text-align: center;
   }
 }
 
@@ -81,6 +163,9 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
   color: $grayLight;
   a {
     color: $gray;
@@ -139,7 +224,29 @@ input {
 }
 
 #session_remember_me {
-  margin-top: -3px;
+  margin-top: -4px;
+}
+
+#edit-gravatar {
+  width: 100px;
+  float: left;
+
+  img {
+    margin-top: 10px;
+  }
+
+  a {
+    float: right;
+    margin-top: 5px;
+  }
+}
+
+.edit_user {
+  float: right;
+}
+
+.center-form {
+  margin: auto;
 }
 
 
@@ -149,11 +256,24 @@ input {
   margin: 0;
 
   li {
+    display: inline-block;
+    width: 250px;
     overflow: auto;
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:last-child {
       border-bottom: 1px solid $grayLighter;
+    }
+
+    img {
+      display: block;
+    }
+    a {
+      overflow: hidden;
+    }
+    a.delete-item {
+      display: block;
+      margin-top: 5px;
     }
   }
 }
@@ -166,16 +286,6 @@ input {
   margin-top: 45px;
   @include box_sizing;
 }
-
-
-/* contact form, about text */
-
-.static-page-block {
-  width: 500px;
-  margin: auto;
-  position: relative;
-}
-
 
 
 /* clearfix */
@@ -290,5 +400,18 @@ aside {
   margin-top: 10px;
   .gravatar {
     margin: 1px 1px;
+  }
+}
+
+/* contact form, about text */
+
+.static-page-block {
+  width: 500px;
+  margin: auto;
+  position: relative;
+  text-align: justify;
+  h2 {
+    font-size: 24px;
+    color: inherit;
   }
 }
