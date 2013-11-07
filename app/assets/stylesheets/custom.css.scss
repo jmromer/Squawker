@@ -2,13 +2,11 @@
 
 /* mixins, variables, etc */
 $grayMediumLight: #eaeaea;
-
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 
 /* universal */
 html {
@@ -295,14 +293,12 @@ input {
   @include box_sizing;
 }
 
-
 /* clearfix */
 .group:after {
   content: "";
   clear: both;
   display: table;
 }
-
 
 /* squawks */
 .gravatar {
@@ -318,11 +314,9 @@ aside {
   }
 }
 
-
 .squawks {
   list-style: none !important;
   margin: 10px 0 0 0;
-
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
@@ -342,6 +336,7 @@ aside {
     display: block;
   }
 }
+
 .timestamp {
   color: $grayLight;
   text-align: right;
