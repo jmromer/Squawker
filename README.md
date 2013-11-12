@@ -1,6 +1,6 @@
 #squawker
 
-Squawker is a Twitter clone I built to learn Rails 4. Much gratitude to [Michael Hartl](https://github.com/mhartl), whose Rails tutorial was a huge help in transitioning from Rails 3. 
+Squawker is a Twitter clone I built to learn Rails 4. 
 
 ## Features
 
@@ -18,3 +18,8 @@ Squawker is a Twitter clone I built to learn Rails 4. Much gratitude to [Michael
   Uses Twitter bootrstrap, with some tweaks in SASS
 * **Tested**:		
   Test suite written in RSpec, automated with Guard. Users generated with Factory Girl and Faker.
+
+
+## Acknowledgements
+
+Much gratitude to [Michael Hartl](https://github.com/mhartl), whose Rails tutorial was a huge help in creating this. 
