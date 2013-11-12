@@ -441,3 +441,9 @@ aside {
     white-space: nowrap;
   }
 }
+
+/* elements hidden but retained for accessibility */
+
+.offscreen {
+  margin-right: -9999px;
+}
