@@ -1,6 +1,9 @@
 @import "bootstrap";
 
-/* mixins, variables, etc */
+// ------------------------------------
+//  Mixins, Variables, etc
+// ------------------------------------
+
 $grayMediumLight: #eaeaea;
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -8,7 +11,10 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
-/* universal */
+// ------------------------------------
+//  Global Styling
+// ------------------------------------
+
 html {
   overflow-y: scroll;
 }
@@ -33,10 +39,11 @@ body {
     text-transform: lowercase;
   }
   h2 {
-    letter-spacing: normal;
-    width: 250px;
-    margin: 0px auto 20px auto;
-    color: $grayLight;
+    letter-spacing: -1px;
+    width: 200px;
+    margin: 20px auto 20px auto;
+    color: white; //$grayLight;
+    display: none;
   }
   a {
     font-weight: 300;
@@ -120,7 +127,10 @@ textarea {
   }
 }
 
-/* typography */
+// ------------------------------------
+//  Typography
+// ------------------------------------
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -146,7 +156,10 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
+// ------------------------------------
+//  Header
+// ------------------------------------
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -161,13 +174,16 @@ p {
   }
 }
 
-/* footer */
+// ------------------------------------
+//  Footer
+// ------------------------------------
+
 footer {
   margin-top: 45px;
   padding-top: 5px;
   padding-bottom: 70px;
   border-top: 1px solid $grayMediumLight;
-  width: 750px;
+  width: 730px;
   margin-left: auto;
   margin-right: auto;
   color: $grayLight;
@@ -191,8 +207,21 @@ footer {
   }
 }
 
+.right-footer {
+  float: right;
+  a {
+    margin: 0px 5px;
+    &:last-of-type {
+      margin-right: 0px;
+    }
+  }
+}
 
-/* forms */
+
+// ------------------------------------
+//  Forms
+// ------------------------------------
+
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -258,7 +287,10 @@ input {
 }
 
 
-/* Users index */
+// ------------------------------------
+//  Users Index
+// ------------------------------------
+
 .users {
   list-style: none;
   margin: 0;
@@ -284,7 +316,10 @@ input {
   }
 }
 
-/* miscellaneous */
+// ------------------------------------
+//  Miscellany
+// ------------------------------------
+
 .debug_dump {
   clear: both;
   float: left;
@@ -293,14 +328,20 @@ input {
   @include box_sizing;
 }
 
-/* clearfix */
+// ------------------------------------
+//  Clearfix
+// ------------------------------------
+
 .group:after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* squawks */
+// ------------------------------------
+//  Squawks
+// ------------------------------------
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -347,7 +388,10 @@ aside {
   margin-top: -3px;
 }
 
-/* sidebar */
+// ------------------------------------
+//  Sidebar
+// ------------------------------------
+
 aside {
  section {
     padding: 10px 0;
@@ -405,19 +449,24 @@ aside {
   }
 }
 
-/* contact form, about text */
+// ------------------------------------
+//  About Page
+// ------------------------------------
+
 .static-page-block {
   width: 500px;
   margin: auto;
   position: relative;
-  text-align: justify;
   h2 {
     font-size: 24px;
     color: inherit;
     margin: 30px auto 10px auto;
   }
   p {
+    text-align: justify;
     margin: 10px auto;
+    letter-spacing: 0px;
+    line-height: 1.3em;
     a {
       color: #3f738d;
       &:hover {
@@ -442,8 +491,12 @@ aside {
   }
 }
 
-/* elements hidden but retained for accessibility */
+// ------------------------------------
+//  Hidden but retained elements
+//     (for accesibility and testing)
+// ------------------------------------
 
 .offscreen {
-  margin-right: -9999px;
+  position: absolute;
+  left: -999em;
 }

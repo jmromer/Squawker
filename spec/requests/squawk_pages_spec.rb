@@ -26,7 +26,7 @@ describe "Squawk pages" do
 
       before { fill_in 'squawk_content', with: "Lorem ipsum" }
       it "should create a squawk" do
-        expect { click_button "Squawk" }.to change(Squawk, :count).by(1)
+        expect { click_button "squawk it!" }.to change(Squawk, :count).by(1)
       end
     end
   end

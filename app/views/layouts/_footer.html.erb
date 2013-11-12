@@ -8,8 +8,11 @@
     </ul>
   </nav>
 
-  <small>
-    &copy; 2013 Jake Romer
-  </small>
+<% unless signed_in? %>
+  <div class="right-footer">
+    <%= link_to "Sign Up", signup_path %>
+    <%= link_to "Try It Out", "#" %>
+  </div>
+<% end %>
 
 </footer>
