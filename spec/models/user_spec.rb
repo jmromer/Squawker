@@ -12,6 +12,7 @@
 #  admin                :boolean          default(FALSE)
 #  password_reset_token :string(255)
 #  password_reset_at    :datetime
+#  image_url            :string(255)
 #
 
 require 'spec_helper'

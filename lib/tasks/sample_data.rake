@@ -1,3 +1,5 @@
+require_relative './profile_pics.rb'
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -8,40 +10,58 @@ namespace :db do
 end
 
 def make_users
-  admin = User.create!(name:     "Admin User",
+  admin = User.create!(name:     "Johnny Neckbeard",
                        email:    "admin@example.com",
                        password: "password",
                        password_confirmation: "password",
+                       image_url: PROFILE_PICS[0],
                        admin: true)
+
   jane  = User.create!(name:     "Jane Squawker",
-                       email:    "jane@squawker.com",
+                       email:    "jane@example.com",
                        password: "password",
                        password_confirmation: "password",
-                       admin: false)
-  98.times do |n|
-    name  = Faker::Name.name
-    email = "user-#{n+1}@example.com"
-    password  = "password"
+                       image_url: PROFILE_PICS[1])
+
+  3.upto(100).each do |n|
+    name     = Faker::Name.name
+    email    = "user-#{n}@example.com"
+    password = "password"
     User.create!(name:     name,
                  email:    email,
                  password: password,
+                 image_url: PROFILE_PICS[n-1],
                  password_confirmation: password)
   end
 end
 
 def make_squawks
-  users = User.all(limit: 6)
-  50.times do
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.squawks.create!(content: content) }
+  users = User.all(limit: 20)
+
+  30.times do
+    for user in users do
+      date = (1..30).to_a.sample.days.ago
+      dummy_text = Faker::Lorem.sentence(5)
+      user.squawks.create!(content: dummy_text, created_at: date)
+    end
   end
 end
 
 def make_relationships
   users = User.all
-  user  = users.first
-  followed_users = users[2..50]
-  followers      = users[3..40]
-  followed_users.each { |followed| user.follow!(followed) }
-  followers.each      { |follower| follower.follow!(user) }
+  admin = users[0]
+  jane  = users[1]
+
+  followed_users = users[1..50]
+  followers      = users[1..40]
+
+  followed_users.each do |followed|
+    admin.follow!(followed) unless followed.id == admin.id
+    jane.follow!(followed)  unless followed.id == jane.id
+  end
+
+  followers.each do |follower|
+    follower.follow!(admin) unless follower.id == admin.id
+    follower.follow!(jane)  unless follower.id == jane.id
+  end
 end

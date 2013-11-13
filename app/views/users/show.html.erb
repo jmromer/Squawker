@@ -4,11 +4,16 @@
 
   <aside class="span4">
     <section>
+      <span class="show-gravatar">
+        <%= gravatar_for @user %>
+      </span>
       <h1>
-        <span class="show-gravatar">
-          <%= gravatar_for @user %>
-        </span>
-        <%= @user.name %>
+        <div class="show-name">
+          <%= @user.name %>
+        </div>
+        <div class="show-admin">
+          <%= @user.admin? ? "(Administrator)" : "" %>
+        </div>
       </h1>
     </section>
 

@@ -12,6 +12,7 @@
 #  admin                :boolean          default(FALSE)
 #  password_reset_token :string(255)
 #  password_reset_at    :datetime
+#  image_url            :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -20,9 +21,9 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 50 }
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-\.]+[^\.]\.[a-z]+\z/i
+  VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-\.]+[^\.]\.[a-z]+\z/i
   validates :email, presence:   true,
-                    format:     { with: VALID_EMAIL_REGEX },
+                    format:     { with: VALID_EMAIL },
                     uniqueness: { case_sensitive: false }
 
   validates :password, length: { minimum: 6 }
@@ -48,7 +49,6 @@ class User < ActiveRecord::Base
 
 
   def send_password_reset
-    # self.update_attributes!(password_reset_token: User.new_token, password_reset_at: Time.zone.now)
     self.password_reset_token = User.new_token
     self.password_reset_at = Time.zone.now
     self.save!(validate: false)
@@ -80,7 +80,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
     def create_tokens
       self.remember_token = User.encrypt(User.new_token)
       self.password_reset_token = User.new_token
