@@ -21,6 +21,12 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def trial
+    user = User.find(2)
+    sign_in user
+    redirect_back_or user
+  end
+
   private
     def valid_password?(user)
       user.authenticate(params[:session][:password])

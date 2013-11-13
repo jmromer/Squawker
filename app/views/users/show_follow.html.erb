@@ -2,15 +2,22 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <%= gravatar_for @user %>
-      <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
-      <span><b>Tweets:</b> <%= @user.squawks.count %></span>
+      <div class="sidebar-gravatar">
+        <%= gravatar_for @user %>
+      </div>
+      <h1 class="sidebar-name"><%= @user.name %></h1>
+      <div class="sidebar-profile-link">
+        <%= link_to "view my profile", @user %>
+      </div>
+      <div class="sidebar-squawks">
+        <% squawks = @user.squawks.count %>
+        <%= squawks %> <%= "squawk".pluralize(squawks) %>
+      </div>
     </section>
     <section>
       <%= render 'shared/stats' %>
       <% if @users.any? %>
-        <div class="user_avatars">
+        <div id="follower_avatars">
           <% @users.each do |user| %>
             <%= link_to gravatar_for(user, size: 30), user %>
           <% end %>
@@ -21,7 +28,7 @@
   <div class="span8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users">
+      <ul class="users" id="follower_listing">
         <%= render @users %>
       </ul>
 

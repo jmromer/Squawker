@@ -4,17 +4,15 @@
 
   <aside class="span4">
     <section>
-      <span class="show-gravatar">
+      <div class="sidebar-gravatar">
         <%= gravatar_for @user %>
-      </span>
-      <h1>
-        <div class="show-name">
+      </div>
+      <h1 class="sidebar-name">
           <%= @user.name %>
-        </div>
-        <div class="show-admin">
-          <%= @user.admin? ? "(Administrator)" : "" %>
-        </div>
       </h1>
+      <h2 class="sidebar-admin">
+        <%= @user.admin? ? "(Administrator)" : "" %>
+      </h2>
     </section>
 
     <section>
@@ -25,7 +23,7 @@
 
   <div class="span8">
     <% if @user.squawks.any? %>
-    <h3>your squawks (<%= @user.squawks.count %>)</h3>
+    <h3>squawks (<%= @user.squawks.count %>)</h3>
     <ol class="squawks">
       <%= render @squawks %>
     </ol>

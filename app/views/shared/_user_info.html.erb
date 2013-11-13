@@ -1,15 +1,15 @@
-<span class="show-gravatar">
+<span class="sidebar-gravatar">
   <%= link_to gravatar_for(current_user, size: 40), current_user %>
 </span>
 <h1>
-  <div class="show-name">
+  <div class="sidebar-name">
     <%= current_user.name %>
   </div>
-  <div class="show-admin">
+  <div class="sidebar-admin">
     <%= current_user.admin? ? "(Administrator)" : "" %>
   </div>
 </h1>
 
-<span id="view-profile-link">
+<div class="sidebar-profile-link">
   <%= link_to "view my profile page", current_user %>
-</span>
+</div>

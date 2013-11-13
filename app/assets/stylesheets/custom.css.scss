@@ -22,6 +22,7 @@ html {
 body {
   padding-top: 60px;
   margin: auto;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .container {
@@ -30,7 +31,7 @@ body {
 
 .hero-unit {
   height: 450px;
-  margin-bottom: 0px;
+  margin-bottom: -45px;
   background: url(https://dl.dropboxusercontent.com/u/15940843/squawkbird.jpg);
   h1 {
     font-size: 150px;
@@ -116,10 +117,6 @@ textarea {
   }
 }
 
-//.show-gravatar {
-//  width: 100px;
-//}
-
 #all-users {
   margin: auto;
   width: 730px;
@@ -180,7 +177,7 @@ p {
 // ------------------------------------
 
 footer {
-  margin-top: 0px;//45px;
+  margin-top: 45px;
   padding-top: 5px;
   padding-bottom: 70px;
   border-top: 1px solid $grayMediumLight;
@@ -263,11 +260,8 @@ input {
 
 #edit-gravatar {
   width: 100px;
-  float: left;
-  a {
-    float: right;
-    margin-top: 5px;
-  }
+  img { margin-bottom: 0px; }
+  a { float: right; }
 }
 
 .edit_user {
@@ -393,6 +387,11 @@ aside {
   margin-top: -3px;
 }
 
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
 // ------------------------------------
 //  Sidebar
 // ------------------------------------
@@ -417,31 +416,31 @@ aside {
       margin-bottom: 3px;
       margin-top: 0px;
     }
-    .show-gravatar {
-      margin: auto;
-      max-width: 128px;
-    }
-    .show-name {
-      display: block;
-      text-align: center;
-    }
-    .show-admin {
-      display: block;
-      font-size: 75%;
-      margin-top: 2px;
-      letter-spacing: normal;
-      font-weight: normal;
-      color: $grayLight;
-    }
-    #view-profile-link {
-      text-align:center;
-    }
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
+.sidebar-gravatar {
+  margin: auto;
+  max-width: 128px;
+}
+.sidebar-name {
+  display: block;
+  text-align: center;
+}
+.sidebar-admin {
+  display: block;
+  font-size: 16px;
+  margin-top: 2px;
+  letter-spacing: normal;
+  font-weight: normal;
+  color: $grayLight;
+}
+.sidebar-profile-link {
+  text-align: center;
+}
+.sidebar-squawks {
+  font-weight: bold;
+  text-align: center;
 }
 
 .stats {
@@ -491,6 +490,7 @@ aside {
     margin: 10px auto;
     letter-spacing: 0px;
     line-height: 1.3em;
+    font-size: 16px;
     a {
       color: #3f738d;
       &:hover {
@@ -515,6 +515,26 @@ aside {
   }
 }
 
+
+// ------------------------------------
+//  Follower Page
+// ------------------------------------
+
+#follower_avatars {
+  padding: 20px 0px;
+  img {
+    width: 50px;
+    margin: 1px;
+  }
+}
+
+#follower_listing {
+  li {
+    width: 150px;
+    border: none;
+  }
+}
+
 // ------------------------------------
 //  Hidden but retained elements
 //     (for accesibility and testing)
@@ -523,4 +543,12 @@ aside {
 .offscreen {
   position: absolute;
   left: -999em;
+}
+
+
+
+
+
+.delete-item {
+  width: 50px;
 }

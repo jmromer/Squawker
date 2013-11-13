@@ -10,21 +10,24 @@ namespace :db do
 end
 
 def make_users
-  admin = User.create!(name:     "Johnny Neckbeard",
-                       email:    "admin@example.com",
-                       password: "password",
-                       password_confirmation: "password",
-                       image_url: PROFILE_PICS[0],
-                       admin: true)
+  admin = User.create!( name:     "Johnny Neckbeard",
+                        email:    "admin@example.com",
+                        password: "password",
+                        password_confirmation: "password",
+                        image_url: PROFILE_PICS[0],
+                        admin: true )
 
-  jane  = User.create!(name:     "Jane Squawker",
-                       email:    "jane@example.com",
-                       password: "password",
-                       password_confirmation: "password",
-                       image_url: PROFILE_PICS[1])
+  jane  = User.create!( name:     "Jane Squawker",
+                        email:    "jane@example.com",
+                        password: "password",
+                        password_confirmation: "password",
+                        image_url: PROFILE_PICS[1] )
 
   3.upto(100).each do |n|
-    name     = Faker::Name.name
+    first = Faker::Name.first_name
+    last  = Faker::Name.last_name
+
+    name     = "#{first} #{last}"
     email    = "user-#{n}@example.com"
     password = "password"
     User.create!(name:     name,

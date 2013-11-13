@@ -5,9 +5,11 @@
   </span>
 
   <% if current_user?(squawk.user) %>
-    <%= link_to trash_can_icon, squawk,
-                          method: :delete,
-                          data: { confirm: "Are you sure?" },
-                          title: squawk.content %>
+    <%= link_to trash_can_icon, squawk, method: :delete #,
+                          # data: { confirm: "Are you sure?" },
+                          #title: squawk.content
+                          %>
   <% end %>
 </li>
+
+<!-- TODO: Add some jQuery here -->
