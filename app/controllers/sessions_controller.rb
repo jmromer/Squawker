@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :clear_sts
 
   def new
   end
@@ -32,9 +31,5 @@ class SessionsController < ApplicationController
   private
     def valid_password?(user)
       user.authenticate(params[:session][:password])
-    end
-
-    def clear_sts
-      headers['Strict-Transport-Security'] = 'max-age=0'
     end
 end
