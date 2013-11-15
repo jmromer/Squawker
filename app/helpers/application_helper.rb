@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def trash_can_icon
-    image_tag("icon_trash.gif",
+    image_tag("https://s3.amazonaws.com/squawker/icon_trash.gif",
                 border: 0,
                 alt: 'Delete',
                 title: 'Delete',

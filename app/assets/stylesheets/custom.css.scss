@@ -384,7 +384,8 @@ aside {
 }
 
 .trashcan {
-  margin-top: -3px;
+  margin-top: -2px;
+  padding-left: 2px;
 }
 
 .gravatar {
@@ -543,12 +544,4 @@ aside {
 .offscreen {
   position: absolute;
   left: -999em;
-}
-
-
-
-
-
-.delete-item {
-  width: 50px;
 }
