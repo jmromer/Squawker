@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def trial
+    params[:remember_me] = false
     user = User.find(2)
     sign_in user
     redirect_back_or user

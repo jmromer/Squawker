@@ -3,7 +3,7 @@
   <aside class="span4">
     <section>
       <div class="sidebar-gravatar">
-        <%= gravatar_for @user %>
+        <%= avatar_for @user %>
       </div>
       <h1 class="sidebar-name"><%= @user.name %></h1>
       <div class="sidebar-profile-link">
@@ -19,7 +19,7 @@
       <% if @users.any? %>
         <div id="follower_avatars">
           <% @users.each do |user| %>
-            <%= link_to gravatar_for(user, size: 30), user %>
+            <%= link_to avatar_for(user), user %>
           <% end %>
         </div>
       <% end %>

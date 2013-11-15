@@ -34,23 +34,20 @@ class User < ActiveRecord::Base
   has_secure_password
       # provides presence validation,
       # password and password_confirmation attributes,
-      # and matching validation for those two, among other things
+      # and matching validation for those two
 
   has_many :squawks, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
-
-  has_many :reverse_relationships,
-    foreign_key: "followed_id",
-    class_name: "Relationship",
-    dependent: :destroy
-
   has_many :followers, through: :reverse_relationships, source: :follower
-
+  has_many :reverse_relationships,
+           foreign_key: "followed_id",
+           class_name: "Relationship",
+           dependent: :destroy
 
   def send_password_reset
     self.password_reset_token = User.new_token
-    self.password_reset_at = Time.zone.now
+    self.password_reset_at    = Time.zone.now
     self.save!(validate: false)
     UserMailer.password_reset(self).deliver
   end
@@ -81,7 +78,7 @@ class User < ActiveRecord::Base
 
   private
     def create_tokens
-      self.remember_token = User.encrypt(User.new_token)
+      self.remember_token       = User.encrypt(User.new_token)
       self.password_reset_token = User.new_token
     end
 end
