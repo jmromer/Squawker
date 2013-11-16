@@ -23,16 +23,16 @@ def pull_timeline_for(twitter_username, count)
 end
 
 def make_users_and_tweets
-  FALSE_FRIENDS[0..50].each_with_index do |username, id|
+  FALSE_FRIENDS[0..50].each_with_index do |username, idx|
     num_of_squawks = (30..50).to_a.sample
     tweets         = pull_timeline_for(username, num_of_squawks)
     name           = tweets.first[:name]
-    email          = "user#{id}@example.com"
+    email          = "user#{idx+1}@example.com"
     base_url       = "#{BASE_URL}/#{username}"
 
-    if id == 0
+    if idx+1 == 1
       name = "Johnny Neckbeard"
-    elsif id == 1
+    elsif idx+1 == 2
       name = "Jane Squawker"
     end
 
