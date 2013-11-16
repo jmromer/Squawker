@@ -1,70 +1,63 @@
-require_relative './profile_pics.rb'
+require_relative './false_friends.rb'
 
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_users
-    make_squawks
+    make_users_and_tweets
     make_relationships
   end
 end
 
-def make_users
-  admin = User.create!( name:     "Johnny Neckbeard",
-                        email:    "admin@example.com",
-                        password: "password",
-                        password_confirmation: "password",
-                        image_url: PROFILE_PICS[0],
-                        admin: true )
+def pull_timeline_for(twitter_username, count)
+  # returns array of non-retweeted tweets with name, time, text
+  options = { count: count, exclude_replies: true }
 
-  jane  = User.create!( name:     "Jane Squawker",
-                        email:    "jane@example.com",
-                        password: "password",
-                        password_confirmation: "password",
-                        image_url: PROFILE_PICS[1] )
-
-  3.upto(100).each do |n|
-    first = Faker::Name.first_name
-    last  = Faker::Name.last_name
-
-    name     = "#{first} #{last}"
-    email    = "user-#{n}@example.com"
-    password = "password"
-    User.create!(name:     name,
-                 email:    email,
-                 password: password,
-                 image_url: PROFILE_PICS[n-1],
-                 password_confirmation: password)
-  end
+  Twitter.user_timeline(twitter_username, options)
+         .delete_if{ |t| t.retweeted }
+         .delete_if{ |t| t.text =~ /^RT\s@/ }
+         .map do |tweet|
+           { name: tweet.user.name,
+             time: tweet.created_at,
+             text: tweet.text }
+             end
 end
 
-def make_squawks
-  users = User.all(limit: 20)
+def make_users_and_tweets
+  FALSE_FRIENDS[0..50].each_with_index do |username, id|
+    num_of_squawks = (30..50).to_a.sample
+    tweets         = pull_timeline_for(username, num_of_squawks)
+    name           = tweets.first[:name]
+    email          = "user#{id}@example.com"
+    base_url       = "#{BASE_URL}/#{username}"
 
-  30.times do
-    for user in users do
-      date = (1..30).to_a.sample.days.ago
-      dummy_text = Faker::Lorem.sentence(5)
-      user.squawks.create!(content: dummy_text, created_at: date)
+    if id == 0
+      name = "Johnny Neckbeard"
+    elsif id == 1
+      name = "Jane Squawker"
+    end
+
+    user = User.create!( name: name, email: email, image_url: base_url,
+                         password: "password", password_confirmation: "password")
+
+    tweets.each do |tweet|
+      user.squawks.create!( content: tweet[:text], created_at: tweet[:time] )
     end
   end
+
+  User.find(1).update_attribute(:admin, true)
 end
 
 def make_relationships
-  users = User.all
-  admin = users[0]
-  jane  = users[1]
-
-  followed_users = users[1..50]
-  followers      = users[1..40]
-
-  followed_users.each do |followed|
-    admin.follow!(followed) unless followed.id == admin.id
-    jane.follow!(followed)  unless followed.id == jane.id
-  end
+  users     = User.all
+  admin     = users[0]
+  jane      = users[1]
+  followeds = users.shuffle
+  followers = users.shuffle
 
   followers.each do |follower|
-    follower.follow!(admin) unless follower.id == admin.id
-    follower.follow!(jane)  unless follower.id == jane.id
+    followeds.sample((10..30).to_a.sample).each do |followed|
+      follower.follow!(followed) unless followed.id == follower.id
+    end
   end
+
 end

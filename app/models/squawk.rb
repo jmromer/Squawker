@@ -10,9 +10,9 @@
 #
 
 class Squawk < ActiveRecord::Base
-  validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 140 }
-  before_save { self.content = content.upcase! }
+  validates   :user_id, presence: true
+  validates   :content, presence: true, length: { maximum: 160 }
+  before_save :transform_text
 
   belongs_to :user
   default_scope -> { order ('created_at DESC') }
@@ -26,4 +26,11 @@ class Squawk < ActiveRecord::Base
 
     where(is_followee_or_self, user_id: user)
   end
+
+  private
+    def transform_text
+      self.content =
+        self.content.partition(/(http.*)/i)
+        .map{ |i| (i =~ /(http:\/\/.*)/i).nil? ? i.upcase : i }.join
+    end
 end

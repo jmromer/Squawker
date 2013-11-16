@@ -58,5 +58,6 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
 
+gem 'twitter'
 
 

@@ -22,7 +22,7 @@ html {
 body {
   padding-top: 60px;
   margin: auto;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .container {
@@ -120,9 +120,12 @@ textarea {
 #all-users {
   margin: auto;
   width: 730px;
-  .pagination {
-    text-align: center;
-  }
+}
+
+.pagination {
+  text-align: center;
+  width: 175px;
+  margin: 35px auto 0px auto;
 }
 
 // ------------------------------------
@@ -427,8 +430,9 @@ aside {
   max-width: 128px;
 }
 .sidebar-name {
-  display: block;
+  display: inline-block;
   text-align: center;
+  width: 100%;
 }
 .sidebar-admin {
   display: block;
@@ -473,6 +477,10 @@ aside {
   .gravatar {
     margin: 1px 1px;
   }
+}
+
+input#squawk_content {
+  text-align: center;
 }
 
 // ------------------------------------
@@ -532,8 +540,11 @@ aside {
 }
 
 #follower_listing {
+  ul.users {
+    width: 500px;
+  }
   li {
-    width: 150px;
+    width: 160px;
     border: none;
   }
 }
@@ -547,3 +558,7 @@ aside {
   position: absolute;
   left: -999em;
 }
+
+.cf:before, .cf:after { content: " "; display: table; }
+.cf:after { clear: both; }
+.cf { zoom: 1; }

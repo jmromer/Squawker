@@ -14,6 +14,8 @@ Bundler.require(:default, Rails.env)
 module Squawker
   class Application < Rails::Application
 
+    WillPaginate.per_page = 15
+
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.assets.precompile << Proc.new do |path|

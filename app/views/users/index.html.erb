@@ -3,7 +3,7 @@
 
 <div id="all-users">
   <div class="paginate">
-    <%= will_paginate %>
+    <%= will_paginate @users, page_links: false %>
   </div>
 
   <ul class="users">
@@ -11,6 +11,6 @@
   </ul>
 
   <div class="paginate">
-    <%= will_paginate %>
+    <%= will_paginate @users, page_links: false %>
   </div>
 </div>

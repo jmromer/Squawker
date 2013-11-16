@@ -1,5 +1,9 @@
 <li>
-  <span class="content"><%= squawk.content %></span>
+  <span class="content">
+    <%= squawk.content
+        .gsub(/(?<link>http:\/\/\S+)/i, '<a href="\k<link>">\k<link></a>')
+        .html_safe %>
+  </span>
   <span class="timestamp">
     <%= time_ago_in_words(squawk.created_at) %> ago.
   </span>
