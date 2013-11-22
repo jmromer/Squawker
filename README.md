@@ -17,7 +17,7 @@ A Twitter clone, with a twist.
 * **Bootstrap styling**:		
   Uses Twitter bootrstrap, with some tweaks in SASS
 * **Tested**:		
-  Test suite written in RSpec, automated with Guard. Users generated with Factory Girl and Faker.
+  Test suite written in RSpec, automated with Guard. 
 
 
 
