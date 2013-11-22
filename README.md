@@ -1,6 +1,6 @@
 #squawker
 
-Squawker is a Twitter clone I built to learn Rails 4. 
+A Twitter clone, with a twist.
 
 ## Features
 
