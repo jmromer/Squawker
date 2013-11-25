@@ -1,6 +1,6 @@
 #squawker
 
-Squawker is a Twitter clone.
+A Twitter clone.
 
 ## Features
 
