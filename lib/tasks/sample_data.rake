@@ -1,34 +1,27 @@
-require_relative './false_friends.rb'
+include FakeFriends
 
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_users_and_tweets
+    make_users_and_posts
     make_relationships
   end
 end
 
-def pull_timeline_for(twitter_username, count)
-  # returns array of non-retweeted tweets with name, time, text
-  options = { count: count, exclude_replies: true }
+def make_users_and_posts
+  admin    = FakeFriend.find_by(username: 'idiot')
+  jane     = FakeFriend.find_by(username: 'divya')
+  friends  = [admin, jane]
+  the_rest = FakeFriend.gather(50)
 
-  Twitter.user_timeline(twitter_username, options)
-         .delete_if{ |t| t.retweeted }
-         .delete_if{ |t| t.text =~ /^RT\s@/ }
-         .map do |tweet|
-           { name: tweet.user.name,
-             time: tweet.created_at,
-             text: tweet.text }
-             end
-end
+  the_rest.delete_if{|user| ['idiot', 'divya'].include?(user.username) }
+  friends += the_rest
 
-def make_users_and_tweets
-  FALSE_FRIENDS[0..50].each_with_index do |username, idx|
-    num_of_squawks = (30..50).to_a.sample
-    tweets         = pull_timeline_for(username, num_of_squawks)
-    name           = tweets.first[:name]
+  friends.each_with_index do |friend, idx|
+    name           = friend.name
     email          = "user#{idx+1}@example.com"
-    base_url       = "#{BASE_URL}/#{username}"
+    image_url      = friend.avatar_url(128)
+    posts          = friend.posts
 
     if idx+1 == 1
       name = "Johnny Neckbeard"
@@ -36,11 +29,11 @@ def make_users_and_tweets
       name = "Jane Squawker"
     end
 
-    user = User.create!( name: name, email: email, image_url: base_url,
+    user = User.create!( name: name, email: email, image_url: image_url,
                          password: "password", password_confirmation: "password")
 
-    tweets.each do |tweet|
-      user.squawks.create!( content: tweet[:text], created_at: tweet[:time] )
+    posts.each do |post|
+      user.squawks.create!( content: post[:text], created_at: post[:time] )
     end
   end
 

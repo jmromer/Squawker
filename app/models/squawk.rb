@@ -30,7 +30,7 @@ class Squawk < ActiveRecord::Base
   private
     def transform_text
       self.content =
-        self.content.partition(/(http.*)/i)
-        .map{ |i| (i =~ /(http:\/\/.*)/i).nil? ? i.upcase : i }.join
+        self.content.partition(/(https?.*)/i)
+        .map{ |i| (i =~ /(https?:\/\/.*)/i).nil? ? i.upcase : i }.join
     end
 end
