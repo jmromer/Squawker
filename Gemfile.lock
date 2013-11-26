@@ -271,6 +271,5 @@ DEPENDENCIES
   selenium-webdriver (= 2.35.1)
   spork-rails (= 4.0.0)
   turbolinks (= 1.1.1)
-  twitter
   uglifier (= 2.1.1)
   will_paginate (= 3.0.4)
