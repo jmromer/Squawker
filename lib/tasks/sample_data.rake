@@ -1,4 +1,3 @@
-require 'fake_friends'
 include FakeFriends
 
 namespace :db do
