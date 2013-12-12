@@ -4,7 +4,7 @@ ruby '2.0.0'
 
 
 gem 'bcrypt-ruby', '3.0.1'
-gem 'fake_friends'
+gem 'fake_friends', '0.1.6'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
