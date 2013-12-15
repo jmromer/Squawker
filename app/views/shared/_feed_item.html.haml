@@ -1,0 +1,13 @@
+%li.group{ id: feed_item.id }
+  .squawk-gravatar
+    = link_to(avatar_for(feed_item.user, size: 73), feed_item.user)
+  .squawk-content
+    %span.user
+      = link_to(feed_item.user.name, feed_item.user)
+    %span.timestamp
+      = time_ago_in_words(feed_item.created_at)
+      ago
+    %span.text
+      = formatted feed_item.content
+      - if current_user? feed_item.user
+        = link_to trash_can_icon, feed_item, method: :delete,  title: "delete", class: 'delete-item' #, data: {confirm: "Are you sure?"}

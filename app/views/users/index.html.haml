@@ -1,0 +1,9 @@
+- provide :title, "Squawkers"
+%h1 Squawkers
+#all-users
+  .paginate
+    = will_paginate @users, page_links: false
+  %ul.users
+    = render @users
+  .paginate
+    = will_paginate @users, page_links: false

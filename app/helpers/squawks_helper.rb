@@ -1,7 +1,7 @@
 module SquawksHelper
 
   def parse_urls(str)
-    str.gsub(/(?<link>http:\/\/[\/\w\d\.-]+)/i, '<a href="\k<link>">\k<link></a>').html_safe
+    str.gsub(/(?<link>https?:\/\/[\/\w\d\.-]+)/i, '<a href="\k<link>">\k<link></a>').html_safe
   end
 
   def parse_mentions(str)

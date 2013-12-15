@@ -1,0 +1,9 @@
+%span.sidebar-gravatar
+  = link_to avatar_for(current_user), current_user
+%h1
+  .sidebar-name
+    = current_user.name
+  .sidebar-admin
+    = current_user.admin? ? "(Administrator)" : ""
+.sidebar-profile-link
+  = link_to "view my profile page", current_user

@@ -1,0 +1,11 @@
+%footer.footer
+  %nav
+    %ul
+      %li= link_to "About",   about_path
+      %li= link_to "Contact", "http://about.jakeromer.com"
+      %li
+        %a{ href: "http://www.jakeromer.com" } Blog
+  - unless signed_in?
+    .right-footer
+      = link_to "Sign Up", signup_path
+      = link_to "Try It Out!", trial_path

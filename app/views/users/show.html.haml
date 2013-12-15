@@ -1,0 +1,22 @@
+= provide :title, @user.name
+.row
+  %aside.span4
+    %section
+      .sidebar-gravatar
+        = avatar_for @user
+      %h1.sidebar-name
+        = @user.name
+      %h2.sidebar-admin
+        = @user.admin? ? "(Administrator)" : ""
+    %section
+      = render 'shared/stats'
+      = render 'follow_form' if signed_in?
+  .span8
+    - if @user.squawks.any?
+      %h3
+        = "squawks (#{@user.squawks.count})"
+      %ol.squawks
+        - @squawks.each do |squawk|
+          = render squawk
+      .paginate
+        = will_paginate @squawks, page_links: false

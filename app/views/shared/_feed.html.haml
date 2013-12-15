@@ -1,0 +1,6 @@
+- if @feed_items.any?
+  %ul.squawks
+    - @feed_items.each do |feed_item|
+      = render 'shared/feed_item', feed_item: feed_item
+  .paginate
+    = will_paginate @feed_items, page_links: false

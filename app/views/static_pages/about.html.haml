@@ -1,0 +1,57 @@
+- provide(:title, 'About')
+.static-page-block
+  %h1 what is squawker?
+  %h2 disruptive innovation
+  %p
+    I built
+    %span.squawker squawker
+    to address one of the internet's most pressing needs:
+    %span#capslock
+      more shouting.
+    That's why
+    %span.squawker squawker
+    is the world's first
+    %em all-caps-lock
+    social network.
+  %p
+    Every post on
+    %span.squawker squawker
+    is automatically upcased by the magic Rails trolls (more on that below) that power the site.
+  %p So celebrate yourself. Sound your barbaric yawp over the roofs of the world. Or, just shout at people.
+  %p You're welcome, internet.
+  %h2 a technology showcase
+  %p
+    %span.squawker squawker
+    runs on
+    = succeed "." do
+      %a{:href => "http://rubyonrails.org/"} Rails 4
+    Its styling is courtesy of
+    = succeed "," do
+      %a{:href => "http://getbootstrap.com/"} Twitter Bootstrap
+    with customized CSS implemented in
+    %a{:href => "http://sass-lang.com/"} SASS
+    and some
+    %a{:href => "http://jquery.com/"} jQuery
+    magic mixed in for good measure.
+  %p
+    Its test suite is implemented in
+    %a{:href => "http://rspec.info/"} RSpec
+    and automated with the
+    %a{:href => "http://rubygems.org/gems/guard-rails"} guard-rails
+    gem. I used
+    %a{:href => "http://jnicklas.github.io/capybara/"} Capybara
+    to simulate user interaction and
+    %a{:href => "http://rubygems.org/gems/fake_friends"} FakeFriends
+    and
+    %a{:href => "http://github.com/thoughtbot/factory_girl_rails"} Factory Girl
+    to automate the creation of test profiles.
+  %p
+    %span.squawker squawker
+    uses a
+    %a{:href => "http://www.postgresql.org/"} PostgreSQL
+    database and is deployed to
+    = succeed "." do
+      %a{:href => "http://www.heroku.com"} heroku
+    The source is available
+    = succeed "." do
+      %a{:href => "http://github.com/jmromer/Squawker"} on Github

@@ -1,0 +1,8 @@
+%li
+  %span.content
+    = formatted squawk.content
+  %span.timestamp
+    = time_ago_in_words(squawk.created_at)
+    ago.
+  - if current_user?(squawk.user)
+    = link_to trash_can_icon, squawk, method: :delete , title: "delete", class: 'delete-item' #, data: { confirm: "Are you sure?" }
