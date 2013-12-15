@@ -2,12 +2,10 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 #ruby-gemset=Squawker
 
-
 gem 'bcrypt-ruby', '3.0.1'
 gem 'fake_friends', '0.1.6'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
-
 
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
@@ -20,11 +18,6 @@ gem 'rails', '4.0.0'
 gem 'pg'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'newrelic_rpm'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', '0.3.20', require: false
-end
 
 group :production do
   gem 'rails_12factor'
