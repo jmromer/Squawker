@@ -5,6 +5,8 @@ $grayMediumLight: #eaeaea;
 $grayLighter: rgb(238, 238, 238);
 $grayLight: rgb(153, 153, 153);
 $blue: #049cdb;
+$gray: rgb(85, 85, 85);
+$grayDarker: rgb(34, 34, 34);
 
 @mixin box_size($bs) {
   -moz-box-sizing: $bs;

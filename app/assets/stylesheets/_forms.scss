@@ -37,7 +37,10 @@ input {
 #edit-gravatar {
   width: 100px;
   img { margin-bottom: 0px; }
-  a { float: right; }
+  a {
+    float: right;
+    &:hover { text-decoration: none; }
+  }
 }
 .edit_user {
   float: right;

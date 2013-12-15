@@ -27,12 +27,13 @@ body {
     letter-spacing: -1px;
     width: 200px;
     margin: 20px auto 20px auto;
-    color: white; //$grayLight;
+    color: white;
     display: none;
   }
   a {
     font-weight: 300;
     letter-spacing: normal;
+    &:hover{ text-decoration: none; }
   }
 }
 .navbar {

@@ -23,6 +23,7 @@
     }
     a {
       overflow: hidden;
+      &:hover { text-decoration: none; }
     }
     a.delete-item {
       display: block;

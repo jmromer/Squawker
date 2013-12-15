@@ -1,3 +1,5 @@
+@import "mixins";
+
 // ------------------------------------
 //  Header
 // ------------------------------------
@@ -29,7 +31,10 @@ footer {
   color: $grayLight;
   a {
     color: $gray;
-    &:hover { color: $grayDarker; }
+    &:hover {
+      color: $grayDarker;
+      text-decoration: none;
+    }
   }
   small {
     float: right;
@@ -48,8 +53,7 @@ footer {
   float: right;
   a {
     margin: 0px 5px;
-    &:last-of-type {
-      margin-right: 0px;
-    }
+    &:hover { text-decoration: none; }
+    &:last-of-type { margin-right: 0px; }
   }
 }
