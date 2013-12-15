@@ -16,7 +16,7 @@ A Twitter clone.
   On sign-in, elect to install a permanent cookie rather than a temporary one
 * **Bootstrap**:     
   Uses Twitter bootrstrap, with some tweaks in SASS
-* **Character countdown**:
+* **Character countdown**:       
   Shows remaining number of available characters (maximum: 160)
 * **Tested**:     
   Test suite written in RSpec, automated with Guard.
