@@ -1,0 +1,72 @@
+aside section {
+  padding: 10px 0;
+  border-top: 1px solid #999999; }
+  aside section:first-child {
+    border: 0;
+    padding-top: 0; }
+  aside section span {
+    display: block;
+    margin-bottom: 3px;
+    line-height: 1; }
+  aside section h1 {
+    font-size: 1.4em;
+    text-align: center;
+    letter-spacing: -1px;
+    margin-bottom: 3px;
+    margin-top: 0px; }
+
+.sidebar-gravatar {
+  margin: auto;
+  max-width: 128px; }
+
+.sidebar-name {
+  display: inline-block;
+  text-align: center;
+  width: 100%; }
+
+.sidebar-admin {
+  display: block;
+  font-size: 16px;
+  margin-top: 2px;
+  letter-spacing: normal;
+  font-weight: normal;
+  color: #eeeeee; }
+
+.sidebar-profile-link {
+  text-align: center; }
+
+.sidebar-squawks {
+  font-weight: bold;
+  text-align: center; }
+
+.stats {
+  overflow: auto; }
+  .stats a {
+    float: left;
+    padding: 0 5px;
+    border-left: 1px solid #999999;
+    color: gray; }
+    .stats a:first-child {
+      padding-left: 0;
+      border: 0; }
+    .stats a:hover {
+      text-decoration: none;
+      color: #049cdb; }
+  .stats strong {
+    display: block; }
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px; }
+  .user_avatars .gravatar {
+    margin: 1px 1px; }
+
+#squawk_content {
+  text-align: center; }
+
+#countdown {
+  text-align: right;
+  margin-top: -5px;
+  margin-right: 5px;
+  font-size: 90%;
+  color: auto; }

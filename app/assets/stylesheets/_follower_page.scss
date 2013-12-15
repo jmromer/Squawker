@@ -1,0 +1,19 @@
+// ------------------------------------
+//  Follower Page
+// ------------------------------------
+#follower_avatars {
+  padding: 20px 0px;
+  img {
+    width: 50px;
+    margin: 1px;
+  }
+}
+#follower_listing {
+  ul.users {
+    width: 500px;
+  }
+  li {
+    width: 160px;
+    border: none;
+  }
+}

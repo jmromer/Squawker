@@ -1,0 +1,135 @@
+/* line 4, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+html {
+  overflow-y: scroll;
+}
+
+/* line 7, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+body {
+  padding-top: 60px;
+  margin: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 12, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.container {
+  width: 730px;
+}
+
+/* line 15, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.hero-unit {
+  height: 450px;
+  margin-bottom: -45px;
+  background: url(https://s3.amazonaws.com/squawker/squawker.jpg);
+}
+/* line 19, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.hero-unit h1 {
+  font-size: 150px;
+  color: white;
+  text-align: center;
+  margin: 120px 0px 0px -45px !important;
+  text-transform: lowercase;
+}
+/* line 26, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.hero-unit h2 {
+  letter-spacing: -1px;
+  width: 200px;
+  margin: 20px auto 20px auto;
+  color: white;
+  display: none;
+}
+/* line 33, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.hero-unit a {
+  font-weight: 300;
+  letter-spacing: normal;
+}
+
+/* line 38, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.navbar {
+  background-image: linear-gradient(to bottom, #222222, #111111);
+  background-repeat: repeat-x;
+  border-color: #252525;
+}
+
+/* line 43, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.navbar-inner {
+  width: 940px;
+  margin: auto;
+}
+/* line 46, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.navbar-inner .container {
+  width: 730px !important;
+  margin: auto;
+  padding: 0px 30px 0px 50px;
+}
+
+/* line 52, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.row {
+  width: 750px;
+  margin: auto;
+}
+
+/* line 56, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.span4 {
+  width: 220px;
+  margin-top: 15px;
+}
+
+/* line 60, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.span8 {
+  width: 470px;
+  margin-left: 30px;
+}
+
+/* line 64, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+#edit-profile-form {
+  margin: auto;
+  width: 500px;
+}
+/* line 67, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+#edit-profile-form .span4 {
+  width: 100px;
+}
+/* line 70, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+#edit-profile-form .span8 {
+  width: 350px;
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+/* line 76, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.offset3 {
+  margin-left: 150px;
+}
+
+/* line 79, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+section {
+  overflow: auto;
+}
+
+/* line 82, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+textarea {
+  resize: vertical;
+  height: 32px !important;
+}
+
+/* line 86, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.center {
+  text-align: center;
+}
+/* line 88, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* line 92, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+#all-users {
+  margin: auto;
+  width: 730px;
+}
+
+/* line 96, /Users/romer/Developer/repos/Squawker/app/assets/stylesheets/_global.scss */
+.pagination {
+  text-align: center;
+  width: 175px;
+  margin: 35px auto 0px auto;
+}

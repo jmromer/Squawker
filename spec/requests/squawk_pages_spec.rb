@@ -11,7 +11,6 @@ describe "Squawk pages" do
     before { visit root_path }
 
     describe "with invalid information" do
-
       it "should not create a squawk" do
         expect { click_button "squawk it!" }.not_to change(Squawk, :count)
       end
@@ -39,7 +38,7 @@ describe "Squawk pages" do
 
       it "should delete a squawk" do
         expect do
-          find('.delete-item').click
+          find('.trashcan').click
         end.to change(Squawk, :count).by(-1)
       end
     end

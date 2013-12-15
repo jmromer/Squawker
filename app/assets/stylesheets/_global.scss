@@ -1,0 +1,100 @@
+// ------------------------------------
+//  Global Styling
+// ------------------------------------
+html {
+  overflow-y: scroll;
+}
+body {
+  padding-top: 60px;
+  margin: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.container {
+  width: 730px;
+}
+.hero-unit {
+  height: 450px;
+  margin-bottom: -45px;
+  background: url(https://s3.amazonaws.com/squawker/squawker.jpg);
+  h1 {
+    font-size: 150px;
+    color: white;
+    text-align: center;
+    margin: 120px 0px 0px -45px !important;
+    text-transform: lowercase;
+  }
+  h2 {
+    letter-spacing: -1px;
+    width: 200px;
+    margin: 20px auto 20px auto;
+    color: white; //$grayLight;
+    display: none;
+  }
+  a {
+    font-weight: 300;
+    letter-spacing: normal;
+  }
+}
+.navbar {
+  background-image: linear-gradient(to bottom, rgb(34, 34, 34), rgb(17, 17, 17));
+  background-repeat: repeat-x;
+  border-color: rgb(37, 37, 37);
+}
+.navbar-inner {
+  width: 940px;
+  margin: auto;
+  .container {
+    width: 730px !important;
+    margin: auto;
+    padding: 0px 30px 0px 50px;
+  }
+}
+.row {
+    width: 750px;
+    margin: auto;
+}
+.span4 {
+  width: 220px;
+  margin-top: 15px;
+}
+.span8 {
+  width: 470px;
+  margin-left: 30px;
+}
+#edit-profile-form {
+  margin: auto;
+  width: 500px;
+  .span4 {
+    width: 100px;
+  }
+  .span8 {
+    width: 350px;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}
+.offset3 {
+  margin-left: 150px;
+}
+section {
+  overflow: auto;
+}
+textarea {
+  resize: vertical;
+  height: 32px !important;
+}
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+#all-users {
+  margin: auto;
+  width: 730px;
+}
+.pagination {
+  text-align: center;
+  width: 175px;
+  margin: 35px auto 0px auto;
+}

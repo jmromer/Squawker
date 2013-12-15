@@ -1,0 +1,41 @@
+// ------------------------------------
+//  About Page
+// ------------------------------------
+.static-page-block {
+  width: 500px;
+  margin: auto;
+  position: relative;
+  h2 {
+    font-size: 24px;
+    color: inherit;
+    margin: 30px auto 10px auto;
+  }
+  p {
+    text-align: justify;
+    margin: 10px auto;
+    letter-spacing: 0px;
+    line-height: 1.3em;
+    font-size: 16px;
+    a {
+      color: #3f738d;
+      &:hover {
+        color: rgb(0, 136, 204);
+        text-decoration: none;
+      }
+    }
+  }
+  #capslock {
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0px auto;
+    padding: 0px 0px;
+  }
+  .squawker {
+    font-variant: small-caps;
+    font-weight: bold;
+  }
+  .keep-together {
+    white-space: nowrap;
+  }
+}

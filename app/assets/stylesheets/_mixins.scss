@@ -1,0 +1,13 @@
+// ------------------------------------
+//  Mixins, Variables, etc
+// ------------------------------------
+$grayMediumLight: #eaeaea;
+$grayLighter: rgb(238, 238, 238);
+$grayLight: rgb(153, 153, 153);
+$blue: #049cdb;
+
+@mixin box_size($bs) {
+  -moz-box-sizing: $bs;
+  -webkit-box-sizing: $bs;
+  box-sizing: $bs;
+}
