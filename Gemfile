@@ -2,10 +2,15 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 #ruby-gemset=Squawker
 
+gem 'rails', '4.0.0'
+gem 'pg'
+
+gem 'unicorn'
+gem 'rack-timeout'
+gem 'newrelic_rpm'
+
 gem 'bcrypt-ruby', '3.0.1'
 gem 'fake_friends', '0.1.6'
-gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
 
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
@@ -14,10 +19,9 @@ gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
 gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'jbuilder', '1.0.2'       # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
-gem 'rails', '4.0.0'
-gem 'pg'
+gem 'will_paginate', '3.0.4'
 gem 'bootstrap-sass', '2.3.2.0'
-gem 'newrelic_rpm'
+gem 'bootstrap-will_paginate', '0.0.9'
 
 group :production do
   gem 'rails_12factor'
