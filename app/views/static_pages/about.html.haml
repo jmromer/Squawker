@@ -1,57 +1,44 @@
 - provide(:title, 'About')
+
 .static-page-block
-  %h1 what is squawker?
-  %h2 disruptive innovation
-  %p
-    I built
-    %span.squawker squawker
-    to address one of the internet's most pressing needs:
-    %span#capslock
-      more shouting.
-    That's why
-    %span.squawker squawker
-    is the world's first
-    %em all-caps-lock
-    social network.
-  %p
-    Every post on
-    %span.squawker squawker
-    is automatically upcased by the magic Rails trolls (more on that below) that power the site.
-  %p So celebrate yourself. Sound your barbaric yawp over the roofs of the world. Or, just shout at people.
-  %p You're welcome, internet.
-  %h2 a technology showcase
-  %p
-    %span.squawker squawker
-    runs on
-    = succeed "." do
-      %a{:href => "http://rubyonrails.org/"} Rails 4
-    Its styling is courtesy of
-    = succeed "," do
-      %a{:href => "http://getbootstrap.com/"} Twitter Bootstrap
-    with customized CSS implemented in
-    %a{:href => "http://sass-lang.com/"} SASS
-    and some
-    %a{:href => "http://jquery.com/"} jQuery
-    magic mixed in for good measure.
-  %p
-    Its test suite is implemented in
-    %a{:href => "http://rspec.info/"} RSpec
-    and automated with the
-    %a{:href => "http://rubygems.org/gems/guard-rails"} guard-rails
-    gem. I used
-    %a{:href => "http://jnicklas.github.io/capybara/"} Capybara
-    to simulate user interaction and
-    %a{:href => "http://rubygems.org/gems/fake_friends"} FakeFriends
-    and
-    %a{:href => "http://github.com/thoughtbot/factory_girl_rails"} Factory Girl
-    to automate the creation of test profiles.
-  %p
-    %span.squawker squawker
-    uses a
-    %a{:href => "http://www.postgresql.org/"} PostgreSQL
-    database and is deployed to
-    = succeed "." do
-      %a{:href => "http://www.heroku.com"} heroku
-    The source is available
-    = succeed "." do
-      %a{:href => "http://github.com/jmromer/Squawker"} on Github
+  :markdown
+
+    # what is squawker?
+
+    ## disruptive innovation
+
+    I built squawker to address one of the internet's most pressing needs:
+
+    <span id="capslock">MORE SHOUTING.</span>
+
+    That's why squawker is the world's first *all-caps-lock* social network.
+
+    Every post on squawker is automatically upcased by the magic Rails trolls (more on that below) that power the site.
+
+    So celebrate yourself. Sound your barbaric yawp over the roofs of the world. Or, just shout at people.
+
+    You're welcome, internet.
+
+
+    ## a technology showcase
+
+    Squawker runs on [Rails 4][rails]. It's styled with [Bootstrap][bootstrap], customized in [Haml][haml] and [Sass (SCSS)][scss] with hints of [jQuery][jquery].
+
+    Its test suite is implemented in [RSpec][rspec] and uses Capybara to simulate user interaction, [Factory Girl][factory_girl] to automate the creation of test profiles, and [FakeFriends][fake_friends] to populate the site with generated user data.
+
+    Squawker uses a [PostgreSQL][psql] database and is hosted on [heroku][heroku] with [Unicorn][unicorn]. The [source code][source] is available on Github.
+
+    [rails]: http://rubyonrails.org
+    [haml]: http://haml.info
+    [scss]: http://sass-lang.com
+    [bootstrap]: http://getbootstrap.com
+    [jquery]: http://jquery.com
+    [rspec]: http://rspec.info
+    [capybara]: http://github.com/jnicklas/capybara
+    [factory_girl]: http://github.com/thoughtbot/factory_girl_rails
+    [fake_friends]: http://rubygems.org/gems/fake_friends
+    [psql]: http://www.postgresql.org
+    [heroku]: http://www.heroku.com
+    [unicorn]: http://rubygems.org/gems/unicorn
+    [source]: http://github.com/jmromer/Squawker
+
