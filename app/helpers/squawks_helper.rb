@@ -21,7 +21,6 @@ module SquawksHelper
         end
       end.join(' ').html_safe
     end
-
   end
 
   def formatted(str)
