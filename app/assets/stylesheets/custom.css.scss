@@ -479,8 +479,15 @@ aside {
   }
 }
 
-input#squawk_content {
+#squawk_content {
   text-align: center;
+}
+#countdown {
+  text-align: right;
+  margin-top: -5px;
+  margin-right: 5px;
+  font-size: 90%;
+  color: auto;
 }
 
 // ------------------------------------
