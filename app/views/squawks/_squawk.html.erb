@@ -1,8 +1,11 @@
 <li>
   <span class="content">
-    <%= squawk.content
-        .gsub(/(?<link>https?:\/\/\S+)/i, '<a href="\k<link>">\k<link></a>')
-        .html_safe %>
+    <%= wrap(
+          squawk
+            .content
+            .gsub(/(?<link>https?:\/\/\S+)/i, '<a href="\k<link>">\k<link></a>')
+            .html_safe
+        ) %>
   </span>
   <span class="timestamp">
     <%= time_ago_in_words(squawk.created_at) %> ago.
@@ -16,4 +19,3 @@
   <% end %>
 </li>
 
-<!-- TODO: Add some jQuery here -->

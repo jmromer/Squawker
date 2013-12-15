@@ -11,15 +11,21 @@
       <%= time_ago_in_words(feed_item.created_at) %> ago
     </span>
     <span class="text">
-      <%= feed_item.content
-            .gsub(/(?<link>http:\/\/\S+)/i, '<a href="\k<link>">\k<link></a>')
-            .html_safe %>
+      <%= wrap(
+            feed_item
+              .content
+              .gsub(/(?<link>http:\/\/\S+)/i, '<a href="\k<link>">\k<link></a>')
+              .html_safe
+        ) %>
+
       <% if current_user?(feed_item.user) %>
+
       <%= link_to trash_can_icon, feed_item, method: :delete #,
                                              #data: {confirm: "Are you sure?"},
                                              #title: feed_item.content,
                                              #class: 'delete-item'
                                              %>
+
       <% end %>
     </span>
   </div>
