@@ -1,18 +1,21 @@
 function updateCountdown () {
-  var currentChars   = $('#squawk_content').val().length
-  var remainingChars = 160 - currentChars;
+  var current   = $('#squawk_content').val().length
+  var remaining = 160 - current;
 
-  if (remainingChars === 160 ) {
-    $('#countdown').text('');
-  } else if (remainingChars <= 10) {
-    $('#countdown').text(remainingChars).css('color', 'red');
+  if (remaining === 160 ) {
+    $('#countdown').html('');
+  } else if (remaining <= 10) {
+    $('#countdown').text(remaining).css('color', 'red');
   } else {
-    $('#countdown').text(remainingChars).css('color', 'black');
+    $('#countdown').text(remaining).css('color', 'black');
   }
 }
 
 $(document).ready(function(){
-  updateCountdown();
-  $('#squawk_content').change(updateCountdown);
-  $('#squawk_content').keyup(updateCountdown);
+  if ($('#squawk_content').val() != undefined) {
+    updateCountdown();
+    $('#squawk_content').change(updateCountdown);
+    $('#squawk_content').keyup(updateCountdown);
+  }
 });
+
