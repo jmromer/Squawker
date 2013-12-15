@@ -14,6 +14,7 @@ gem 'fake_friends', '0.1.6'
 
 gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
+gem 'haml-rails'              # Use Haml for html
 gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
 gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
