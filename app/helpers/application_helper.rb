@@ -1,6 +1,5 @@
 module ApplicationHelper
 
-  # Returns the full title on a per-page basis.
   def full_title(page_title)
     base_title = "Squawker"
     if page_title.empty?
@@ -11,11 +10,9 @@ module ApplicationHelper
   end
 
   def trash_can_icon
-    image_tag("https://s3.amazonaws.com/squawker/icon_trash.gif",
-                border: 0,
-                alt: 'Delete',
-                title: 'Delete',
-                class: 'trashcan')
+    trash_icon_url = "http://s3.amazonaws.com/squawker/icon_trash.gif"
+    image_tag(trash_icon_url, border: 0,
+      alt: 'Delete', title: 'Delete', class: 'trashcan')
   end
 
 

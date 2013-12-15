@@ -38,7 +38,7 @@ describe "Squawk pages" do
 
       it "should delete a squawk" do
         expect do
-          find('.trashcan').click
+          find('.delete-item').click
         end.to change(Squawk, :count).by(-1)
       end
     end

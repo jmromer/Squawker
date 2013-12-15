@@ -14,8 +14,8 @@ describe "User pages" do
 
     before { visit user_path(user) }
 
-    # it { should have_content(user.name) }
-    # it { should have_title(user.name) }
+    it { should have_content(user.name) }
+    it { should have_title(user.name) }
 
     describe "follow/unfollow buttons" do
       let(:other_user) { FactoryGirl.create(:user) }
@@ -189,9 +189,7 @@ describe "User pages" do
           sign_in admin
           visit users_path
         end
-
         it { should have_css('.trashcan') }
-
         it "should be able to delete another user" do
           expect{ find('.delete-item').click }.to change(User, :count).by(-1)
         end
@@ -207,12 +205,12 @@ describe "User pages" do
     let!(:m2) { FactoryGirl.create(:squawk, user: user, content: "Bar") }
 
     before { visit user_path(user) }
-    # it { should have_content(user.name) }
-    # it { should have_title(user.name) }
+    it { should have_content(user.name) }
+    it { should have_title(user.name) }
 
     describe 'squawks' do
-      # it { should have_content(m1.content) }
-      # it { should have_content(m2.content) }
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
       it { should have_content(user.squawks.count) }
     end
 
