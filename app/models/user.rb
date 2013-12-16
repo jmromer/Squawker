@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
            class_name: "Relationship",
            dependent: :destroy
 
+  self.per_page = 20
+
   def send_password_reset
     self.password_reset_token = User.new_token
     self.password_reset_at    = Time.zone.now

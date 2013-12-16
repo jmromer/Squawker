@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if signed_in?
-      @squawk = current_user.squawks.build
+      @squawk     = current_user.squawks.build
       @feed_items = current_user.feed.paginate(page: params[:page])
     end
   end

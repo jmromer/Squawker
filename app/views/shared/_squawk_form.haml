@@ -1,7 +1,6 @@
 = form_for(@squawk) do |f|
   = render 'shared/error_messages', object: f.object
   .field
-    = f.text_field :content,    |
-      placeholder: "squawk it!" |
+    = f.text_field :content, placeholder: "squawk it!"
   #countdown
   = f.submit "squawk it!", class: "btn btn-primary offscreen", id: "submit-squawk"
