@@ -1,6 +1,9 @@
 #squawker
 
+[![Code Climate](https://codeclimate.com/github/jmromer/Squawker.png)](https://codeclimate.com/github/jmromer/Squawker)
+
 A Twitter clone.
+
 
 ## Features
 
