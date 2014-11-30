@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-#ruby-gemset=Squawker
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 gem 'pg'
 
 gem 'unicorn'
@@ -12,13 +10,13 @@ gem 'newrelic_rpm'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'fake_friends', '0.1.6'
 
-gem 'sass-rails', '4.0.0'     # Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.2'  # Use SCSS for stylesheets
 gem 'uglifier', '2.1.1'       # Use Uglifier as compressor for JavaScript assets
 gem 'haml-rails'              # Use Haml for html
 gem 'markdown-rails'          # Use markdown for content
 gem 'coffee-rails', '4.0.0'   # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails', '3.0.4'   # Use jquery as the JavaScript library
-gem 'turbolinks', '1.1.1'     # Makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks', '1.1.1'     # Read more: https://github.com/rails/turbolinks
 gem 'jbuilder', '1.0.2'       # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 gem 'will_paginate', '3.0.4'
@@ -31,11 +29,11 @@ end
 
 group :development, :test do
   gem 'pry-rails'             # use pry for rails console
+  gem 'pry-byebug'
   gem 'annotate'              # annotate models
 
   gem 'better_errors'         # better errors, duh
   gem 'binding_of_caller'     # REPL in better errors
-  gem 'debugger'              # for debugging
 
   gem 'rspec-rails', '2.13.1' # rspec as alternative TDD language
   gem 'guard-rspec', '2.5.0'  # guard to automate rspec
@@ -46,7 +44,6 @@ group :development, :test do
   gem 'autotest'
   gem 'autotest-rails'        # for automated testing with growl
   gem 'autotest-growl'
-  # gem 'autotest-fsevent'
   gem 'meta_request'
 end
 
@@ -55,5 +52,4 @@ group :test do
   gem 'capybara', '2.1.0'             # Simulates user interaction
   gem 'factory_girl_rails', '4.2.1'   # Creates users
 end
-
 
