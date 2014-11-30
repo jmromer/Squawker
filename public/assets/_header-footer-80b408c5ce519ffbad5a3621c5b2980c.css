@@ -1,0 +1,68 @@
+/* line 6, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  letter-spacing: -0.5px;
+  padding-top: 9px;
+  line-height: 1;
+}
+/* line 14, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+#logo:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* line 23, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  padding-bottom: 70px;
+  border-top: 1px solid #eaeaea;
+  width: 730px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #999999;
+}
+/* line 32, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer a {
+  color: #555555;
+}
+/* line 34, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer a:hover {
+  color: #222222;
+  text-decoration: none;
+}
+/* line 39, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer small {
+  float: right;
+}
+/* line 42, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer ul {
+  float: left;
+  list-style: none;
+  margin-left: 0px;
+}
+/* line 46, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+footer ul li {
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 52, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+.right-footer {
+  float: right;
+}
+/* line 54, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+.right-footer a {
+  margin: 0px 5px;
+}
+/* line 56, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+.right-footer a:hover {
+  text-decoration: none;
+}
+/* line 57, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_header-footer.scss */
+.right-footer a:last-of-type {
+  margin-right: 0px;
+}

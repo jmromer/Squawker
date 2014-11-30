@@ -1,0 +1,114 @@
+/* line 6, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+a:hover {
+  text-decoration: none;
+}
+
+/* line 8, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+aside section {
+  padding: 10px 0;
+  border-top: 1px solid #eeeeee;
+}
+/* line 11, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+aside section:first-child {
+  border: 0;
+  padding-top: 0;
+}
+/* line 15, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+aside section span {
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+/* line 20, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+aside section h1 {
+  font-size: 1.4em;
+  text-align: center;
+  letter-spacing: -1px;
+  margin-bottom: 3px;
+  margin-top: 0px;
+}
+
+/* line 29, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.sidebar-gravatar {
+  margin: auto;
+  max-width: 128px;
+}
+
+/* line 33, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.sidebar-name {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+/* line 38, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.sidebar-admin {
+  display: block;
+  font-size: 16px;
+  margin-top: 2px;
+  letter-spacing: normal;
+  font-weight: normal;
+  color: #999999;
+}
+
+/* line 46, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.sidebar-profile-link {
+  text-align: center;
+}
+
+/* line 49, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.sidebar-squawks {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* line 53, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.stats {
+  overflow: auto;
+}
+/* line 55, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.stats a {
+  float: left;
+  padding: 0 5px;
+  border-left: 1px solid #eeeeee;
+  color: gray;
+}
+/* line 60, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.stats a:first-child {
+  padding-left: 0;
+  border: 0;
+}
+/* line 64, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.stats a:hover {
+  text-decoration: none;
+  color: #049cdb;
+}
+/* line 69, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.stats strong {
+  display: block;
+}
+
+/* line 73, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+}
+/* line 76, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+.user_avatars .gravatar {
+  margin: 1px 1px;
+}
+
+/* line 80, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+#squawk_content {
+  text-align: center;
+  width: 200px;
+}
+
+/* line 84, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_sidebar.scss */
+#countdown {
+  text-align: right;
+  margin-top: -5px;
+  margin-right: 5px;
+  font-size: 90%;
+  color: auto;
+}

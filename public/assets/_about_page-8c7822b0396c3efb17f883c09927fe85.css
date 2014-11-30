@@ -1,0 +1,46 @@
+/* line 4, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block {
+  width: 500px;
+  margin: auto;
+  position: relative;
+}
+/* line 8, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block h2 {
+  font-size: 24px;
+  color: inherit;
+  margin: 30px auto 10px auto;
+}
+/* line 13, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block p {
+  text-align: justify;
+  margin: 10px auto;
+  letter-spacing: 0px;
+  line-height: 1.3em;
+  font-size: 16px;
+}
+/* line 19, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block p a {
+  color: #3f738d;
+}
+/* line 21, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block p a:hover {
+  color: #0088cc;
+  text-decoration: none;
+}
+/* line 27, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block #capslock {
+  display: block;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0px auto;
+  padding: 0px 0px;
+}
+/* line 34, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block .squawker {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+/* line 38, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_about_page.scss */
+.static-page-block .keep-together {
+  white-space: nowrap;
+}

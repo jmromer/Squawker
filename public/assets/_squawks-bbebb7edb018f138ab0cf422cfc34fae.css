@@ -1,0 +1,62 @@
+/* line 6, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.gravatar {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* line 13, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+aside textarea {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+/* line 18, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.squawks {
+  list-style: none !important;
+  margin: 10px 0 0 0;
+}
+/* line 21, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.squawks li {
+  padding: 10px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+/* line 26, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.squawk-gravatar {
+  display: block;
+  float: left;
+  width: 40px;
+  padding-top: 2px;
+  padding-right: 8px;
+}
+
+/* line 33, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.squawk-content {
+  display: block;
+  margin-left: 45px;
+}
+/* line 36, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.squawk-content .text {
+  display: block;
+}
+
+/* line 40, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.timestamp {
+  color: #999999;
+  text-align: right;
+  font-size: 12px;
+}
+
+/* line 45, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.trashcan {
+  margin-top: -2px;
+  padding-left: 2px;
+}
+
+/* line 49, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_squawks.scss */
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
