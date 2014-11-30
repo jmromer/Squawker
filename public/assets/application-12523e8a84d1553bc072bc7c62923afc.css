@@ -1,3 +1,18 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
 /*!
  * Bootstrap v2.3.2
  *
@@ -6868,7 +6883,7 @@ body {
 .hero-unit {
   height: 450px;
   margin-bottom: -45px;
-  background: url(/public/assets/images/squawker.jpg);
+  background: url(/assets/squawker.jpg);
 }
 /* line 19, /Users/romer/Developer/backups/demo_apps/Squawker/app/assets/stylesheets/_global.scss */
 .hero-unit h1 {

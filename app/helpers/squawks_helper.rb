@@ -37,12 +37,9 @@ module SquawksHelper
     sanitize(raw(wrapped_string))
   end
 
-  private
-
-    def wrap_long_string(text, max_length)
-        zero_width_space    = "&#8203;"
-        string_upto_max_len = /.{1,#{max_length}}/
-        text.scan(string_upto_max_len).join(zero_width_space)
-    end
-
+  def wrap_long_string(text, max_length)
+    zero_width_space    = "&#8203;"
+    string_upto_max_len = /.{1,#{max_length}}/
+    text.scan(string_upto_max_len).join(zero_width_space)
+  end
 end
