@@ -1,24 +1,22 @@
-function updateCountdown () {
-  var current   = $('#squawk_content').val().length
-  var remaining = 160 - current;
+var updateCountdown = function ($form) {
+  var current, remaining, color;
+  current = $form.find('#squawk_content').val().length;
+  remaining = 160 - current;
+  color = (remaining <= 10) ? 'red' : 'black';
+  $form.find('#countdown').text(remaining).css('color', color);
+};
 
-  if (remaining <= 10) {
-    $('#countdown').text(remaining).css('color', 'red');
-  } else {
-    $('#countdown').text(remaining).css('color', 'black');
-  }
-}
-
-$(document).ready(function(){
-  $('#squawk_content').focus(function(){
-    updateCountdown();
-    $('#squawk_content').change(updateCountdown);
-    $('#squawk_content').keyup(updateCountdown);
-  });
-});
+var clearCountdown = function ($form){
+  $(this).find('#countdown').text('');
+};
 
 $(document).ready(function(){
-  $('#squawk_content').focusout(function(){
-    $('#countdown').text('');
+  $('#new_squawk').on({
+    'focus keyup': {
+      '#squawk_content': updateCountdown($(this))
+    },
+    'focusout': {
+      '#squawk_content': clearCountdown($(this))
+    }
   });
 });
