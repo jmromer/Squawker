@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-
   private
-    def set_friendly_return_page
-      session[:return_to] = request.url if request.get?
-    end
+
+  def set_friendly_return_page
+    session[:return_to] = request.url if request.get?
+  end
 end

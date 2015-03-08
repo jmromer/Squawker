@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user,
-                only: [:index, :edit, :update, :destroy, :following, :followers]
-
-  before_action :correct_user,  only: [:edit, :update]
-  before_action :admin_user,    only: :destroy
-  before_action :set_friendly_return_page,  only: :show
+  before_action :signed_in_user, except: %i(new create show)
+  before_action :admin_user, only: :destroy
+  before_action :set_friendly_return_page, only: :show
+  before_action :set_user, only: %i(edit update show following follwers)
+  before_action :correct_user, only: %i(edit update)
+  after_action :render_show_follow_template, only: %i(following followers)
 
   def index
     @users = User.paginate(page: params[:page])
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to Squawker!"
+      flash[:success] = 'Welcome to Squawker!'
       redirect_to @user
     else
       render :new
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render :edit
@@ -47,38 +47,43 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user    = User.find(params[:id])
     @squawks = @user.squawks.paginate(page: params[:page])
   end
 
   def following
-    @title = "Following"
-    @user  = User.find(params[:id])
+    @title = 'Following'
     @users = @user.followed_users.paginate(page: params[:page])
-    render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
-    @user  = User.find(params[:id])
+    @title = 'Followers'
     @users = @user.followers.paginate(page: params[:page])
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :email,
+      :password,
+      :password_confirmation
+    )
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def render_show_follow_template
     render 'show_follow'
   end
 
+  def correct_user
+    redirect_to(root_url) unless current_user?(@user)
+  end
 
-  private
-    def user_params
-      params.require(:user)
-            .permit(:name, :email, :password, :password_confirmation)
-    end
-
-  # 'before' filters
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
-
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
 end
