@@ -30,9 +30,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'childprocess', '0.3.6'
   gem 'guard-rspec', '2.5.0'
+  gem 'jazz_fingers'
   gem 'meta_request'
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'rspec-rails', '2.13.1'
 
   # remove once rspec is upgraded
