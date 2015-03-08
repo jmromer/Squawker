@@ -37,8 +37,10 @@ group :development, :test do
 
   # remove once rspec is upgraded
   gem 'test-unit'
-  gem 'responders', '~> 2.0'
 end
+
+# refactor for Rails 4
+gem 'responders', '~> 2.0'
 
 group :test do
   gem 'capybara', '2.1.0'
