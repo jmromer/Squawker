@@ -1,5 +1,6 @@
 Squawker::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence over those in
+  # config/application.rb.
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
@@ -13,8 +14,8 @@ Squawker::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
-  config.static_cache_control = "public, max-age=3600"
+  config.serve_static_files  = true
+  config.static_cache_control = 'public, max-age=3600'
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -36,4 +37,8 @@ Squawker::Application.configure do
 
   # Speed up tests by lowering bcrypt's cost function
   ActiveModel::SecurePassword.min_cost = true
+
+  # Hide SQL logging when testing
+  config.log_level = :error
 end
+
