@@ -203,6 +203,8 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -295,7 +297,7 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    turbolinks (1.1.1)
+    turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -340,6 +342,7 @@ DEPENDENCIES
   meta_request
   newrelic_rpm
   pg
+  quiet_assets
   rack-timeout
   rails (~> 4.2.0)
   rails_12factor
@@ -348,7 +351,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.1)
   selenium-webdriver (= 2.35.1)
   test-unit
-  turbolinks (= 1.1.1)
+  turbolinks (= 2.5.3)
   uglifier (= 2.1.1)
   unicorn
   will_paginate (= 3.0.4)
