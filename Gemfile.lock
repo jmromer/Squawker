@@ -81,7 +81,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    fake_friends (0.1.6)
+    fake_friends (1.0.2)
     ffi (1.9.3)
     formatador (0.2.4)
     guard (2.2.3)
@@ -257,7 +257,7 @@ DEPENDENCIES
   childprocess (= 0.3.6)
   coffee-rails (= 4.0.0)
   factory_girl_rails (= 4.2.1)
-  fake_friends (~> 0.1.6)
+  fake_friends (~> 1.0.2)
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)
   haml-rails
