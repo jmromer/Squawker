@@ -3,7 +3,7 @@ squawker
 
 [![Code Climate Badge][]][Code Climate]
 
-[Code Climate Badge]: https://codeclimate.com/github/jkrmr/Squawker.png
+[Code Climate Badge]: https://codeclimate.com/github/jkrmr/Squawker/badges/gpa.svg
 [Code Climate]: https://codeclimate.com/github/jkrmr/Squawker
 
 A Twitter clone.
