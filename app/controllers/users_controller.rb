@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
+
   before_action :signed_in_user, except: %i(new create show)
   before_action :admin_user, only: :destroy
   before_action :set_friendly_return_page, only: :show
-  before_action :set_user, only: %i(edit update show following follwers)
+  before_action :set_user, only: %i(edit update show following followers)
   before_action :correct_user, only: %i(edit update)
-  after_action :render_show_follow_template, only: %i(following followers)
 
   def index
     @users = User.paginate(page: params[:page])
@@ -53,11 +53,13 @@ class UsersController < ApplicationController
   def following
     @title = 'Following'
     @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   def followers
     @title = 'Followers'
     @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   private
@@ -75,10 +77,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def render_show_follow_template
-    render 'show_follow'
-  end
-
   def correct_user
     redirect_to(root_url) unless current_user?(@user)
   end
@@ -86,4 +84,5 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
+
 end
