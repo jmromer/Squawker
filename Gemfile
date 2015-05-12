@@ -5,7 +5,7 @@ gem 'bcrypt-ruby', '~> 3.1.5'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'fake_friends', '~> 1.0.2'
+gem 'fake_friends', '~> 1.0.3'
 gem 'haml-rails'
 gem 'jbuilder', '1.0.2'
 gem 'jquery-rails', '4.0.3'
@@ -29,8 +29,6 @@ group :development, :test do
   gem 'autotest-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'childprocess', '0.3.6'
-  gem 'guard-rspec', '2.5.0'
   gem 'jazz_fingers'
   gem 'meta_request'
   gem 'rspec-rails', '2.13.1'
@@ -47,4 +45,3 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'selenium-webdriver', '2.35.1'
 end
-
