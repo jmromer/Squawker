@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_back_or user
     else
-      flash.now[:error] = "Invalid email/password combination"
-      # NB: .now contents disappear as soon as there is an additional request
+      flash.now[:error] = 'Invalid email/password combination'
       render :new
     end
   end
@@ -23,13 +22,15 @@ class SessionsController < ApplicationController
 
   def trial
     params[:remember_me] = false
-    user = User.find(2)
+    user = User.second
     sign_in user
     redirect_back_or user
   end
 
   private
-    def valid_password?(user)
-      user.authenticate(params[:session][:password])
-    end
+
+  def valid_password?(user)
+    user.authenticate(params[:session][:password])
+  end
+
 end
