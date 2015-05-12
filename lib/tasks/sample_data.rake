@@ -1,5 +1,3 @@
-
-# TODO: fix this. not loading FakeFriends
 namespace :db do
   desc 'Fill database with sample data'
   task populate: :environment do
@@ -44,9 +42,9 @@ def create_user_and_associated_posts(friend, index)
 end
 
 def make_users_and_posts
-  admin   = FakeFriend.find_by(username: 'idiot')
-  jane    = FakeFriend.find_by(username: 'divya')
-  friends = FakeFriend.gather(50)
+  admin   = FakeFriends::FakeFriend.find_by(username: 'idiot')
+  jane    = FakeFriends::FakeFriend.find_by(username: 'divya')
+  friends = FakeFriends::FakeFriend.gather(50)
 
   friends.delete_if { |ff| ff.username =~ /idiot|divya/ }
   friends.unshift(admin, jane)
@@ -70,4 +68,3 @@ def make_relationships
     end
   end
 end
-
