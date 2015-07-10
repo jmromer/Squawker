@@ -39,7 +39,7 @@ describe Squawk do
   end
 
   describe "with content that is too long" do
-    before { @squawk.content = "a" * 141 }
+    before { @squawk.content = "a" * 161 }
     it { should_not be_valid }
   end
 

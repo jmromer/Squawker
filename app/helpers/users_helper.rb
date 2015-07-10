@@ -4,7 +4,8 @@ module UsersHelper
     if is_a_dummy?(user)
       get_gravatar_for(user, options)
     else
-      avatar_url = user.image_url.sub("/128.", "/#{options[:size]}.")
+      avatar_url = user.image_url
+      avatar_url = avatar_url.sub("/128.", "/#{options[:size]}.") if avatar_url
       image_tag(avatar_url, alt: user.name, class: 'gravatar')
     end
   end
