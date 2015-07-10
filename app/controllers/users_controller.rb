@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_action :signed_in_user, except: %i(new create show)
   before_action :admin_user, only: :destroy
   before_action :set_friendly_return_page, only: :show
@@ -65,12 +64,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(
-      :name,
-      :email,
-      :password,
-      :password_confirmation
-    )
+    params.require(:user)
+      .permit(:name, :email, :password, :password_confirmation)
   end
 
   def set_user
@@ -84,5 +79,4 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
-
 end

@@ -7,15 +7,15 @@ describe RelationshipsController do
   before { sign_in user, no_capybara: true }
 
   describe 'creating a relationship with Ajax' do
-    it "should increment the Relationship count" do
+    it 'should increment the Relationship count' do
       expect do
         xhr :post, :create, relationship: { followed_id: other_user.id }
       end.to change(Relationship, :count).by(1)
     end
 
-    it "should respond with su ccess" do
+    it 'should respond with su ccess' do
       xhr :post, :create, relationship: { followed_id: other_user.id }
-      expect(response).to be_success
+      expect(response).to be_ok
     end
   end
 
@@ -24,7 +24,7 @@ describe RelationshipsController do
 
     before { user.follow!(other_user) }
 
-    it "should decrement the Relationship count" do
+    it 'should decrement the Relationship count' do
       expect do
         xhr :delete, :destroy, id: relationship.id
       end.to change(Relationship, :count).by(-1)
@@ -32,7 +32,7 @@ describe RelationshipsController do
 
     it 'should respond with success' do
       xhr :delete, :destroy, id: relationship.id
-      expect(response).to be_success
+      expect(response).to be_ok
     end
   end
 end

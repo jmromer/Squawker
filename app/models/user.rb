@@ -14,7 +14,6 @@
 #  password_reset_at    :datetime
 #  image_url            :string(255)
 #
-
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_tokens
@@ -28,22 +27,23 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
   validates :remember_token, uniqueness: true
   validates :password_reset_token, uniqueness: true
 
+  # provides presence validation, password and password_confirmation attributes,
+  # and matching validation for those two
   has_secure_password
-      # provides presence validation,
-      # password and password_confirmation attributes,
-      # and matching validation for those two
 
   has_many :squawks, dependent: :destroy
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
+
+  has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :reverse_relationships,
-           foreign_key: "followed_id",
-           class_name: "Relationship",
-           dependent: :destroy
+    foreign_key: 'followed_id',
+    class_name: 'Relationship',
+    dependent: :destroy
 
   self.per_page = 20
 
@@ -54,11 +54,11 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
-  def User.encrypt(token)
+  def self.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 
@@ -67,21 +67,25 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    self.relationships.find_by(followed_id: other_user.id)
+    relationships.find_by(followed_id: other_user.id)
   end
 
   def follow!(other_user)
-    self.relationships.create!(followed_id: other_user.id)
+    relationships.create!(followed_id: other_user.id)
   end
 
   def unfollow!(other_user)
-    self.relationships.find_by(followed_id: other_user.id).destroy!
+    relationships.find_by(followed_id: other_user.id).destroy!
+  end
+
+  def dummy?
+    email !~ /.+@example.com$/
   end
 
   private
-    def create_tokens
-      self.remember_token       = User.encrypt(User.new_token)
-      self.password_reset_token = User.new_token
-    end
-end
 
+  def create_tokens
+    self.remember_token       = User.encrypt(User.new_token)
+    self.password_reset_token = User.new_token
+  end
+end

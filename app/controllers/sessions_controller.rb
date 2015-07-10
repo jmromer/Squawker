@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def new
   end
 
@@ -17,13 +16,16 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
+
     redirect_to root_url
   end
 
   def trial
     params[:remember_me] = false
     user = User.second
+
     sign_in user
+
     redirect_back_or user
   end
 
@@ -32,5 +34,4 @@ class SessionsController < ApplicationController
   def valid_password?(user)
     user.authenticate(params[:session][:password])
   end
-
 end

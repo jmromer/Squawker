@@ -1,26 +1,17 @@
 module UsersHelper
-
   def avatar_for(user, options={ size: 128 })
-    if is_a_dummy?(user)
-      get_gravatar_for(user, options)
-    else
-      avatar_url = user.image_url
-      avatar_url = avatar_url.sub("/128.", "/#{options[:size]}.") if avatar_url
-      image_tag(avatar_url, alt: user.name, class: 'gravatar')
-    end
-  end
+    return get_gravatar_for(user, options) if user.dummy?
 
-  def is_a_dummy?(user)
-    (user.email =~ /.+@example.com$/).nil?
+    avatar_url = user.image_url
+    avatar_url = avatar_url.sub('/128.', "/#{options[:size]}.") if avatar_url
+    image_tag(avatar_url, alt: user.name, class: 'gravatar')
   end
 
   def get_gravatar_for(user, options)
-    gravatar_id  = Digest::MD5::hexdigest(user.email.downcase)
+    gravatar_id  = Digest::MD5.hexdigest(user.email.downcase)
     size         = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+
     image_tag(gravatar_url, alt: user.name, class: 'gravatar')
   end
 end
-
-
-
