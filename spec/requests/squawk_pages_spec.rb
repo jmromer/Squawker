@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Squawk pages" do
 
@@ -17,7 +17,7 @@ describe "Squawk pages" do
 
       describe "error messages" do
         before { click_button "squawk it!" }
-        it { should have_content('error') }
+        it { is_expected.to have_content('error') }
       end
     end
 

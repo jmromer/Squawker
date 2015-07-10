@@ -9,7 +9,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Squawk do
 
@@ -17,30 +17,34 @@ describe Squawk do
   before { @squawk = user.squawks.build(content: "Lorem ipsum") }
 
   subject { @squawk }
-  it { should respond_to(:content) }
-  it { should respond_to(:user_id) }
-  it { should respond_to(:user) }
-  its(:user) { should eq user }
-  it { should be_valid }
+  it { is_expected.to respond_to(:content) }
+  it { is_expected.to respond_to(:user_id) }
+  it { is_expected.to respond_to(:user) }
+
+  describe '#user' do
+    subject { super().user }
+    it { is_expected.to eq user }
+  end
+  it { is_expected.to be_valid }
 
   describe 'when user_id is not present' do
     before { @squawk.user_id = nil }
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe "when user_id is not present" do
     before { @squawk.user_id = nil }
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe "with blank content" do
     before { @squawk.content = " " }
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe "with content that is too long" do
     before { @squawk.content = "a" * 161 }
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
 end

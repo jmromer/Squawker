@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "User pages" do
   subject { page }
 
   describe 'signup page' do
     before { visit signup_path }
-    it { should have_content ('Sign Up') }
-    it { should have_title( full_title('Sign Up') ) }
+    it { is_expected.to have_content ('Sign Up') }
+    it { is_expected.to have_title( full_title('Sign Up') ) }
   end # signup page
 
   describe 'profile page' do
@@ -14,8 +14,8 @@ describe "User pages" do
 
     before { visit user_path(user) }
 
-    it { should have_content(user.name) }
-    it { should have_title(user.name) }
+    it { is_expected.to have_content(user.name) }
+    it { is_expected.to have_title(user.name) }
 
     describe "follow/unfollow buttons" do
       let(:other_user) { FactoryGirl.create(:user) }
@@ -38,7 +38,7 @@ describe "User pages" do
 
         describe "toggling the button" do
           before { click_button "Follow" }
-          it { should have_xpath("//input[@value='Unfollow']") }
+          it { is_expected.to have_xpath("//input[@value='Unfollow']") }
         end
       end
 
@@ -62,7 +62,7 @@ describe "User pages" do
 
         describe "toggling the button" do
           before { click_button "Unfollow" }
-          it { should have_xpath("//input[@value='Follow']") }
+          it { is_expected.to have_xpath("//input[@value='Follow']") }
         end
       end
     end
@@ -82,8 +82,8 @@ describe "User pages" do
       describe 'after submission' do
         before { click_button submit }
 
-        it { should have_title 'Sign Up' }
-        it { should have_content 'error' }
+        it { is_expected.to have_title 'Sign Up' }
+        it { is_expected.to have_content 'error' }
       end
     end # invalid info
 
@@ -103,14 +103,14 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { should have_link "Sign Out"}
-        it { should have_title user.name }
-        it { should have_selector 'div.alert.alert-success', text: 'Welcome' }
+        it { is_expected.to have_link "Sign Out"}
+        it { is_expected.to have_title user.name }
+        it { is_expected.to have_selector 'div.alert.alert-success', text: 'Welcome' }
       end
 
       describe "followed by signout" do
         # before { click_link "Sign Out" } # ?
-        it { should have_link "Sign In" }
+        it { is_expected.to have_link "Sign In" }
       end
     end # valid info
   end # signup
@@ -123,9 +123,9 @@ describe "User pages" do
     end
 
     describe "page" do
-      it { should have_content "Update your profile" }
-      it { should have_title "Edit user" }
-      it { should have_link "change", href: "http://gravatar.com/emails" }
+      it { is_expected.to have_content "Update your profile" }
+      it { is_expected.to have_title "Edit user" }
+      it { is_expected.to have_link "change", href: "http://gravatar.com/emails" }
     end
 
     describe "with valid information" do
@@ -139,16 +139,16 @@ describe "User pages" do
         click_button "Save changes"
       end
 
-      it { should have_title new_name }
-      it { should have_selector 'div.alert.alert-success' }
-      it { should have_link "Sign Out", href: signout_path }
+      it { is_expected.to have_title new_name }
+      it { is_expected.to have_selector 'div.alert.alert-success' }
+      it { is_expected.to have_link "Sign Out", href: signout_path }
       specify { expect(user.reload.name).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }
     end # valid information
 
     describe "with invalid information" do
       before { click_button "Save changes" }
-      it { should have_content "error" }
+      it { is_expected.to have_content "error" }
     end
 
   end # edit
@@ -161,15 +161,15 @@ describe "User pages" do
       visit users_path
     end
 
-    it { should have_title('Squawkers') }
-    it { should have_content('Squawkers') }
+    it { is_expected.to have_title('Squawkers') }
+    it { is_expected.to have_content('Squawkers') }
 
     describe "pagination" do
 
       before(:all) { 30.times { FactoryGirl.create(:user) } }
       after(:all)  { User.delete_all }
 
-      it { should have_selector('div.pagination') }
+      it { is_expected.to have_selector('div.pagination') }
 
       it "should list each user" do
         User.paginate(page: 1).each do |user|
@@ -180,7 +180,7 @@ describe "User pages" do
 
     describe "delete links" do
       # it { should_not have_link "delete" }
-      it { should_not have_css('.trashcan') }
+      it { is_expected.not_to have_css('.trashcan') }
 
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
@@ -189,7 +189,7 @@ describe "User pages" do
           sign_in admin
           visit users_path
         end
-        it { should have_css('.trashcan') }
+        it { is_expected.to have_css('.trashcan') }
         it "should be able to delete another user" do
           expect{ find('.delete-item').click }.to change(User, :count).by(-1)
         end
@@ -205,13 +205,13 @@ describe "User pages" do
     let!(:m2) { FactoryGirl.create(:squawk, user: user, content: "Bar") }
 
     before { visit user_path(user) }
-    it { should have_content(user.name) }
-    it { should have_title(user.name) }
+    it { is_expected.to have_content(user.name) }
+    it { is_expected.to have_title(user.name) }
 
     describe 'squawks' do
-      it { should have_content(m1.content) }
-      it { should have_content(m2.content) }
-      it { should have_content(user.squawks.count) }
+      it { is_expected.to have_content(m1.content) }
+      it { is_expected.to have_content(m2.content) }
+      it { is_expected.to have_content(user.squawks.count) }
     end
 
   end
@@ -227,9 +227,9 @@ describe "User pages" do
           visit following_user_path(user)
         end
 
-        it { should have_title(full_title('Following')) }
-        it { should have_selector('h3', text: 'Following') }
-        it { should have_link(other_user.name, href: user_path(other_user)) }
+        it { is_expected.to have_title(full_title('Following')) }
+        it { is_expected.to have_selector('h3', text: 'Following') }
+        it { is_expected.to have_link(other_user.name, href: user_path(other_user)) }
       end
 
       describe "followers" do
@@ -238,9 +238,9 @@ describe "User pages" do
           visit followers_user_path(other_user)
         end
 
-        it { should have_title(full_title('Followers')) }
-        it { should have_selector('h3', text: 'Followers') }
-        it { should have_link(user.name, href: user_path(user)) }
+        it { is_expected.to have_title(full_title('Followers')) }
+        it { is_expected.to have_selector('h3', text: 'Followers') }
+        it { is_expected.to have_link(user.name, href: user_path(user)) }
       end
   end
 

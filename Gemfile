@@ -28,17 +28,14 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'jazz_fingers'
   gem 'meta_request'
-  gem 'rspec-rails', '2.13.1'
-
-  # remove once rspec is upgraded
-  gem 'test-unit'
+  gem 'rspec-rails', '~> 3.3.2'
 end
 
 # refactor for Rails 4
 gem 'responders', '~> 2.0'
 
 group :test do
-  gem 'capybara', '2.1.0'
+  gem 'capybara', '2.4.4'
   gem 'factory_girl_rails', '4.2.1'
   gem 'selenium-webdriver', '2.35.1'
 end
