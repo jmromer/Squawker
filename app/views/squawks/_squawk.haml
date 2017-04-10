@@ -5,4 +5,8 @@
     = time_ago_in_words(squawk.created_at)
     ago.
   - if current_user?(squawk.user)
-    = link_to trash_can_icon, squawk, method: :delete , title: "delete", class: 'delete-item' #, data: { confirm: "Are you sure?" }
+    = link_to trash_can_icon, squawk, |
+      method: :delete, |
+      title: "Delete", |
+      class: "delete-item",
+      data: { confirm: "Are you sure you want to delete?" }
