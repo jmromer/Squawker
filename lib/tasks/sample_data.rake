@@ -55,7 +55,7 @@ def make_users_and_posts
     create_user_and_associated_posts(friend, idx)
   end
 
-  User.find(1).update_attribute(:admin, true)
+  User.first.update_attribute(:admin, true)
 end
 
 def make_relationships
