@@ -16,7 +16,9 @@
       %h3
         = "squawks (#{@user.squawks.count})"
       %ol.squawks
-        - @squawks.each do |squawk|
-          = render squawk
+        - cache(cache_key_for_collection(@squawks, "squawk_list")) do
+          - @squawks.each do |squawk|
+            - cache(squawk) do
+              = render squawk
       .paginate
         = will_paginate @squawks, page_links: false
