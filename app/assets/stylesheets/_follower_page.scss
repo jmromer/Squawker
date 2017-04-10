@@ -2,18 +2,21 @@
 //  Follower Page
 // ------------------------------------
 #follower_avatars {
-  padding: 20px 0px;
+  padding: 20px 0;
+
   img {
-    width: 50px;
     margin: 1px;
+    width: 50px;
   }
 }
+
 #follower_listing {
   ul.users {
     width: 500px;
   }
+
   li {
+    border: 0;
     width: 160px;
-    border: none;
   }
 }

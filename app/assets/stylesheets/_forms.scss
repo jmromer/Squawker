@@ -1,54 +1,65 @@
-@import "mixins";
+@import 'mixins';
 
 // ------------------------------------
 //  Forms
 // ------------------------------------
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
+input,
+textarea,
+select,
+.uneditable-input {
   @include box_size("border-box");
+  border: 1px solid #bbb;
+  margin-bottom: 15px;
+  width: 100%;
 }
+
 input {
   height: auto !important;
 }
+
 #error_explanation {
   color: #f00;
+
   ul {
     list-style: none;
-    margin: 0 0 18px 0;
+    margin: 0 0 18px;
   }
 }
+
 #follow_form {
-  text-align: center;
   padding-top: 30px;
+  text-align: center;
 }
+
 #forgot-password {
   float: right;
   font-size: small;
 }
+
 #session_remember_me {
   margin-top: -4px;
 }
+
 #edit-gravatar {
   width: 100px;
-  img { margin-bottom: 0px; }
+  img { margin-bottom: 0; }
+
   a {
     float: right;
     &:hover { text-decoration: none; }
   }
 }
+
 .edit_user {
   float: right;
 }
-.center-form {
-  margin: auto;
-}
-#submit-squawk {
-  float: right;
-}
+
 .center-form {
   float: none;
   margin: auto;
   width: 300px;
+}
+
+#submit-squawk {
+  float: right;
 }

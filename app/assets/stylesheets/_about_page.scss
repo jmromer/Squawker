@@ -2,39 +2,46 @@
 //  About Page
 // ------------------------------------
 .static-page-block {
-  width: 500px;
   margin: auto;
   position: relative;
+  width: 500px;
+
   h2 {
-    font-size: 24px;
     color: inherit;
-    margin: 30px auto 10px auto;
+    font-size: 24px;
+    margin: 30px auto 10px;
   }
+
   p {
-    text-align: justify;
-    margin: 10px auto;
-    letter-spacing: 0px;
-    line-height: 1.3em;
     font-size: 16px;
+    letter-spacing: 0;
+    line-height: 1.3em;
+    margin: 10px auto;
+    text-align: justify;
+
     a {
       color: #3f738d;
+
       &:hover {
         color: rgb(0, 136, 204);
         text-decoration: none;
       }
     }
   }
+
   #capslock {
     display: block;
-    text-transform: uppercase;
+    margin: 0 auto;
+    padding: 0;
     text-align: center;
-    margin: 0px auto;
-    padding: 0px 0px;
+    text-transform: uppercase;
   }
+
   .squawker {
     font-variant: small-caps;
     font-weight: bold;
   }
+
   .keep-together {
     white-space: nowrap;
   }

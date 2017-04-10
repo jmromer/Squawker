@@ -1,45 +1,56 @@
-@import "bootstrap";
-@import "mixins";
+@import 'bootstrap';
+@import 'mixins';
 
-@import "global";
-@import "typography";
-@import "header-footer";
-@import "forms";
-@import "users_index";
-@import "squawks";
-@import "sidebar";
-@import "about_page";
-@import "follower_page";
+@import 'global';
+@import 'typography';
+@import 'header-footer';
+@import 'forms';
+@import 'users_index';
+@import 'squawks';
+@import 'sidebar';
+@import 'about_page';
+@import 'follower_page';
 
 // ------------------------------------
 //  Miscellany
 // ------------------------------------
 .debug_dump {
+  @include box_size('border-box');
   clear: both;
   float: left;
-  width: 100%;
   margin-top: 45px;
-  @include box_size("border-box");
+  width: 100%;
 }
 
 // ------------------------------------
 //  Clearfix
 // ------------------------------------
 .group:after {
-  content: "";
   clear: both;
+  content: '';
   display: table;
 }
-.cf:before, .cf:after { content: " "; display: table; }
-.cf:after { clear: both; }
-.cf { zoom: 1; }
+
+.cf:before,
+.cf:after {
+  content: ' ';
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  zoom: 1;
+}
+
 
 // ------------------------------------
 //  Hidden but retained elements
 //     (for accesibility and testing)
 // ------------------------------------
 .offscreen {
-  position: absolute;
   left: -999em;
+  position: absolute;
 }
-

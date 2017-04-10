@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :signed_in_user, except: %i(new create show)
+  before_action :signed_in_user, except: %i[new create show]
   before_action :admin_user, only: :destroy
   before_action :set_friendly_return_page, only: :show
-  before_action :set_user, only: %i(edit update show following followers)
-  before_action :correct_user, only: %i(edit update)
+  before_action :set_user, only: %i[edit update show following followers]
+  before_action :correct_user, only: %i[edit update]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in @user
-      flash[:success] = 'Welcome to Squawker!'
+      flash[:success] = "Welcome to Squawker!"
       redirect_to @user
     else
       render :new
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = 'Profile updated'
+      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render :edit
@@ -50,21 +52,22 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = 'Following'
+    @title = "Following"
     @users = @user.followed_users.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   def followers
-    @title = 'Followers'
+    @title = "Followers"
     @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   private
 
   def user_params
-    params.require(:user)
+    params
+      .require(:user)
       .permit(:name, :email, :password, :password_confirmation)
   end
 

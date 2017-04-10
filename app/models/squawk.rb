@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: squawks
@@ -16,11 +18,11 @@ class Squawk < ActiveRecord::Base
 
   belongs_to :user
 
-  default_scope -> { order('created_at DESC') }
+  default_scope -> { order("created_at DESC") }
 
   def self.from_users_followed_by(user)
-    followed_user_ids = 'SELECT followed_id FROM relationships
-                         WHERE follower_id = :user_id'
+    followed_user_ids = "SELECT followed_id FROM relationships
+                         WHERE follower_id = :user_id"
 
     is_followee_or_self = "user_id IN (#{followed_user_ids})
                            OR user_id = :user_id"

@@ -4,87 +4,105 @@
 //  Sidebar
 // ------------------------------------
 a:hover { text-decoration: none; }
+
 aside {
- section {
-    padding: 10px 0;
+  section {
     border-top: 1px solid $grayLighter;
+    padding: 10px 0;
+
     &:first-child {
       border: 0;
       padding-top: 0;
     }
+
     span {
       display: block;
-      margin-bottom: 3px;
       line-height: 1;
+      margin-bottom: 3px;
     }
+
     h1 {
       font-size: 1.4em;
-      text-align: center;
       letter-spacing: -1px;
       margin-bottom: 3px;
       margin-top: 0px;
+      text-align: center;
     }
   }
 }
+
 .sidebar-gravatar {
   margin: auto;
   max-width: 128px;
 }
+
 .sidebar-name {
   display: inline-block;
   text-align: center;
   width: 100%;
 }
+
 .sidebar-admin {
+  color: $grayLight;
   display: block;
   font-size: 16px;
-  margin-top: 2px;
-  letter-spacing: normal;
   font-weight: normal;
-  color: $grayLight;
+  letter-spacing: normal;
+  margin-top: 2px;
 }
+
 .sidebar-profile-link {
   text-align: center;
 }
+
 .sidebar-squawks {
   font-weight: bold;
   text-align: center;
 }
+
 .stats {
   overflow: auto;
+
   a {
-    float: left;
-    padding: 0 5px;
     border-left: 1px solid $grayLighter;
     color: gray;
+    float: left;
+    padding: 0 5px;
+
     &:first-child {
-      padding-left: 0;
       border: 0;
+      padding-left: 0;
     }
+
     &:hover {
-      text-decoration: none;
       color: $blue;
+      text-decoration: none;
     }
   }
+
   strong {
     display: block;
   }
 }
+
 .user_avatars {
-  overflow: auto;
   margin-top: 10px;
+  overflow: auto;
+
   .gravatar {
     margin: 1px 1px;
   }
 }
+
 #squawk_content {
   text-align: center;
   width: 200px;
 }
+
 #countdown {
-  text-align: right;
-  margin-top: -5px;
-  margin-right: 5px;
-  font-size: 90%;
   color: auto;
+  font-size: 90%;
+  margin-right: 5px;
+  margin-top: -5px;
+  text-align: right;
 }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMailer < ActionMailer::Base
   default from: "no-reply@squawknation.net"
 
@@ -10,5 +12,4 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail to: user.email, subject: "Reset your Squawker password."
   end
-
 end

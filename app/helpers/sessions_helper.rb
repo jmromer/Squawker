@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SessionsHelper
   def sign_in(user)
     remember_token = User.new_token
@@ -19,7 +21,7 @@ module SessionsHelper
   def signed_in_user
     return if signed_in?
     store_location
-    redirect_to signin_url, notice: 'Please sign in.'
+    redirect_to signin_url, notice: "Please sign in."
   end
 
   attr_writer :current_user

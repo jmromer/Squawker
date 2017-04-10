@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SquawksHelper
   URLS = /(?<link>https?:\/\/[\/\w\d\.-]+)/i
   MENTIONS = /(?<link>@\w+)/i
@@ -18,7 +20,7 @@ module SquawksHelper
     return str if hash_tags.empty?
 
     segments = str.split.map { |substr| linkify_hashtag(hash_tags, substr) }
-    segments.join(' ').html_safe
+    segments.join(" ").html_safe
   end
 
   def linkify_hashtag(hash_tags, substr)
@@ -30,11 +32,11 @@ module SquawksHelper
     parse_hashtags(parse_mentions(parse_urls(wrap(str))))
   end
 
-  def wrap(content, options={ max_length: 70 })
+  def wrap(content, options = { max_length: 70 })
     max_length = options[:max_length]
 
     wrapped = content.split.map { |str| wrap_if_needed(max_length, str) }
-    wrapped_string = wrapped.join(' ')
+    wrapped_string = wrapped.join(" ")
 
     sanitize(raw(wrapped_string))
   end
@@ -45,7 +47,7 @@ module SquawksHelper
   end
 
   def wrap_long_string(text, max_length)
-    zero_width_space = '&#8203;'
+    zero_width_space = "&#8203;"
     string_upto_max_len = /.{1,#{max_length}}/
 
     text.scan(string_upto_max_len).join(zero_width_space)

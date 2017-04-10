@@ -4,98 +4,120 @@
 html {
   overflow-y: scroll;
 }
+
 body {
-  padding-top: 60px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: auto;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-top: 60px;
 }
+
 .container {
   width: 730px;
 }
+
 .hero-unit {
+  background: asset-data-url('squawker.jpg');
   height: 450px;
   margin-bottom: -45px;
-  background: asset-data-url('squawker.jpg');
+
   h1 {
+    color: #fff;
     font-size: 150px;
-    color: white;
+    margin: 120px 0 0 -45px !important;
     text-align: center;
-    margin: 120px 0px 0px -45px !important;
     text-transform: lowercase;
   }
+
   h2 {
-    letter-spacing: -1px;
-    width: 200px;
-    margin: 20px auto 20px auto;
-    color: white;
+    color: #fff;
     display: none;
+    letter-spacing: -1px;
+    margin: 20px auto 20px auto;
+    width: 200px;
   }
+
   a {
     font-weight: 300;
     letter-spacing: normal;
     &:hover{ text-decoration: none; }
   }
 }
+
 .navbar {
   background-image: linear-gradient(to bottom, rgb(34, 34, 34), rgb(17, 17, 17));
   background-repeat: repeat-x;
   border-color: rgb(37, 37, 37);
 }
+
 .navbar-inner {
-  width: 940px;
   margin: auto;
+  width: 940px;
+
   .container {
-    width: 730px !important;
     margin: auto;
-    padding: 0px 30px 0px 50px;
+    padding: 0 30px 0 50px;
+    width: 730px !important;
   }
 }
+
 .row {
-    width: 750px;
-    margin: auto;
+  margin: auto;
+  width: 750px;
 }
+
 .span4 {
-  width: 220px;
   margin-top: 15px;
+  width: 220px;
 }
+
 .span8 {
-  width: 470px;
   margin-left: 30px;
+  width: 470px;
 }
+
 #edit-profile-form {
   margin: auto;
   width: 500px;
+
   .span4 {
     width: 100px;
   }
+
   .span8 {
+    margin-left: 0;
+    padding-left: 0;
     width: 350px;
-    margin-left: 0px;
-    padding-left: 0px;
   }
 }
+
 .offset3 {
   margin-left: 150px;
 }
+
 section {
   overflow: auto;
 }
+
 textarea {
-  resize: vertical;
   height: 32px !important;
+  resize: vertical;
 }
+
 .center {
   text-align: center;
+
   h1 {
     margin-bottom: 10px;
   }
 }
+
 #all-users {
   margin: auto;
   width: 730px;
 }
+
 .pagination {
+  margin: 35px auto 0;
   text-align: center;
   width: 175px;
-  margin: 35px auto 0px auto;
 }

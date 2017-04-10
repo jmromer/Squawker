@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 // ------------------------------------
 //  Users Index
@@ -6,25 +6,31 @@
 .users {
   list-style: none;
   margin: 0;
+
   li {
+    border-top: 1px solid $grayLighter;
     display: inline-block;
-    width: 240px;
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    width: 240px;
+
     &:last-child {
       border-bottom: 1px solid $grayLighter;
     }
+
     img {
       display: block;
+
       &.gravatar {
-      width: 70px;
+        width: 70px;
       }
     }
+
     a {
       overflow: hidden;
       &:hover { text-decoration: none; }
     }
+
     a.delete-item {
       display: block;
       padding-top: 5px;

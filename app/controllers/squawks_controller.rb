@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SquawksController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy]
 
@@ -5,11 +7,10 @@ class SquawksController < ApplicationController
     @squawk = current_user.squawks.build(squawk_params)
 
     if @squawk.save
-      flash[:success] = 'SQUAWK!'
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      render "static_pages/home"
     end
   end
 
