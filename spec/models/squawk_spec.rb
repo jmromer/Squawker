@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: squawks
@@ -9,10 +11,9 @@
 #  updated_at :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 describe Squawk do
-
   let(:user) { FactoryGirl.create(:user) }
   before { @squawk = user.squawks.build(content: "Lorem ipsum") }
 
@@ -21,13 +22,13 @@ describe Squawk do
   it { is_expected.to respond_to(:user_id) }
   it { is_expected.to respond_to(:user) }
 
-  describe '#user' do
+  describe "#user" do
     subject { super().user }
     it { is_expected.to eq user }
   end
   it { is_expected.to be_valid }
 
-  describe 'when user_id is not present' do
+  describe "when user_id is not present" do
     before { @squawk.user_id = nil }
     it { is_expected.not_to be_valid }
   end
@@ -46,5 +47,4 @@ describe Squawk do
     before { @squawk.content = "a" * 161 }
     it { is_expected.not_to be_valid }
   end
-
 end

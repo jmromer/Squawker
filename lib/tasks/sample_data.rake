@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 namespace :db do
-  desc 'Fill database with sample data'
+  desc "Fill database with sample data"
   task populate: :environment do
     clear_current_rows
     make_users_and_posts
@@ -15,9 +17,9 @@ end
 
 def set_name(friend, index)
   if index + 1 == 1
-    'Johnny Neckbeard'
+    "Johnny Neckbeard"
   elsif index + 1 == 2
-    'Jane Squawker'
+    "Jane Squawker"
   else
     friend.name
   end
@@ -28,8 +30,8 @@ def create_user_from(friend, index)
     name: set_name(friend, index),
     email: "user#{index + 1}@example.com",
     image_url: friend.avatar_url(128),
-    password: 'password',
-    password_confirmation: 'password'
+    password: "password",
+    password_confirmation: "password"
   )
 end
 
@@ -42,8 +44,8 @@ def create_user_and_associated_posts(friend, index)
 end
 
 def make_users_and_posts
-  admin   = FakeFriends::FakeFriend.find_by(username: 'idiot')
-  jane    = FakeFriends::FakeFriend.find_by(username: 'divya')
+  admin   = FakeFriends::FakeFriend.find_by(username: "idiot")
+  jane    = FakeFriends::FakeFriend.find_by(username: "divya")
   friends = FakeFriends::FakeFriend.gather(50)
 
   friends.delete_if { |ff| ff.username =~ /idiot|divya/ }

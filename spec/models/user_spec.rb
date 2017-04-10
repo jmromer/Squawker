@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -15,15 +17,14 @@
 #  image_url            :string(255)
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 describe User do
-
   before do
     @user = User.new(
       name: "Example User", email: "user@example.com",
       password: "foobar", password_confirmation: "foobar"
-      )
+    )
   end
 
   subject { @user }
@@ -58,7 +59,7 @@ describe User do
   describe "remember_token" do
     before { @user.save }
 
-    describe '#remember_token' do
+    describe "#remember_token" do
       subject { super().remember_token }
       it { is_expected.not_to be_blank }
     end
@@ -88,7 +89,7 @@ describe User do
   end
 
   describe "with a password that's too short" do
-    before { @user.password = @user.password_confirmation = "a"*5 }
+    before { @user.password = @user.password_confirmation = "a" * 5 }
     it { is_expected.to be_invalid }
   end
 
@@ -114,14 +115,14 @@ describe User do
 
   # Email Format
   describe "when email format is invalid" do
-      it "should be invalid" do
-        addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-                       foo@bar_baz.com foo@bar+baz.com]
-        addresses.each do |invalid_address|
-          @user.email = invalid_address
-          expect(@user).not_to be_valid
-        end
+    it "should be invalid" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
+                     foo@bar_baz.com foo@bar+baz.com]
+      addresses.each do |invalid_address|
+        @user.email = invalid_address
+        expect(@user).not_to be_valid
       end
+    end
   end
 
   describe "when email format is valid" do
@@ -145,8 +146,7 @@ describe User do
   end
 
   # Squawks
-  describe 'squawk associations' do
-
+  describe "squawk associations" do
     before { @user.save }
 
     let!(:older_squawk) do
@@ -157,11 +157,11 @@ describe User do
       FactoryGirl.create(:squawk, user: @user, created_at: 1.hour.ago)
     end
 
-    it 'should have the right squawks in the right order' do
+    it "should have the right squawks in the right order" do
       expect(@user.squawks.to_a).to eq [newer_squawk, older_squawk]
     end
 
-    it 'should destroy associated squawks' do
+    it "should destroy associated squawks" do
       squawks = @user.squawks.to_a
       @user.destroy
       expect(squawks).not_to be_empty
@@ -181,35 +181,34 @@ describe User do
         3.times { followed_user.squawks.create!(content: "Lorem ipsum") }
       end
 
-      describe '#feed' do
+      describe "#feed" do
         subject { super().feed }
         it { is_expected.to include(newer_squawk) }
       end
 
-      describe '#feed' do
+      describe "#feed" do
         subject { super().feed }
         it { is_expected.to include(older_squawk) }
       end
 
-      describe '#feed' do
+      describe "#feed" do
         subject { super().feed }
         it { is_expected.not_to include(unfollowed_post) }
       end
 
-      describe '#feed' do
+      describe "#feed" do
         subject { super().feed }
         it do
-        followed_user.squawks.each do |squawk|
-          is_expected.to include(squawk)
+          followed_user.squawks.each do |squawk|
+            is_expected.to include(squawk)
+          end
         end
       end
-      end
     end
-
   end # squawk associations
 
-  describe 'following' do
-    let(:other_user) { FactoryGirl.create(:user)}
+  describe "following" do
+    let(:other_user) { FactoryGirl.create(:user) }
 
     before do
       @user.save
@@ -218,29 +217,28 @@ describe User do
 
     it { is_expected.to be_following(other_user) }
 
-    describe '#followed_users' do
+    describe "#followed_users" do
       subject { super().followed_users }
       it { is_expected.to include(other_user) }
     end
 
-    describe 'followed user' do
+    describe "followed user" do
       subject { other_user }
 
-      describe '#followers' do
+      describe "#followers" do
         subject { super().followers }
         it { is_expected.to include(@user) }
       end
     end
 
-    describe 'unfollowing' do
+    describe "unfollowing" do
       before { @user.unfollow!(other_user) }
       it { is_expected.not_to be_following(other_user) }
 
-      describe '#followed_users' do
+      describe "#followed_users" do
         subject { super().followed_users }
         it { is_expected.not_to include(other_user) }
       end
     end
   end # following
-
 end

@@ -1,30 +1,32 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-describe 'Authentication' do
+require "rails_helper"
+
+describe "Authentication" do
   subject { page }
 
-  describe 'signin page' do
+  describe "signin page" do
     before { visit signin_path }
 
-    it { is_expected.to have_content('Sign In') }
-    it { is_expected.to have_title('Sign In') }
+    it { is_expected.to have_content("Sign In") }
+    it { is_expected.to have_title("Sign In") }
 
-    describe 'signin' do
+    describe "signin" do
       before { visit signin_path }
 
-      describe 'with invalid information' do
-        before { click_button 'Sign In' }
+      describe "with invalid information" do
+        before { click_button "Sign In" }
 
         it { is_expected.to have_title("Sign In") }
-        it { is_expected.to have_selector("div.alert.alert-error", text: "Invalid")}
+        it { is_expected.to have_selector("div.alert.alert-error", text: "Invalid") }
       end
 
-      describe 'after visiting another page' do
-        before { click_link 'Home' }
-        it { is_expected.not_to have_selector 'div.alert.alert-error'}
+      describe "after visiting another page" do
+        before { click_link "Home" }
+        it { is_expected.not_to have_selector "div.alert.alert-error" }
       end
 
-      describe 'with valid information' do
+      describe "with valid information" do
         let(:user) { FactoryGirl.create(:user) }
         before { sign_in user }
 
@@ -38,9 +40,8 @@ describe 'Authentication' do
     end
   end
 
-  describe 'authorization' do
-
-    describe 'for non-signed-in users' do
+  describe "authorization" do
+    describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 
       describe "in the Relationships controller" do
@@ -58,12 +59,12 @@ describe 'Authentication' do
       describe "in the Users controller" do
         describe "visiting the following page" do
           before { visit following_user_path(user) }
-          it { is_expected.to have_title('Sign In') }
+          it { is_expected.to have_title("Sign In") }
         end
 
         describe "visiting the followers page" do
           before { visit followers_user_path(user) }
-          it { is_expected.to have_title('Sign In') }
+          it { is_expected.to have_title("Sign In") }
         end
 
         describe "visiting the edit page" do
@@ -95,11 +96,9 @@ describe 'Authentication' do
             expect(page).to have_title("Edit user")
           end
         end # visiting a protected page
-
       end
 
       describe "in the Squawks controller" do
-
         describe "submitting to the create action" do
           before { post squawks_path }
           specify { expect(response).to redirect_to(signin_path) }
@@ -112,7 +111,7 @@ describe 'Authentication' do
       end
     end # non-signed in
 
-    describe 'as wrong user' do
+    describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) do
         FactoryGirl.create(:user, email: "wrong@example.com")
@@ -120,17 +119,17 @@ describe 'Authentication' do
 
       before { sign_in user, no_capybara: true }
 
-      describe 'submitting a GET request to the Users#edit action' do
+      describe "submitting a GET request to the Users#edit action" do
         before { get edit_user_path(wrong_user) }
-        specify { expect(response.body).not_to match(full_title('Edit user')) }
+        specify { expect(response.body).not_to match(full_title("Edit user")) }
         specify { expect(response).to redirect_to(root_url) }
       end
 
-      describe 'submitting a PATCH request to the Users#update action' do
+      describe "submitting a PATCH request to the Users#update action" do
         before { patch user_path(wrong_user) }
         specify { expect(response).to redirect_to(root_url) }
       end
-    end #wrong user
+    end # wrong user
 
     describe "as non-admin user" do
       let(:user) { FactoryGirl.create(:user) }
@@ -142,10 +141,6 @@ describe 'Authentication' do
         before { delete user_path(user) }
         specify { expect(response).to redirect_to(root_url) }
       end
-    end #non-admin
-
+    end # non-admin
   end # authorization
-
 end # authentication
-
-

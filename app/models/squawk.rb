@@ -34,6 +34,6 @@ class Squawk < ActiveRecord::Base
 
   def transform_text
     self.content = content.partition(/(https?.*)/i)
-      .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }.join
+                          .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }.join
   end
 end

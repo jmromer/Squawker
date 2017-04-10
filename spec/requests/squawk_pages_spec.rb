@@ -1,7 +1,8 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 describe "Squawk pages" do
-
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
@@ -17,13 +18,12 @@ describe "Squawk pages" do
 
       describe "error messages" do
         before { click_button "squawk it!" }
-        it { is_expected.to have_content('error') }
+        it { is_expected.to have_content("error") }
       end
     end
 
     describe "with valid information" do
-
-      before { fill_in 'squawk_content', with: "Lorem ipsum" }
+      before { fill_in "squawk_content", with: "Lorem ipsum" }
       it "should create a squawk" do
         expect { click_button "squawk it!" }.to change(Squawk, :count).by(1)
       end
@@ -38,10 +38,9 @@ describe "Squawk pages" do
 
       it "should delete a squawk" do
         expect do
-          find('.delete-item').click
+          find(".delete-item").click
         end.to change(Squawk, :count).by(-1)
       end
     end
   end
-
 end

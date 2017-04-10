@@ -43,16 +43,16 @@ class User < ActiveRecord::Base
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships,
-    foreign_key: "followed_id",
-    class_name: "Relationship",
-    dependent: :destroy
+           foreign_key: "followed_id",
+           class_name: "Relationship",
+           dependent: :destroy
 
   self.per_page = 20
 
   def send_password_reset
     self.password_reset_token = User.new_token
     self.password_reset_at    = Time.zone.now
-    self.save!(validate: false)
+    save!(validate: false)
     UserMailer.password_reset(self).deliver
   end
 

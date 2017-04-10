@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path("../boot", __FILE__)
 
 # Pick the frameworks you want:
 require "active_record/railtie"
@@ -13,25 +15,24 @@ Bundler.require(:default, Rails.env)
 
 module Squawker
   class Application < Rails::Application
-
     WillPaginate.per_page = 10
 
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif]
 
-    config.assets.precompile << Proc.new do |path|
-          if path =~ /\.(css|js)\z/
-            full_path = Rails.application.assets.resolve(path).to_path
-            app_assets_path = Rails.root.join('app', 'assets').to_path
-            if full_path.starts_with? app_assets_path
-              puts "including asset: " + full_path
-              true
-            else
-              puts "excluding asset: " + full_path
-              false
-            end
-          else
-            false
-          end
+    config.assets.precompile << proc do |path|
+      if path =~ /\.(css|js)\z/
+        full_path = Rails.application.assets.resolve(path).to_path
+        app_assets_path = Rails.root.join("app", "assets").to_path
+        if full_path.starts_with? app_assets_path
+          puts "including asset: " + full_path
+          true
+        else
+          puts "excluding asset: " + full_path
+          false
+        end
+      else
+        false
+      end
     end
 
     # Settings in config/environments/* take precedence over those specified here.

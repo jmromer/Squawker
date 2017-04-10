@@ -1,5 +1,6 @@
-FactoryGirl.define do
+# frozen_string_literal: true
 
+FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "Person #{n}" }
     sequence(:email) { |n| "person_#{n}@example.com" }
@@ -15,5 +16,4 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
-
 end

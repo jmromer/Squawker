@@ -8,6 +8,6 @@ module ApplicationHelper
 
   def trash_can_icon
     image_tag("icon_trash.gif", border: 0, alt: "Delete",
-              title: "Delete", class: "trashcan")
+                                title: "Delete", class: "trashcan")
   end
 end

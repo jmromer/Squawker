@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Squawker::Application.configure do
   # Settings specified here will take precedence over those in
   # config/application.rb.
@@ -14,8 +16,8 @@ Squawker::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_files  = true
-  config.static_cache_control = 'public, max-age=3600'
+  config.serve_static_files = true
+  config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -41,4 +43,3 @@ Squawker::Application.configure do
   # Hide SQL logging when testing
   config.log_level = :error
 end
-

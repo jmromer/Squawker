@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSquawks < ActiveRecord::Migration
   def change
     create_table :squawks do |t|
@@ -7,6 +9,6 @@ class CreateSquawks < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :squawks, [:user_id, :created_at]
+    add_index :squawks, %i[user_id created_at]
   end
 end

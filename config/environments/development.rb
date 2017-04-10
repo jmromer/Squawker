@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Squawker::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -34,5 +36,4 @@ Squawker::Application.configure do
 
   # Base URL for links in mailers
   config.action_mailer.default_url_options = { host: "localhost:3000" }
-
 end
