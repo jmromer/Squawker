@@ -2,12 +2,12 @@ squawker
 ========
 
 [![Code Climate Badge][]][Code Climate]
+[![Build Status Badge][]][Build Status]
 
 [Code Climate Badge]: https://codeclimate.com/github/jkrmr/Squawker/badges/gpa.svg
 [Code Climate]: https://codeclimate.com/github/jkrmr/Squawker
-
-A Twitter clone.
-
+[Build Status Badge]: https://travis-ci.org/jkrmr/Squawker.svg?branch=master
+[Build Status]: https://travis-ci.org/jkrmr/Squawker
 
 Features
 --------
