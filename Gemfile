@@ -31,6 +31,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem "jazz_fingers"
   gem "meta_request"
+  gem "pry-rails"
   gem "rspec-rails", "~> 3.3.2"
 end
 

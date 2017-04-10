@@ -21,9 +21,9 @@ module Squawker
 
     config.assets.precompile << proc do |path|
       if path =~ /\.(css|js)\z/
-        full_path = Rails.application.assets.resolve(path).to_path
+        full_path = Rails.application.assets.resolve(path)
         app_assets_path = Rails.root.join("app", "assets").to_path
-        if full_path.starts_with? app_assets_path
+        if full_path.starts_with?(app_assets_path)
           puts "including asset: " + full_path
           true
         else
