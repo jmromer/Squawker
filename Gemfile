@@ -21,9 +21,10 @@ gem "rails", "~> 4.2.0"
 gem "rails_12factor"
 gem "sass-rails", "~> 5.0.1"
 gem "turbolinks", "2.5.3"
-gem "uglifier", "2.1.1"
+gem "uglifier", "~> 3.2.0"
 gem "unicorn"
 gem "will_paginate", "3.0.4"
+gem "multi_json", "~> 1.12"
 
 group :development, :test do
   gem "annotate"
@@ -31,14 +32,15 @@ group :development, :test do
   gem "binding_of_caller"
   gem "jazz_fingers"
   gem "meta_request"
-  gem "rspec-rails", "~> 3.3.2"
+  gem "pry-rails"
+  gem "rspec-rails", "~> 3.5"
+end
+
+group :test do
+  gem "capybara", "~> 2.13"
+  gem "factory_girl_rails", "~> 4.8"
+  gem "selenium-webdriver", "~> 2.52"
 end
 
 # refactor for Rails 4
 gem "responders", "~> 2.0"
-
-group :test do
-  gem "capybara", "2.4.4"
-  gem "factory_girl_rails", "4.2.1"
-  gem "selenium-webdriver", "2.35.1"
-end
