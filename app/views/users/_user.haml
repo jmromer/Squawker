@@ -1,8 +1,9 @@
-%li
-  = avatar_for user, size: 73
-  = link_to user.name, user
-  - if current_user.admin? && !current_user?(user)
-    = link_to trash_can_icon, user,       |
-      method: :delete,                    |
-      data: { confirm: "Are you sure?" }, |
-      class: 'delete-item'                |
+- cache(user) do
+  %li
+    = avatar_for user, size: 73
+    = link_to user.name, user
+    - if current_user.admin? && !current_user?(user)
+      = link_to trash_can_icon, user,       |
+        method: :delete,                    |
+        data: { confirm: "Are you sure?" }, |
+        class: 'delete-item'                |

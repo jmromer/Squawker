@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i[edit update]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @page = params[:page]
+    @users = User.paginate(page: @page)
   end
 
   def new
@@ -47,7 +48,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @squawks = @user.squawks.paginate(page: params[:page])
+    @page = params[:page]
+    @squawks = @user.squawks.paginate(page: @page)
   end
 
   def following

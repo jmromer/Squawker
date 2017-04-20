@@ -16,7 +16,7 @@
       %h3
         = "squawks (#{@user.squawks.count})"
       %ol.squawks
-        - cache(cache_key_for_collection(@squawks, "squawk_list")) do
+        - cache(cache_key_for_collection(@squawks, @page, "squawk_list")) do
           - @squawks.each do |squawk|
             - cache(squawk) do
               = render squawk
