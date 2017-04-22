@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def redirect_to_twitter(username:)
+    redirect_to "https://twitter.com/#{username.try(:downcase)}"
+  end
+
   def set_friendly_return_page
     session[:return_to] = request.url if request.get?
   end

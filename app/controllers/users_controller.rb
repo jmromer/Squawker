@@ -56,8 +56,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:id])
 
     if @user.nil?
-      redirect_to "https://twitter.com/#{params[:id].downcase}"
-      return
+      return redirect_to_twitter(username: params[:id])
     end
 
     @page = params[:page]
