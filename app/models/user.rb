@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   before_create :create_tokens
 
   validates :name, presence: true, length: { maximum: 50 }
+  validates :username,
+            presence: true,
+            length: { maximum: 50 },
+            uniqueness: { case_sensitive: false }
 
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-\.]+[^\.]\.[a-z]+\z/i
   validates :email, presence:   true,
@@ -82,6 +86,10 @@ class User < ActiveRecord::Base
 
   def dummy?
     email !~ /.+@example.com$/
+  end
+
+  def to_param
+    username
   end
 
   private

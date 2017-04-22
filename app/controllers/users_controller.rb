@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :signed_in_user, except: %i[new create show]
   before_action :admin_user, only: :destroy
   before_action :set_friendly_return_page, only: :show
-  before_action :set_user, only: %i[edit update show following followers]
   before_action :correct_user, only: %i[edit update]
 
   def index
@@ -28,9 +27,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @user = User.find_by(username: params[:id])
+  end
 
   def update
+    @user = User.find_by(username: params[:id])
+
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -40,25 +43,36 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
+    user = User.find_by(username: params[:id])
+
     name = user.name
     user.destroy
-    flash[:success] = "User #{name} deleted."
+
+    flash[:success] = "Account for #{name} deleted."
     redirect_to users_url
   end
 
   def show
+    @user = User.find_by(username: params[:id])
+
+    if @user.nil?
+      redirect_to "https://twitter.com/#{params[:id].downcase}"
+      return
+    end
+
     @page = params[:page]
     @squawks = @user.squawks.paginate(page: @page)
   end
 
   def following
+    @user = User.find_by(username: params[:id])
     @title = "Following"
     @users = @user.followed_users.paginate(page: params[:page])
     render "show_follow"
   end
 
   def followers
+    @user = User.find_by(username: params[:id])
     @title = "Followers"
     @users = @user.followers.paginate(page: params[:page])
     render "show_follow"
@@ -69,15 +83,12 @@ class UsersController < ApplicationController
   def user_params
     params
       .require(:user)
-      .permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def set_user
-    @user = User.find(params[:id])
+      .permit(:name, :username, :email, :password, :password_confirmation)
   end
 
   def correct_user
-    redirect_to(root_url) unless current_user?(@user)
+    user = User.find_by(username: params[:id])
+    redirect_to(root_url) unless current_user?(user)
   end
 
   def admin_user

@@ -23,3 +23,11 @@ RSpec.configure do |config|
   # Include the Capybara DSL so that specs in spec/requests still work.
   config.include Capybara::DSL
 end
+
+# Configure Shoulda matchers
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end

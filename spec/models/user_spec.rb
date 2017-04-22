@@ -22,13 +22,17 @@ require "rails_helper"
 describe User do
   before do
     @user = User.new(
-      name: "Example User", email: "user@example.com",
-      password: "foobar", password_confirmation: "foobar"
+      name: "Example User",
+      username: "example_user",
+      email: "user@example.com",
+      password: "foobar",
+      password_confirmation: "foobar"
     )
   end
 
   subject { @user }
   it { is_expected.to respond_to :name }
+  it { is_expected.to respond_to :username }
   it { is_expected.to respond_to :email }
   it { is_expected.to respond_to :password_digest }
   it { is_expected.to respond_to :password }
@@ -46,6 +50,9 @@ describe User do
   it { is_expected.to respond_to :unfollow! }
   it { is_expected.to be_valid }
   it { is_expected.not_to be_admin }
+
+  it { is_expected.to validate_presence_of :username }
+  it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
 
   describe "with admin attribute set to 'true" do
     before do

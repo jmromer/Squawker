@@ -32,7 +32,7 @@ module SessionsHelper
   end
 
   def current_user?(user)
-    user == current_user
+    user.try(:username) == current_user.try(:username)
   end
 
   def signed_in?

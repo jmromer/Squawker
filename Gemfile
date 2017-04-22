@@ -40,6 +40,7 @@ group :test do
   gem "capybara", "~> 2.13"
   gem "factory_girl_rails", "~> 4.8"
   gem "selenium-webdriver", "~> 2.52"
+  gem "shoulda-matchers", "~> 3.1.1"
 end
 
 # refactor for Rails 4

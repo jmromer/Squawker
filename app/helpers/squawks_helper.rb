@@ -2,17 +2,14 @@
 
 module SquawksHelper
   URLS = /(?<link>https?:\/\/[\/\w\d\.-]+)/i
-  MENTIONS = /(?<link>@\w+)/i
+  MENTIONS = /(?<handle>(?<=[[:space:]]@)\w+)/i
 
   def parse_urls(str)
     str.gsub(URLS, '<a href="\k<link>">\k<link></a>').html_safe
   end
 
   def parse_mentions(str)
-    str.gsub(
-      MENTIONS,
-      '<a href="http://twitter.com/\k<link>">\k<link></a>'
-    ).html_safe
+    str.gsub(/@#{MENTIONS}/, '<a href="/users/\k<handle>">@\k<handle></a>').html_safe
   end
 
   def parse_hashtags(str)
