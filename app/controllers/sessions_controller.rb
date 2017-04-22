@@ -17,16 +17,13 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-
     redirect_to root_url
   end
 
   def trial
     params[:remember_me] = false
-    user = User.second
-
+    user = User.find_by(username: "divya")
     sign_in user
-
     redirect_back_or user
   end
 

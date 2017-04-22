@@ -16,9 +16,7 @@ class SquawksController < ApplicationController
 
   def destroy
     @squawk = correct_user
-
     @squawk.destroy
-
     redirect_to session[:return_to]
   end
 
