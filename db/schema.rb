@@ -1,6 +1,4 @@
 # encoding: UTF-8
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_131_112_230_749) do
+ActiveRecord::Schema.define(version: 20170422201941) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,7 +24,7 @@ ActiveRecord::Schema.define(version: 20_131_112_230_749) do
   end
 
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
-  add_index "relationships", %w[follower_id followed_id], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "squawks", force: :cascade do |t|
@@ -35,7 +34,7 @@ ActiveRecord::Schema.define(version: 20_131_112_230_749) do
     t.datetime "updated_at"
   end
 
-  add_index "squawks", %w[user_id created_at], name: "index_squawks_on_user_id_and_created_at", using: :btree
+  add_index "squawks", ["user_id", "created_at"], name: "index_squawks_on_user_id_and_created_at", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -44,12 +43,14 @@ ActiveRecord::Schema.define(version: 20_131_112_230_749) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin", default: false
+    t.boolean  "admin",                default: false
     t.string   "password_reset_token"
     t.datetime "password_reset_at"
     t.string   "image_url"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+
 end

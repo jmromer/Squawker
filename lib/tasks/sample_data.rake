@@ -28,7 +28,8 @@ end
 def create_user_from(friend, index)
   User.create!(
     name: set_name(friend, index),
-    email: "user#{index + 1}@example.com",
+    username: friend.username,
+    email: "#{friend.username}@example.com",
     image_url: friend.avatar_url(128),
     password: "password",
     password_confirmation: "password"
