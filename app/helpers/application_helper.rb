@@ -18,7 +18,7 @@ module ApplicationHelper
   def cache_key_for_collection(items, page, location)
     entity = items.first.try(:table_name) || items.first.class.to_s.underscore
     items_count = items.count
-    time_of_most_recent_update = items.maximum(:updated_at) .try(:utc) .try(:to_s, :number)
+    time_of_most_recent_update = items.maximum(:updated_at).try(:utc).try(:to_s, :number)
     "#{entity}/#{location}-#{page}-#{items_count}-#{time_of_most_recent_update}"
   end
 end
