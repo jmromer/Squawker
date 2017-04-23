@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 
   def trial
     params[:remember_me] = false
-    user = User.find_by(username: "divya")
+    user = User.find_by(username: "DIVYA")
     sign_in user
     redirect_back_or user
   end
