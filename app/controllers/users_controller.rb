@@ -56,7 +56,13 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:id])
 
     if @user.nil?
-      return redirect_to_twitter(username: params[:id])
+      begin
+        tweets = TwitterAPI.instance.client.user_timeline(params[:id])
+        @user, _squawks = Squawk.new_collection_from_tweets(tweets)
+      rescue Twitter::Error::Unauthorized
+        tweeter = TwitterAPI.instance.client.user(params[:id])
+        @user = User.new_from_tweeter(tweeter)
+      end
     end
 
     @page = params[:page]

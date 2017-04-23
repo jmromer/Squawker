@@ -10,6 +10,8 @@ def full_title(page_title)
 end
 
 def sign_in(user, options = {})
+  raise ArgumentError if user.nil?
+
   if options[:no_capybara]
     # Sign in when not using Capybara.
     remember_token = User.new_token

@@ -16,6 +16,7 @@ module ApplicationHelper
   end
 
   def cache_key_for_collection(items, page, location)
+    return unless items.present?
     entity = items.first.try(:table_name) || items.first.class.to_s.underscore
     items_count = items.count
     time_of_most_recent_update = items.maximum(:updated_at).try(:utc).try(:to_s, :number)

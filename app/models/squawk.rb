@@ -20,6 +20,19 @@ class Squawk < ActiveRecord::Base
 
   default_scope -> { order("created_at DESC") }
 
+  def self.new_collection_from_tweets(tweets)
+    return [nil, []] unless (tweeter = tweets.try(:first).try(:user))
+
+    user = User.new_from_tweeter(tweeter)
+    return [nil, []] unless user.save
+
+    squawks = tweets.map do |tweet|
+      Squawk.create(user: user, content: tweet.text)
+    end
+
+    [user, squawks]
+  end
+
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
                          WHERE follower_id = :user_id"

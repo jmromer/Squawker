@@ -60,6 +60,15 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  def self.new_from_tweeter(tweeter)
+    User.new(name: tweeter.name,
+             username: tweeter.screen_name,
+             email: "#{tweeter.screen_name}@example.com",
+             image_url: tweeter.profile_image_url.to_s.sub("_normal", ""),
+             password: ENV["SAMPLE_PASSWORD"],
+             password_confirmation: ENV["SAMPLE_PASSWORD"])
+  end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end

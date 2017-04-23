@@ -213,31 +213,31 @@ describe "User pages" do
     end
   end
 
-  describe "following/followers" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:other_user) { FactoryGirl.create(:user) }
-    before { user.follow!(other_user) }
+  describe "following/followers indicator" do
+    it "displays users the current user follows" do
+      user = FactoryGirl.create(:user)
+      other_user = FactoryGirl.create(:user)
+      user.follow!(other_user)
+      sign_in(user)
 
-    describe "followed users" do
-      before do
-        sign_in user
-        visit following_user_path(user)
-      end
+      visit following_user_path(user)
 
-      it { is_expected.to have_title(full_title("Following")) }
-      it { is_expected.to have_selector("h3", text: "Following") }
-      it { is_expected.to have_link(other_user.name, href: user_path(other_user)) }
+      expect(page).to have_title(full_title("Following"))
+      expect(page).to have_selector("h3", text: "Following")
+      expect(page).to have_link(other_user.name, href: user_path(other_user))
     end
 
-    describe "followers" do
-      before do
-        sign_in other_user
-        visit followers_user_path(other_user)
-      end
+    it "displays users that follow the current user" do
+      user = FactoryGirl.create(:user)
+      other_user = FactoryGirl.create(:user)
+      user.follow!(other_user)
+      sign_in(other_user)
 
-      it { is_expected.to have_title(full_title("Followers")) }
-      it { is_expected.to have_selector("h3", text: "Followers") }
-      it { is_expected.to have_link(user.name, href: user_path(user)) }
+      visit followers_user_path(other_user)
+
+      expect(page).to have_title(full_title("Followers"))
+      expect(page).to have_selector("h3", text: "Followers")
+      expect(page).to have_link(user.name, href: user_path(user))
     end
   end
-end # user pages
+end

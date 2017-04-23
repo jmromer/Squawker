@@ -31,8 +31,8 @@ def create_user_from(friend, index)
     username: friend.username,
     email: "#{friend.username}@example.com",
     image_url: friend.avatar_url(128),
-    password: "password",
-    password_confirmation: "password"
+    password: ENV["SAMPLE_PASSWORD"],
+    password_confirmation: ENV["SAMPLE_PASSWORD"]
   )
 end
 
