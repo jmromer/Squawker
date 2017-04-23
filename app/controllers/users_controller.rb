@@ -54,19 +54,21 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
+    @page = params[:page]
 
     if @user.nil?
       begin
         tweets = TwitterAPI.instance.client.user_timeline(params[:id])
         @user, _squawks = Squawk.new_collection_from_tweets(tweets)
+        @squawks = @user.squawks.paginate(page: @page)
       rescue Twitter::Error::Unauthorized
         tweeter = TwitterAPI.instance.client.user(params[:id])
         @user = User.new_from_tweeter(tweeter)
+        @squawks = []
       end
+    else
+      @squawks = @user.squawks.paginate(page: @page)
     end
-
-    @page = params[:page]
-    @squawks = @user.squawks.paginate(page: @page)
   end
 
   def following
