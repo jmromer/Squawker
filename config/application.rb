@@ -23,5 +23,7 @@ module Squawker
       application.css
       application.js
     ]
+
+    config.autoload_paths += Dir[Rails.root.join("app", "extensions", "*.rb")].each { |f| require f }
   end
 end
