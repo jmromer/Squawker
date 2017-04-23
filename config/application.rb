@@ -25,5 +25,6 @@ module Squawker
     ]
 
     config.autoload_paths += Dir[Rails.root.join("app", "extensions", "*.rb")].each { |f| require f }
+    config.autoload_paths += Dir[Rails.root.join("app", "services", "*.rb")].each { |f| require f }
   end
 end

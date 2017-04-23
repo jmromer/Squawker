@@ -56,18 +56,18 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:id])
     @page = params[:page]
 
-    if @user.nil?
-      begin
-        tweets = TwitterAPI.instance.client.user_timeline(params[:id])
-        @user, _squawks = Squawk.new_collection_from_tweets(tweets)
-        @squawks = @user.squawks.paginate(page: @page)
-      rescue Twitter::Error::Unauthorized
-        tweeter = TwitterAPI.instance.client.user(params[:id])
-        @user = User.new_from_tweeter(tweeter)
-        @squawks = []
-      end
-    else
+    if @user.present?
       @squawks = @user.squawks.paginate(page: @page)
+      return render :show
+    end
+
+    result = FetchTweets.call(username: params[:id])
+
+    if result.user.present?
+      @user = result.user
+      @squawks = @user.squawks.paginate(page: @page)
+    else
+      redirect_to root_url
     end
   end
 

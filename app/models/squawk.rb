@@ -15,7 +15,6 @@ class Squawk < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 160 }
 
   before_save :transform_text
-
   belongs_to :user
 
   default_scope -> { order("created_at DESC") }
@@ -26,13 +25,19 @@ class Squawk < ActiveRecord::Base
     user = User.new_from_tweeter(tweeter)
     return [nil, []] unless user.save
 
-    squawks = tweets.map do |tweet|
-      Squawk.create(user: user,
-                    content: tweet.text,
-                    created_at: tweet.created_at)
+    squawk_attrs = tweets.pmap do |tweet|
+      { user_id: user.id,
+        content: squawked_text(tweet.text),
+        created_at: tweet.created_at }
     end
 
-    [user, squawks]
+    bulk_insert(*squawk_attrs.first.keys) do |worker|
+      squawk_attrs.each do |book|
+        worker.add(book)
+      end
+    end
+
+    [user, squawk_attrs]
   end
 
   def self.from_users_followed_by(user)
@@ -48,7 +53,12 @@ class Squawk < ActiveRecord::Base
   private
 
   def transform_text
-    self.content = content.partition(/(https?.*)/i)
-                          .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }.join
+    self.content = self.class.squawked_text(content)
+  end
+
+  def self.squawked_text(st)
+    st.partition(/(https?.*)/i)
+      .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }
+      .join
   end
 end
