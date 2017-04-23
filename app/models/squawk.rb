@@ -27,7 +27,9 @@ class Squawk < ActiveRecord::Base
     return [nil, []] unless user.save
 
     squawks = tweets.map do |tweet|
-      Squawk.create(user: user, content: tweet.text)
+      Squawk.create(user: user,
+                    content: tweet.text,
+                    created_at: tweet.created_at)
     end
 
     [user, squawks]
