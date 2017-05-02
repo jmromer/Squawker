@@ -10,7 +10,12 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
+require "elasticsearch/model"
+
 class Squawk < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 160 }
 
@@ -62,3 +67,6 @@ class Squawk < ActiveRecord::Base
       .join
   end
 end
+
+# Auto sync with elasticsearch
+Squawk.import
