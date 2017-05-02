@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Squawker::Application.routes.draw do
-  resources :sessions,      only: %i[new create destroy]
-  resources :squawks,       only: %i[create destroy]
+  resources :sessions, only: %i[new create destroy]
+  resources :squawks, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
   resources :password_resets
 
@@ -13,10 +13,11 @@ Squawker::Application.routes.draw do
   end
 
   root "static_pages#home"
-  match "/home",    to: "static_pages#home",  via: "get"
-  match "/about",   to: "static_pages#about", via: "get"
-  match "/signup",  to: "users#new",          via: "get"
-  match "/signin",  to: "sessions#new",       via: "get"
-  match "/signout", to: "sessions#destroy",   via: "delete"
-  match "/trial",   to: "sessions#trial",     via: "get"
+  get "/home", to: "static_pages#home"
+  get "/about", to: "static_pages#about"
+  get "/signup", to: "users#new"
+  get "/signin", to: "sessions#new"
+  delete "/signout", to: "sessions#destroy"
+  get "/trial", to: "sessions#trial"
+  get "/search", to: "search#show"
 end
