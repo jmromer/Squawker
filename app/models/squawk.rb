@@ -69,4 +69,10 @@ class Squawk < ActiveRecord::Base
 end
 
 # Auto sync with elasticsearch
-Squawk.import
+begin
+  Squawk.import
+rescue ArgumentError => e
+  Rails.logger.info("Forcing creation of ElasticSearch index")
+  Rails.logger.info("Exception: #{e}")
+  Squawk.import(force: true)
+end
