@@ -4,10 +4,10 @@
       = link_to "squawker", root_path, id: "logo"
       %nav
         %ul.nav.pull-right
-          %li= link_to "Home", root_path
+          %li= render "shared/search_form"
           - if signed_in?
-            %li= link_to "Squawkers", users_path
-            %li#fat-menu.dropdown
+            -# %li= link_to "Squawkers", users_path
+            %li#fat-menu.dropdown.user-account
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Account
                 %b.caret

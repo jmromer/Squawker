@@ -21,17 +21,11 @@ describe "Authentication" do
         it { is_expected.to have_selector("div.alert.alert-error", text: "Invalid") }
       end
 
-      describe "after visiting another page" do
-        before { click_link "Home" }
-        it { is_expected.not_to have_selector "div.alert.alert-error" }
-      end
-
       describe "with valid information" do
         let(:user) { FactoryGirl.create(:user) }
         before { sign_in user }
 
         it { is_expected.to have_title user.name }
-        it { is_expected.to have_link "Squawkers",   href: users_path }
         it { is_expected.to have_link "Profile",     href: user_path(user) }
         it { is_expected.to have_link "Settings",    href: edit_user_path(user) }
         it { is_expected.to have_link "Sign Out",    href: signout_path }
