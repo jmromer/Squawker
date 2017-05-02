@@ -1,11 +1,9 @@
 %h1
-  Squawk search
-
-= form_tag search_path, method: :get do |f|
-  = label_tag "Search for"
-  = text_field_tag :q, ""
-  = submit_tag "Search"
+  = search_term
 
 %ul
   - squawks.each do |squawk|
     = render "shared/feed_item", feed_item: squawk
+
+.paginate
+  = will_paginate squawks, page_links: false

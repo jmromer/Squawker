@@ -2,7 +2,9 @@
 
 class SearchController < ApplicationController
   def show
-    squawks = Squawk.search(params[:q]).records
-    render :show, locals: { squawks: squawks }
+    @page = params[:page]
+    squawks = Squawk.search(params[:q]).paginate(page: @page).records
+    render :show, locals: { squawks: squawks,
+                            search_term: params[:q] }
   end
 end
