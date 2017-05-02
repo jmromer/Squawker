@@ -14,6 +14,8 @@ Bundler.require(:default, Rails.env)
 
 module Squawker
   class Application < Rails::Application
+    config.active_record.raise_in_transactional_callbacks = true
+
     WillPaginate.per_page = 10
     config.assets.precompile += %w[
       *.png
@@ -24,7 +26,10 @@ module Squawker
       application.js
     ]
 
-    config.autoload_paths += Dir[Rails.root.join("app", "extensions", "*.rb")].each { |f| require f }
-    config.autoload_paths += Dir[Rails.root.join("app", "services", "*.rb")].each { |f| require f }
+    # Autoload paths
+    extensions = Dir[Rails.root.join("app", "extensions", "*.rb")].each { |f| require(f) }
+    services = Dir[Rails.root.join("app", "services", "*.rb")].each { |f| require(f) }
+    config.autoload_paths += extensions
+    config.autoload_paths += services
   end
 end
