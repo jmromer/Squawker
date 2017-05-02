@@ -4,12 +4,11 @@
       = link_to "squawker", root_path, id: "logo"
       %nav
         %ul.nav.pull-right
-          %li= render "shared/search_form"
           - if signed_in?
-            -# %li= link_to "Squawkers", users_path
+            %li= render "shared/search_form"
             %li#fat-menu.dropdown.user-account
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                Account
+                = avatar_for(current_user, class: "nav-avatar")
                 %b.caret
               %ul.dropdown-menu
                 %li= link_to "Profile", current_user
@@ -18,4 +17,4 @@
                 %li
                   = link_to "Sign Out", signout_path, method: "delete"
           - else
-            %li= link_to "Sign In", signin_path
+            %li.signin-link= link_to "Sign In", signin_path

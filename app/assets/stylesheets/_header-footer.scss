@@ -8,7 +8,7 @@
   float: left;
   font-size: 1.7em;
   letter-spacing: -.5px;
-  line-height: 45px;
+  line-height: 52px;
   margin-right: 10px;
 
   &:hover {
@@ -43,10 +43,24 @@ nav {
   }
 
   .caret {
-    margin-top: 11px;
+    vertical-align: middle;
+  }
+
+  .nav-avatar {
+    border-radius: 25px;
+    height: 35px;
+    margin-left: 15px;
+    width: 35px;
+  }
+
+  .signin-link {
+    line-height: 26px;
   }
 }
 
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle {
+  background-color: rgba(17, 17, 17, 0.02);
+}
 
 
 // ------------------------------------
