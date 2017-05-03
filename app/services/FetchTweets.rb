@@ -10,6 +10,8 @@ module FetchTweets
         # profile info
         tweeter = TwitterAPI.instance.client.user(username)
         result.user = User.new_from_tweeter(tweeter)
+      rescue Twitter::Error::NotFound
+        result.user = nil
       end
     end
   end
