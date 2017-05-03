@@ -33,7 +33,8 @@ class Squawk < ActiveRecord::Base
     squawk_attrs = tweets.pmap do |tweet|
       { user_id: user.id,
         content: squawked_text(tweet.text),
-        created_at: tweet.created_at }
+        created_at: tweet.created_at,
+        updated_at: tweet.created_at }
     end
 
     bulk_insert(*squawk_attrs.first.keys) do |worker|

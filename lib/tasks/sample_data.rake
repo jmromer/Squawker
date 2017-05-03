@@ -39,7 +39,9 @@ end
 def create_user_and_associated_posts(friend, index)
   user = create_user_from(friend, index)
   posts = friend.posts.map do |post|
-    { content: post[:text], created_at: post[:time] }
+    { content: post[:text],
+      created_at: post[:time],
+      updated_at: post[:time] }
   end
   user.squawks.create!(posts)
 end
