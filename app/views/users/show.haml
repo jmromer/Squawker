@@ -9,14 +9,14 @@
       %h2.sidebar-admin
         = @user.admin? ? "(Administrator)" : ""
     %section
-      = render 'shared/stats'
-      = render 'follow_form' if signed_in?
+      = render "shared/stats"
+      = render "follow_form" if signed_in?
   .span8
     - if @user.squawks.any?
       %h3
         = "squawks (#{@user.squawks.count})"
       %ol.squawks
-        - cache(cache_key_for_collection(@squawks, @page, "squawk_list")) do
+        - cache(cache_key_for_collection(@squawks, @user)) do
           - @squawks.each do |squawk|
             - cache(squawk) do
               = render squawk

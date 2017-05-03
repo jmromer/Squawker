@@ -4,7 +4,7 @@
   .paginate
     = will_paginate @users, page_links: false
   %ul.users
-    - cache(cache_key_for_collection(@users, @page, "users_index")) do
+    - cache(cache_key_for_collection(@users, current_user)) do
       = render @users
   .paginate
     = will_paginate @users, page_links: false

@@ -54,10 +54,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
-    @page = params[:page]
 
     if @user.present?
-      @squawks = @user.squawks.paginate(page: @page)
+      @squawks = @user.squawks.paginate(page: params[:page])
       return render :show
     end
 
@@ -65,7 +64,7 @@ class UsersController < ApplicationController
 
     if result.user.present?
       @user = result.user
-      @squawks = @user.squawks.paginate(page: @page)
+      @squawks = @user.squawks.paginate(page: params[:page])
     else
       redirect_to root_url
     end
