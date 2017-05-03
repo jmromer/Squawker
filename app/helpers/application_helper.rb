@@ -16,15 +16,16 @@ module ApplicationHelper
   end
 
   # Return a cache key of the form
-  # parent-id / entity / page-number / mru time
+  # entity-name / mru time / item ids
   #
   # Example:
-  # "parent-2/squawk/page-1/20170503032025"
-  def cache_key_for_collection(items, parent)
+  # "squawk/20140223060100/1191-24-96-25-907-1348-26-1192-27-1193"
+  # "user/20170503060413/3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22"
+  def cache_key_for_collection(items)
     entity = items.first.try(:table_name) ||
              items.first.class.to_s.underscore
 
-    page = items.current_page
+    ids = items.pluck(:id).join("-")
 
     mru_time = items
                .max_by(&:updated_at)
@@ -32,6 +33,6 @@ module ApplicationHelper
                .try(:utc)
                .try(:to_s, :number)
 
-    "parent-#{parent.id}/#{entity}/page-#{page}/#{mru_time}"
+    "#{entity}/#{mru_time}/#{ids}"
   end
 end

@@ -8,7 +8,7 @@
       %h3 recent activity
       - if @feed_items.any?
         %ul.squawks
-          - cache(cache_key_for_collection(@feed_items, current_user)) do
+          - cache(cache_key_for_collection(@feed_items)) do
             - @feed_items.each do |feed_item|
               - cache(feed_item) do
                 = render "shared/feed_item", feed_item: feed_item
