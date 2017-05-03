@@ -1,7 +1,11 @@
 "use strict"
 
-var updateCountdown = function(e) {
-  var $form, current, remaining, color
+var updateCountdown = function (e) {
+  var $form
+  var current
+  var remaining
+  var color
+
   $form = $(e.delegateTarget)
 
   current = $form.find("#squawk_content").val().length
@@ -11,11 +15,11 @@ var updateCountdown = function(e) {
   $form.find("#countdown").text(remaining).css("color", color)
 }
 
-var clearCountdown = function(e){
+var clearCountdown = function (e) {
   $(e.delegateTarget).find("#countdown").text("")
 }
 
-$(function() {
+$(function () {
   $("#new_squawk").on({
     "focus keyup change": updateCountdown,
     focusout: clearCountdown
