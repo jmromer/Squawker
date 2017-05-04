@@ -21,27 +21,57 @@
       = render "layouts/footer"
 
     :javascript
-      var squawkList = document.getElementById("squawk-list")
+      var nextPage = 1
 
-      let displayResults = () => {
+      let displayResults = (e) => {
+        let httpRequest = e.target
         if (httpRequest.readyState !== XMLHttpRequest.DONE) { return }
 
-        if (httpRequest.status === 200) {
-          let newItems = httpRequest.responseText
-          let newList = document.createElement("ul")
-          let parentNode = squawkList.parentNode
-
-          newList.className += " squawks"
-          newList.id += " squawk-list"
-          newList.innerHTML = squawkList.innerHTML + newItems
-
-          parentNode.replaceChild(newList, squawkList)
-        } else {
-          console.error(`Could not fetch: ${httpRequest.responseText}`)
+        if (httpRequest.status !== 200) {
+          return console.error(`Could not fetch: ${httpRequest.responseText}`)
         }
+
+        // new <li>s
+        let newItems = httpRequest.responseText
+
+        if (newItems === "") {
+          return console.info(`No more left! Did not increment nextPage to ${nextPage}`)
+        }
+
+        let squawkList = document.getElementsByClassName("squawks")[0]
+        let newList = document.createElement("ul")
+        let parentNode = squawkList.parentNode
+
+        newList.className = "squawks"
+        newList.innerHTML = squawkList.innerHTML + newItems
+
+        parentNode.replaceChild(newList, squawkList)
+        nextPage = nextPage + 1
+        console.info(`Success. Incremented nextPage to ${nextPage}`)
       }
 
-      var httpRequest = new XMLHttpRequest()
-      httpRequest.onreadystatechange = displayResults
-      httpRequest.open("GET", "/activity_feed/index?page=1")
-      httpRequest.send()
+      // Send xhr request for activity feed
+      let requestSquawks = (page) => {
+        console.info(`Requesting page ${page}`)
+        var httpRequest = new XMLHttpRequest()
+        httpRequest.onreadystatechange = displayResults
+        httpRequest.open("GET", `/activity_feed/index?page=${page}`)
+        httpRequest.send()
+      }
+
+      // request the first page of squawks
+      requestSquawks(nextPage)
+
+      // On scroll, request next page if at bottom (plus offset)
+      // TODO: What if there's not enough screen to scroll?
+      window.document.addEventListener("scroll", function(e) {
+        let documentHeight = window.document.body.clientHeight
+        let viewportHeight = window.innerHeight
+        let maxScrollableHeight = documentHeight - viewportHeight
+        let offSet = 100
+        let didScrollToBottom = window.scrollY > (maxScrollableHeight - offSet)
+
+        if (didScrollToBottom) {
+          requestSquawks(nextPage)
+        }
+      })

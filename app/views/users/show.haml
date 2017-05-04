@@ -15,7 +15,7 @@
     - if @user.squawks.any?
       %h3
         = "squawks (#{@user.squawks.count})"
-      %ol.squawks
+      %ul.squawks
         - cache(cache_key_for_collection(@squawks)) do
           - @squawks.each do |squawk|
             - cache(squawk) do
