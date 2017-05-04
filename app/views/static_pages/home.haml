@@ -1,13 +1,15 @@
 - if signed_in?
   .row
     %aside.span4
-      %section= render 'shared/user_info'
-      %section= render 'shared/stats'
-      %section= render 'shared/squawk_form'
+      %section= render "shared/user_info"
+      %section= render "shared/stats"
+      %section= render "shared/squawk_form"
     .span8
       %h3 recent activity
       %ul.squawks#squawk-list
 - else
   .center.hero-unit
     %h1 squawker
-    = link_to "SIGN UP", signup_path, class: "btn btn-large btn-primary offscreen"
+    = link_to "SIGN UP",
+      signup_path,
+      class: "btn btn-large btn-primary offscreen"

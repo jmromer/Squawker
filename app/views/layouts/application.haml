@@ -2,20 +2,23 @@
 %html
   %head
     %title= full_title(yield(:title))
-    = stylesheet_link_tag "application", media: "all", |
-      "data-turbolinks-track" => true                  |
-    -#
+    = stylesheet_link_tag "application", |
+                          media: "all",  |
+                          "data-turbolinks-track" => true
+
     = javascript_include_tag  "application", |
-      "data-turbolinks-track" => true        |
+                              "data-turbolinks-track" => true
     = csrf_meta_tags
-    = render 'layouts/shim'
+    = render "layouts/shim"
+
   %body
-    = render 'layouts/header'
+    = render "layouts/header"
+
     .container
       - flash.each do |key, value|
         = content_tag(:div, value, class: "alert alert-#{key}")
       = yield
-      = render 'layouts/footer'
+      = render "layouts/footer"
 
     :javascript
       var squawkList = document.getElementById("squawk-list")
@@ -34,7 +37,7 @@
 
           parentNode.replaceChild(newList, squawkList)
         } else {
-          console.error(`Could not fetch squawks: ${httpRequest.responseText}`)
+          console.error(`Could not fetch: ${httpRequest.responseText}`)
         }
       }
 
