@@ -6,14 +6,7 @@
       %section= render 'shared/squawk_form'
     .span8
       %h3 recent activity
-      - if @feed_items.any?
-        %ul.squawks
-          - cache(cache_key_for_collection(@feed_items)) do
-            - @feed_items.each do |feed_item|
-              - cache(feed_item) do
-                = render "shared/feed_item", feed_item: feed_item
-      .paginate
-        = will_paginate @feed_items, page_links: false
+      %ul.squawks#squawk-list
 - else
   .center.hero-unit
     %h1 squawker

@@ -16,3 +16,29 @@
         = content_tag(:div, value, class: "alert alert-#{key}")
       = yield
       = render 'layouts/footer'
+
+    :javascript
+      var squawkList = document.getElementById("squawk-list")
+
+      let displayResults = () => {
+        if (httpRequest.readyState !== XMLHttpRequest.DONE) { return }
+
+        if (httpRequest.status === 200) {
+          let newItems = httpRequest.responseText
+          let newList = document.createElement("ul")
+          let parentNode = squawkList.parentNode
+
+          newList.className += " squawks"
+          newList.id += " squawk-list"
+          newList.innerHTML = squawkList.innerHTML + newItems
+
+          parentNode.replaceChild(newList, squawkList)
+        } else {
+          console.error(`Could not fetch squawks: ${httpRequest.responseText}`)
+        }
+      }
+
+      var httpRequest = new XMLHttpRequest()
+      httpRequest.onreadystatechange = displayResults
+      httpRequest.open("GET", "/activity_feed/index?page=1")
+      httpRequest.send()
