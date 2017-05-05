@@ -45,7 +45,7 @@ class ScrollManager {
     let viewportHeight = this.window.innerHeight
     let currScrollPosn = this.window.scrollY
     let maxScrollableHeight = documentHeight - viewportHeight
-    return currScrollPosn > (maxScrollableHeight - offset)
+    return currScrollPosn + offset > maxScrollableHeight
   }
 
   scrollToTop() {
