@@ -83,26 +83,34 @@ class FeedPresenter {
       if (debug) { console.info("Empty result set.") }
 
       this.fetcher.fetchingComplete()
-      let backToTop = this.document.createElement("li")
-      let link = this.document.createElement("a")
-      link.setAttribute("onClick", "scrollManager.scrollToTop()")
-      link.textContent = "back to top"
-      link.setAttribute("style", "cursor: pointer;")
-      backToTop.appendChild(link)
+      let backToTop = this.backToTopListItem()
       squawkList.appendChild(backToTop)
-    } else {
-      this.fetcher.incrementPage()
-
-      let parentNode = squawkList.parentNode
-      if (!parentNode) {
-        console.error("no parent node")
-        return
-      }
-
-      let newList = this.document.createElement("ul")
-      newList.className = "squawks"
-      newList.innerHTML = squawkList.innerHTML + newItems
-      parentNode.replaceChild(newList, squawkList)
+      return
     }
+
+    this.fetcher.incrementPage()
+
+    let parentNode = squawkList.parentNode
+    if (!parentNode) {
+      console.error("no parent node")
+      let backToTop = this.backToTopListItem()
+      squawkList.appendChild(backToTop)
+      return
+    }
+
+    let newList = this.document.createElement("ul")
+    newList.className = "squawks"
+    newList.innerHTML = squawkList.innerHTML + newItems
+    parentNode.replaceChild(newList, squawkList)
+  }
+
+  backToTopListItem() {
+    let backToTop = this.document.createElement("li")
+    let link = this.document.createElement("a")
+    link.setAttribute("onClick", "scrollManager.scrollToTop()")
+    link.textContent = "back to top"
+    link.setAttribute("style", "cursor: pointer;")
+    backToTop.appendChild(link)
+    return backToTop
   }
 }
