@@ -53,21 +53,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:id])
+    user = User.find_by(username: params[:id])
 
-    if @user.present?
-      @squawks = @user.squawks.paginate(page: params[:page])
-      return render :show
+    if user.present?
+      return render :show, locals: { user: user }
     end
 
     result = FetchTweets.call(username: params[:id])
 
     if result.user.present?
-      @user = result.user
-      @squawks = @user.squawks.paginate(page: params[:page])
+      user = result.user
+      render :show, locals: { user: user }
     else
       redirect_to root_url
     end
+  end
+
+  def feed
+    user = User.find_by(username: params[:id])
+    squawks = user.squawks.paginate(page: params[:page])
+    render :feed, locals: { feed_items: squawks }, layout: false
   end
 
   def following

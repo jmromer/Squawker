@@ -1,20 +1,34 @@
 - if signed_in?
   .row
     %aside.span4
-      %section= render 'shared/user_info'
-      %section= render 'shared/stats'
-      %section= render 'shared/squawk_form'
+      %section= render "shared/user_info"
+      %section= render "shared/stats"
+      %section= render "shared/squawk_form"
     .span8
       %h3 recent activity
-      - if @feed_items.any?
-        %ul.squawks
-          - cache(cache_key_for_collection(@feed_items)) do
-            - @feed_items.each do |feed_item|
-              - cache(feed_item) do
-                = render "shared/feed_item", feed_item: feed_item
-      .paginate
-        = will_paginate @feed_items, page_links: false
+      %ul.squawks
 - else
   .center.hero-unit
     %h1 squawker
-    = link_to "SIGN UP", signup_path, class: "btn btn-large btn-primary offscreen"
+    = link_to "SIGN UP",
+      signup_path,
+      class: "btn btn-large btn-primary offscreen"
+
+:javascript
+  let scrollManager = new ScrollManager({ window: window })
+  let feedFetcher = new FeedFetcher({ endpoint: "/activity_feed/index" })
+  let feedPresenter = new FeedPresenter({
+    document: document,
+    fetcher: feedFetcher,
+    listClass: "squawks"
+  })
+
+  window.document.onreadystatechange = () => {
+    feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+  }
+
+  window.document.addEventListener("scroll", (e) => {
+    if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
+      feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+    }
+  })

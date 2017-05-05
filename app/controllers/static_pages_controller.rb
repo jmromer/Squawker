@@ -6,7 +6,6 @@ class StaticPagesController < ApplicationController
   def home
     return unless signed_in?
     @squawk = current_user.squawks.build
-    @feed_items = current_user.feed.paginate(page: params[:page])
   end
 
   def about; end

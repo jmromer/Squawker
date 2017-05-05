@@ -20,4 +20,6 @@ Squawker::Application.routes.draw do
   delete "/signout", to: "sessions#destroy"
   get "/trial", to: "sessions#trial"
   get "/search", to: "search#show"
+  get "/activity_feed/index", to: "activity_feed#index"
+  get "/users/:id/feed", to: "users#feed"
 end

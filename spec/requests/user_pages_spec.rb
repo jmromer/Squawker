@@ -197,22 +197,6 @@ describe "User pages" do
     end
   end # index
 
-  describe "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
-    let!(:m1) { FactoryGirl.create(:squawk, user: user, content: "Foo") }
-    let!(:m2) { FactoryGirl.create(:squawk, user: user, content: "Bar") }
-
-    before { visit user_path(user) }
-    it { is_expected.to have_content(user.name) }
-    it { is_expected.to have_title(user.name) }
-
-    describe "squawks" do
-      it { is_expected.to have_content(m1.content) }
-      it { is_expected.to have_content(m2.content) }
-      it { is_expected.to have_content(user.squawks.count) }
-    end
-  end
-
   describe "following/followers indicator" do
     it "displays users the current user follows" do
       user = FactoryGirl.create(:user)
