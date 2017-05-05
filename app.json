@@ -1,0 +1,73 @@
+{
+  "name": "Squawker",
+  "scripts": {
+  },
+  "env": {
+    "HEROKU_POSTGRESQL_CHARCOAL_URL": {
+      "required": true
+    },
+    "MEMCACHIER_PASSWORD": {
+      "required": true
+    },
+    "MEMCACHIER_SERVERS": {
+      "required": true
+    },
+    "MEMCACHIER_USERNAME": {
+      "required": true
+    },
+    "NEW_RELIC_APP_NAME": {
+      "required": true
+    },
+    "NEW_RELIC_LICENSE_KEY": {
+      "required": true
+    },
+    "NEW_RELIC_LOG": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "SAMPLE_PASSWORD": {
+      "required": true
+    },
+    "SEARCHBOX_SSL_URL": {
+      "required": true
+    },
+    "SEARCHBOX_URL": {
+      "required": true
+    },
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
+      "required": true
+    },
+    "TWITTER_ACCESS_SECRET": {
+      "required": true
+    },
+    "TWITTER_ACCESS_TOKEN": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "newrelic",
+    "memcachier",
+    "papertrail",
+    "heroku-postgresql",
+    "searchbox",
+    "sendgrid"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
