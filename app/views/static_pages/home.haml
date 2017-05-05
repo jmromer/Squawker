@@ -28,7 +28,7 @@
   }
 
   window.document.addEventListener("scroll", (e) => {
-    if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
+    if (scrollManager.scrollIsAtBottom({ offset: 200 })) {
       feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
     }
   })
