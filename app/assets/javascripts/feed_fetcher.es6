@@ -1,23 +1,37 @@
+const debug = true
+
 class FeedFetcher {
   constructor({ endpoint }) {
     this.httpRequest = new XMLHttpRequest()
     this.endpoint = endpoint
     this.page = 1
+    this.completed = false
   }
 
   fetchNextPage(completion) {
+    if (this.completed) { return }
+
     this.httpRequest.onreadystatechange = completion
     this.httpRequest.open("GET", `${this.endpoint}?page=${this.page}`, false)
 
-    // console.info(`Requesting page ${this.page}`)
-    // console.info(`GET ${this.endpoint}?page=${this.page}`)
+    if (debug) {
+      console.info(`Requesting page ${this.page}`)
+      console.info(`GET ${this.endpoint}?page=${this.page}`)
+    }
 
     this.httpRequest.send()
   }
 
   incrementPage() {
-    // console.info(`Success. Incremented nextPage to ${this.page}`)
+    if (debug) {
+      console.info(`Success. Incremented nextPage to ${this.page}`)
+    }
+
     this.page += 1
+  }
+
+  fetchingComplete() {
+    this.completed = true
   }
 }
 
@@ -56,7 +70,9 @@ class FeedPresenter {
 
     let newItems = httpRequest.responseText
     if (newItems === "") {
-      // console.info("Empty result set.")
+      if (debug) { console.info("Empty result set.") }
+
+      this.fetcher.fetchingComplete()
       return
     }
 
