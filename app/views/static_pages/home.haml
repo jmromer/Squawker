@@ -13,3 +13,23 @@
     = link_to "SIGN UP",
       signup_path,
       class: "btn btn-large btn-primary offscreen"
+
+:javascript
+  let scrollManager = new ScrollManager({ window: window })
+  let feedFetcher = new FeedFetcher({ endpoint: "/activity_feed/index" })
+  let feedPresenter = new FeedPresenter({
+    document: document,
+    fetcher: feedFetcher,
+    listClass: "squawks"
+  })
+
+  window.document.onreadystatechange = () => {
+    feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+  }
+
+  // TODO: What if there's not enough screen to scroll?
+  window.document.addEventListener("scroll", (e) => {
+    if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
+      feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+    }
+  })
