@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FetchTweets
   def self.call(username:)
     OpenStruct.new.tap do |result|
