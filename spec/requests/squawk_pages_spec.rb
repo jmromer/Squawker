@@ -29,18 +29,4 @@ describe "Squawk pages" do
       end
     end
   end
-
-  describe "squawk destruction" do
-    before { FactoryGirl.create(:squawk, user: user) }
-
-    describe "as correct user" do
-      before { visit root_path }
-
-      it "should delete a squawk" do
-        expect do
-          find(".delete-item").click
-        end.to change(Squawk, :count).by(-1)
-      end
-    end
-  end
 end

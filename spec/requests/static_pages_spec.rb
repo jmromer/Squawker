@@ -20,12 +20,6 @@ describe "Static pages" do
         visit root_path
       end
 
-      it "should render the user's feed" do
-        user.feed.each do |item|
-          expect(page).to have_selector("li##{item.id}", text: item.content)
-        end
-      end
-
       describe "follower/following counts" do
         let(:other_user) { FactoryGirl.create(:user) }
         before do
