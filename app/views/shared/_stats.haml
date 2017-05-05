@@ -1,14 +1,14 @@
-- @user ||= current_user
+- user ||= current_user
 .stats
-  %a{:href => user_path(@user)}
+  %a{:href => user_path(user)}
     %strong.stat
-      = @user.squawks.count
+      = user.squawks.count
     squawks
-  %a{:href => following_user_path(@user)}
+  %a{:href => following_user_path(user)}
     %strong#following.stat
-      = @user.followed_users.count
+      = user.followed_users.count
     following
-  %a{:href => followers_user_path(@user)}
+  %a{:href => followers_user_path(user)}
     %strong#followers.stat
-      = @user.followers.count
+      = user.followers.count
     followers
