@@ -1,24 +1,36 @@
-= provide :title, @user.name
+= provide :title, user.name
 .row
   %aside.span4
     %section
       .sidebar-gravatar
-        = avatar_for @user
+        = avatar_for user
       %h1.sidebar-name
-        = @user.name
+        = user.name
       %h2.sidebar-admin
-        = @user.admin? ? "(Administrator)" : ""
+        = user.admin? ? "(Administrator)" : ""
     %section
       = render "shared/stats"
       = render "follow_form" if signed_in?
   .span8
-    - if @user.squawks.any?
-      %h3
-        = "squawks (#{@user.squawks.count})"
-      %ul.squawks
-        - cache(cache_key_for_collection(@squawks)) do
-          - @squawks.each do |squawk|
-            - cache(squawk) do
-              = render squawk
-      .paginate
-        = will_paginate @squawks, page_links: false
+    %h3= "squawks (#{user.squawks.count})"
+    %ul.squawks
+
+:javascript
+  let endpoint = "/users/#{user.username}/feed"
+  let scrollManager = new ScrollManager({ window: window })
+  let feedFetcher = new FeedFetcher({ endpoint: endpoint })
+  let feedPresenter = new FeedPresenter({
+    document: document,
+    fetcher: feedFetcher,
+    listClass: "squawks"
+  })
+
+  window.document.onreadystatechange = () => {
+    feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+  }
+
+  window.document.addEventListener("scroll", (e) => {
+    if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
+      feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+    }
+  })

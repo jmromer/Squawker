@@ -27,7 +27,6 @@
     feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
   }
 
-  // TODO: What if there's not enough screen to scroll?
   window.document.addEventListener("scroll", (e) => {
     if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
       feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
