@@ -16,13 +16,16 @@ module SquawksHelper
     hash_tags = str.scan(/#\w+/).uniq
     return str if hash_tags.empty?
 
-    segments = str.split.map { |substr| linkify_hashtag(hash_tags, substr) }
-    segments.join(" ").html_safe
+    segments = str.split.map do |substr|
+      linkify_hashtag(hash_tags, substr)
+    end
+
+    safe_join([segments.join(" ").html_safe], "")
   end
 
   def linkify_hashtag(hash_tags, substr)
     return substr unless hash_tags.include?(substr)
-    "<a href=\"http://twitter.com/search?q=%23#{substr[1..-1]}\">#{substr}</a>"
+    "<a href=\"/search?q=%23#{substr[1..-1]}\">#{substr}</a>"
   end
 
   def formatted(str)
