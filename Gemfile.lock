@@ -283,8 +283,6 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    turbolinks (2.5.3)
-      coffee-rails
     twitter (6.1.0)
       addressable (~> 2.5)
       buftok (~> 0.2.0)
@@ -349,7 +347,6 @@ DEPENDENCIES
   sass-rails (~> 5.0.1)
   selenium-webdriver (~> 2.52)
   shoulda-matchers (~> 3.1.1)
-  turbolinks (= 2.5.3)
   twitter (~> 6.1.0)
   uglifier (~> 3.2.0)
   unicorn
