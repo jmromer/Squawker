@@ -47,6 +47,10 @@ class ScrollManager {
     let maxScrollableHeight = documentHeight - viewportHeight
     return currScrollPosn > (maxScrollableHeight - offset)
   }
+
+  scrollToTop() {
+    this.window.scrollTo(0, 0)
+  }
 }
 
 class FeedPresenter {
@@ -69,30 +73,36 @@ class FeedPresenter {
     }
 
     let newItems = httpRequest.responseText
-    if (newItems === "") {
-      if (debug) { console.info("Empty result set.") }
-
-      this.fetcher.fetchingComplete()
-      return
-    }
-
     let squawkList = this.document.getElementsByClassName(this.listClass)[0]
     if (!squawkList) {
       console.error("no list found")
       return
     }
 
-    let parentNode = squawkList.parentNode
-    if (!parentNode) {
-      console.error("no parent node")
-      return
+    if (newItems === "") {
+      if (debug) { console.info("Empty result set.") }
+
+      this.fetcher.fetchingComplete()
+      let backToTop = this.document.createElement("li")
+      let link = this.document.createElement("a")
+      link.setAttribute("onClick", "scrollManager.scrollToTop()")
+      link.textContent = "back to top"
+      link.setAttribute("style", "cursor: pointer;")
+      backToTop.appendChild(link)
+      squawkList.appendChild(backToTop)
+    } else {
+      this.fetcher.incrementPage()
+
+      let parentNode = squawkList.parentNode
+      if (!parentNode) {
+        console.error("no parent node")
+        return
+      }
+
+      let newList = this.document.createElement("ul")
+      newList.className = "squawks"
+      newList.innerHTML = squawkList.innerHTML + newItems
+      parentNode.replaceChild(newList, squawkList)
     }
-
-    let newList = this.document.createElement("ul")
-    newList.className = "squawks"
-    newList.innerHTML = squawkList.innerHTML + newItems
-
-    parentNode.replaceChild(newList, squawkList)
-    this.fetcher.incrementPage()
   }
 }
