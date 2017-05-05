@@ -36,4 +36,7 @@ Squawker::Application.configure do
 
   # Base URL for links in mailers
   config.action_mailer.default_url_options = { host: "localhost:3000" }
+
+  # suppress output of asset requests
+  config.assets.quiet = true
 end
