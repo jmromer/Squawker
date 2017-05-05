@@ -14,6 +14,8 @@
   .span8
     %h3= "squawks (#{user.squawks.count})"
     %ul.squawks
+    .back-to-top
+      %a{onClick: "scrollManager.scrollToTop()"} back to top
 
 :javascript
   let endpoint = "/users/#{user.username}/feed"
