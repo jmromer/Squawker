@@ -9,15 +9,15 @@ class FeedFetcher {
     this.httpRequest.onreadystatechange = completion
     this.httpRequest.open("GET", `${this.endpoint}?page=${this.page}`, false)
 
-    console.info(`Requesting page ${this.page}`)
-    console.info(`GET ${this.endpoint}?page=${this.page}`)
+    // console.info(`Requesting page ${this.page}`)
+    // console.info(`GET ${this.endpoint}?page=${this.page}`)
 
     this.httpRequest.send()
   }
 
   incrementPage() {
+    // console.info(`Success. Incremented nextPage to ${this.page}`)
     this.page += 1
-    console.info(`Success. Incremented nextPage to ${this.page}`)
   }
 }
 
@@ -56,7 +56,7 @@ class FeedPresenter {
 
     let newItems = httpRequest.responseText
     if (newItems === "") {
-      console.info("Empty result set.")
+      // console.info("Empty result set.")
       return
     }
 
