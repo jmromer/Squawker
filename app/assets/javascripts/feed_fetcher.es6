@@ -4,15 +4,72 @@ class FeedFetcher {
   constructor({ endpoint }) {
     this.httpRequest = new XMLHttpRequest()
     this.endpoint = endpoint
+    this.listId = "js-squawk-list"
     this.page = 1
-    this.completed = false
+    this.hasCompleted = false
+
+    this.httpRequest
+      .addEventListener("progress", this.updateProgress.bind(this))
+    this.httpRequest
+      .addEventListener("load", this.transferComplete.bind(this))
+    this.httpRequest
+      .addEventListener("error", this.transferFailed.bind(this))
+    this.httpRequest
+      .addEventListener("abort", this.transferCanceled.bind(this))
   }
 
-  fetchNextPage(completion) {
-    if (this.completed) { return }
+  updateProgress(event) {
+    let prog = Math.round(event.loaded / event.total) * 100
+    if (debug) { console.log(`${prog}% complete`) }
+  }
 
-    this.httpRequest.onreadystatechange = completion
-    this.httpRequest.open("GET", `${this.endpoint}?page=${this.page}`, false)
+  transferComplete(event) {
+    let newItems = this.httpRequest.responseText
+    let squawkList = window.document.getElementById(this.listId)
+    let parentNode = squawkList.parentNode
+
+    if (newItems === "") {
+      if (debug) { console.info("Empty result set.") }
+
+      // disallow repeated requests
+      this.fetchingComplete()
+
+      // append "back to top" link
+      parentNode.appendChild(this.backToTop)
+      return
+    }
+
+    // if a "back to top" link is present, store it, remove from dom
+    let backToTop = window.document.getElementById("js-back-to-top")
+    if (backToTop) {
+      this.backToTop = backToTop
+      backToTop.remove()
+    }
+
+    // Build a new
+    let newList = window.document.createElement("ul")
+    newList.id = this.listId
+    newList.className = "squawks"
+    newList.innerHTML = squawkList.innerHTML + newItems
+
+    parentNode.replaceChild(newList, squawkList)
+    this.incrementPage()
+  }
+
+  transferFailed(event) {
+    console.error(`Could not fetch: ${this.httpRequest.responseText}`)
+  }
+
+  transferCanceled(event) {
+    console.log("Transfer canceled")
+  }
+
+  fetchNextPage() {
+    if (this.hasCompleted) { return }
+
+    this.httpRequest.open("GET",
+                          `${this.endpoint}?page=${this.page}`,
+                          false)
 
     if (debug) {
       console.info(`Requesting page ${this.page}`)
@@ -31,7 +88,7 @@ class FeedFetcher {
   }
 
   fetchingComplete() {
-    this.completed = true
+    this.hasCompleted = true
   }
 }
 
@@ -50,53 +107,5 @@ class ScrollManager {
 
   scrollToTop() {
     this.window.scrollTo(0, 0)
-  }
-}
-
-class FeedPresenter {
-  constructor({ document, fetcher, listClass }) {
-    this.document = document
-    this.fetcher = fetcher
-    this.listClass = listClass
-  }
-
-  displayResults(event) {
-    let httpRequest = event.target
-
-    if (httpRequest.readyState !== XMLHttpRequest.DONE) {
-      return
-    }
-
-    if (httpRequest.status !== 200) {
-      console.error(`Could not fetch: ${httpRequest.responseText}`)
-      return
-    }
-
-    let newItems = httpRequest.responseText
-    let squawkList = this.document.getElementsByClassName(this.listClass)[0]
-    if (!squawkList) {
-      console.error("no list found")
-      return
-    }
-
-    if (newItems === "") {
-      if (debug) { console.info("Empty result set.") }
-
-      this.fetcher.fetchingComplete()
-      return
-    }
-
-    this.fetcher.incrementPage()
-
-    let parentNode = squawkList.parentNode
-    if (!parentNode) {
-      console.error("no parent node")
-      return
-    }
-
-    let newList = this.document.createElement("ul")
-    newList.className = "squawks"
-    newList.innerHTML = squawkList.innerHTML + newItems
-    parentNode.replaceChild(newList, squawkList)
   }
 }
