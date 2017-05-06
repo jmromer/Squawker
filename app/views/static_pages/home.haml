@@ -6,7 +6,9 @@
       %section= render "shared/squawk_form"
     .span8
       %h3 recent activity
-      %ul.squawks
+      %ul#js-squawk-list.squawks
+      #js-back-to-top.back-to-top
+        %a{onClick: "scrollManager.scrollToTop()"} back to top
 - else
   .center.hero-unit
     %h1 squawker
@@ -17,18 +19,11 @@
 :javascript
   let scrollManager = new ScrollManager({ window: window })
   let feedFetcher = new FeedFetcher({ endpoint: "/activity_feed/index" })
-  let feedPresenter = new FeedPresenter({
-    document: document,
-    fetcher: feedFetcher,
-    listClass: "squawks"
-  })
 
-  window.document.onreadystatechange = () => {
-    feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
-  }
+  feedFetcher.fetchNextPage()
 
   window.document.addEventListener("scroll", (e) => {
-    if (scrollManager.scrollIsAtBottom({ offset: 100 })) {
-      feedFetcher.fetchNextPage(e => feedPresenter.displayResults(e))
+    if (scrollManager.scrollIsAtBottom({ offset: 300 })) {
+      feedFetcher.fetchNextPage()
     }
   })
