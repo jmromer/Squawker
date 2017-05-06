@@ -22,10 +22,9 @@
   let scrollManager = new ScrollManager({ window: window })
   let feedFetcher = new FeedFetcher({ endpoint: endpoint })
 
-  feedFetcher.fetchNextPage()
+  feedFetcher.fetchInitialPages({ scrollManager: scrollManager })
 
-  window.document.addEventListener("scroll", (e) => {
-    if (scrollManager.scrollIsAtBottom({ offset: 300 })) {
-      feedFetcher.fetchNextPage()
-    }
+  window.document.addEventListener("scroll", () => {
+    if (!scrollManager.isAtBottom()) { return }
+    feedFetcher.fetchNextPage()
   })
