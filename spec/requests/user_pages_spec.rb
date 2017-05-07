@@ -12,16 +12,16 @@ describe "User pages" do
   end # signup page
 
   describe "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
-    before { visit user_path(user) }
+    before { visit user_path(user, via_ui: true) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
 
     describe "follow/unfollow buttons" do
-      let(:other_user) { FactoryGirl.create(:user) }
-      before { sign_in user }
+      let(:other_user) { create(:user) }
+      before { sign_in user, via_ui: true }
 
       describe "following a user" do
         before { visit user_path(other_user) }
@@ -118,9 +118,9 @@ describe "User pages" do
   end # signup
 
   describe "edit" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
     before do
-      sign_in user
+      sign_in user, via_ui: true
       visit edit_user_path(user)
     end
 
@@ -155,10 +155,10 @@ describe "User pages" do
   end # edit
 
   describe "index" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     before(:each) do
-      sign_in user
+      sign_in user, via_ui: true
       visit users_path
     end
 
@@ -166,7 +166,7 @@ describe "User pages" do
     it { should have_content("Squawkers") }
 
     describe "pagination" do
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) { 30.times { create(:user) } }
       after(:all)  { User.delete_all }
 
       it { should have_selector("div.pagination") }
@@ -183,10 +183,10 @@ describe "User pages" do
       it { is_expected.not_to have_css(".trashcan") }
 
       describe "as an admin user" do
-        let(:admin) { FactoryGirl.create(:admin) }
+        let(:admin) { create(:admin) }
 
         before do
-          sign_in admin
+          sign_in admin, via_ui: true
           visit users_path
         end
         it { should have_css(".trashcan") }
@@ -199,10 +199,10 @@ describe "User pages" do
 
   describe "following/followers indicator" do
     it "displays users the current user follows" do
-      user = FactoryGirl.create(:user)
-      other_user = FactoryGirl.create(:user)
+      user = create(:user)
+      other_user = create(:user)
       user.follow!(other_user)
-      sign_in(user)
+      sign_in(user, via_ui: true)
 
       visit following_user_path(user)
 
@@ -212,10 +212,10 @@ describe "User pages" do
     end
 
     it "displays users that follow the current user" do
-      user = FactoryGirl.create(:user)
-      other_user = FactoryGirl.create(:user)
+      user = create(:user)
+      other_user = create(:user)
       user.follow!(other_user)
-      sign_in(other_user)
+      sign_in(other_user, via_ui: true)
 
       visit followers_user_path(other_user)
 

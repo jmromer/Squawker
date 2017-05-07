@@ -22,8 +22,8 @@ describe "Authentication" do
       end
 
       describe "with valid information" do
-        let(:user) { FactoryGirl.create(:user) }
-        before { sign_in user }
+        let(:user) { create(:user) }
+        before { sign_in user, via_ui: true }
 
         it { should have_title user.name }
         it { should have_link "Profile",     href: user_path(user) }
@@ -36,7 +36,7 @@ describe "Authentication" do
 
   describe "authorization" do
     describe "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
 
       describe "in the Relationships controller" do
         describe "submitting to the create action" do
@@ -99,19 +99,19 @@ describe "Authentication" do
         end
 
         describe "submitting to the destroy action" do
-          before { delete squawk_path(FactoryGirl.create(:squawk)) }
+          before { delete squawk_path(create(:squawk)) }
           specify { expect(response).to redirect_to(signin_path) }
         end
       end
     end # non-signed in
 
     describe "as wrong user" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
       let(:wrong_user) do
-        FactoryGirl.create(:user, email: "wrong@example.com")
+        create(:user, email: "wrong@example.com")
       end
 
-      before { sign_in user, no_capybara: true }
+      before { sign_in user }
 
       describe "submitting a GET request to the Users#edit action" do
         before { get edit_user_path(wrong_user) }
@@ -126,10 +126,10 @@ describe "Authentication" do
     end # wrong user
 
     describe "as non-admin user" do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:non_admin) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
+      let(:non_admin) { create(:user) }
 
-      before { sign_in non_admin, no_capybara: true }
+      before { sign_in non_admin }
 
       describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }

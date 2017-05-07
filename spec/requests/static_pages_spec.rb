@@ -12,16 +12,16 @@ describe "Static pages" do
     it { is_expected.not_to have_title("| Home") }
 
     describe "for signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
       before do
-        FactoryGirl.create(:squawk, user: user, content: "Lorem ipsum")
-        FactoryGirl.create(:squawk, user: user, content: "Dolor sit amet")
-        sign_in user
+        create(:squawk, user: user, content: "Lorem ipsum")
+        create(:squawk, user: user, content: "Dolor sit amet")
+        sign_in user, via_ui: true
         visit root_path
       end
 
       describe "follower/following counts" do
-        let(:other_user) { FactoryGirl.create(:user) }
+        let(:other_user) { create(:user) }
         before do
           other_user.follow!(user)
           visit root_path
