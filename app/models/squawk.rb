@@ -19,9 +19,12 @@ class Squawk < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 160 }
+  validates :likes_count, presence: true
 
   before_save :transform_text
   belongs_to :user
+  has_many :likes
+  has_many :likers, through: :likes
 
   default_scope -> { order("created_at DESC") }
 

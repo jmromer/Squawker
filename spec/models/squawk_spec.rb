@@ -22,6 +22,10 @@ describe Squawk do
   it { is_expected.to respond_to(:user_id) }
   it { is_expected.to respond_to(:user) }
 
+  it { is_expected.to have_many(:likes) }
+  it { is_expected.to have_many(:likers).through(:likes) }
+  it { is_expected.to validate_presence_of(:likes_count) }
+
   describe "#user" do
     subject { super().user }
     it { is_expected.to eq user }

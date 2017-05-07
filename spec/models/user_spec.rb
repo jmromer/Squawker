@@ -54,6 +54,8 @@ describe User do
   it { is_expected.to validate_presence_of :username }
   it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
 
+  it { is_expected.to have_many(:likes) }
+
   describe "with admin attribute set to 'true" do
     before do
       @user.save!
