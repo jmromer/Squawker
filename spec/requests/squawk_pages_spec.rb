@@ -18,7 +18,7 @@ describe "Squawk pages" do
 
       describe "error messages" do
         before { click_button "squawk it!" }
-        it { is_expected.to have_content("error") }
+        it { should have_content("error") }
       end
     end
 

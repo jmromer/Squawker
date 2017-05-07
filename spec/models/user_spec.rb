@@ -20,234 +20,154 @@
 require "rails_helper"
 
 describe User do
-  before do
-    @user = User.new(
-      name: "Example User",
-      username: "example_user",
-      email: "user@example.com",
-      password: "foobar",
-      password_confirmation: "foobar"
-    )
+  it { should respond_to :name }
+  it { should respond_to :username }
+  it { should respond_to :email }
+  it { should respond_to :password_digest }
+  it { should respond_to :password }
+  it { should respond_to :password_confirmation }
+  it { should respond_to :remember_token }
+  it { should respond_to :authenticate }
+  it { should respond_to :admin }
+  it { should respond_to :squawks }
+  it { should respond_to :feed }
+  it { should respond_to :relationships }
+  it { should respond_to :followed_users }
+  it { should respond_to :reverse_relationships }
+  it { should respond_to :followers }
+  it { should respond_to :follow! }
+  it { should respond_to :unfollow! }
+  it { should respond_to :likes }
+
+  it { should validate_presence_of(:username) }
+  it { should validate_uniqueness_of(:username).case_insensitive }
+  it { should validate_uniqueness_of(:email).case_insensitive }
+  it { should validate_presence_of(:name) }
+  it { should validate_length_of(:name).is_at_most(50) }
+  it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:password) }
+  it { should validate_presence_of(:password_confirmation) }
+  it { should validate_uniqueness_of(:remember_token).case_insensitive }
+  it { should validate_length_of(:password).is_at_least(8) }
+  it { should validate_confirmation_of(:password) }
+
+  it { should have_many(:likes) }
+  it { should have_many(:squawks) }
+
+  it "validates email format" do
+    invalid_addresses = %w[user@foo,com
+                           user_at_foo.org
+                           foo@bar_baz.com
+                           example.user@foo.
+                           foo@bar+baz.com]
+
+    valid_addresses = %w[user@foo.COM
+                         A_US-ER@f.b.org
+                         frst.lst@foo.jp
+                         a+b@baz.cn]
+
+    should_not allow_values(*invalid_addresses).for(:email)
+    should allow_values(*valid_addresses).for(:email)
   end
 
-  subject { @user }
-  it { is_expected.to respond_to :name }
-  it { is_expected.to respond_to :username }
-  it { is_expected.to respond_to :email }
-  it { is_expected.to respond_to :password_digest }
-  it { is_expected.to respond_to :password }
-  it { is_expected.to respond_to :password_confirmation }
-  it { is_expected.to respond_to :remember_token }
-  it { is_expected.to respond_to :authenticate }
-  it { is_expected.to respond_to :admin }
-  it { is_expected.to respond_to :squawks }
-  it { is_expected.to respond_to :feed }
-  it { is_expected.to respond_to :relationships }
-  it { is_expected.to respond_to :followed_users }
-  it { is_expected.to respond_to :reverse_relationships }
-  it { is_expected.to respond_to :followers }
-  it { is_expected.to respond_to :follow! }
-  it { is_expected.to respond_to :unfollow! }
-  it { is_expected.to be_valid }
-  it { is_expected.not_to be_admin }
+  describe "#authenticate" do
+    context "with valid password" do
+      it "returns the requested user" do
+        user = create(:user)
+        found_user = User.find_by(email: user.email)
 
-  it { is_expected.to validate_presence_of :username }
-  it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
+        user = found_user.authenticate(user.password)
 
-  it { is_expected.to have_many(:likes) }
-
-  describe "with admin attribute set to 'true" do
-    before do
-      @user.save!
-      @user.toggle!(:admin)
+        expect(user).to eq found_user
+      end
     end
 
-    it { is_expected.to be_admin }
-  end
+    context "with invalid password" do
+      it "returns false" do
+        user = create(:user)
+        found_user = User.find_by(email: user.email)
 
-  describe "remember_token" do
-    before { @user.save }
+        user = found_user.authenticate(user.password + "salt")
 
-    describe "#remember_token" do
-      subject { super().remember_token }
-      it { is_expected.not_to be_blank }
-    end
-  end
-
-  describe "when name is not present" do
-    before { @user.name = " " }
-    it { is_expected.not_to be_valid }
-  end
-
-  describe "when email is not present" do
-    before { @user.email = " " }
-    it { is_expected.not_to be_valid }
-  end
-
-  describe "when name is too long" do
-    before { @user.name = "a" * 51 }
-    it { is_expected.not_to be_valid }
-  end
-
-  describe "when password is not present" do
-    before do
-      @user = User.new(name: "Example User", email: "user@example.com",
-                       password: " ", password_confirmation: " ")
-    end
-    it { is_expected.not_to be_valid }
-  end
-
-  describe "with a password that's too short" do
-    before { @user.password = @user.password_confirmation = "a" * 5 }
-    it { is_expected.to be_invalid }
-  end
-
-  describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "mismatch" }
-    it { is_expected.not_to be_valid }
-  end
-
-  describe "return value of authenticate method" do
-    before { @user.save }
-    let(:found_user) { User.find_by(email: @user.email) }
-
-    describe "with valid password" do
-      it { is_expected.to eq found_user.authenticate(@user.password) }
-    end
-
-    describe "with invalid password" do
-      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-      it { is_expected.not_to eq user_for_invalid_password }
-      specify { expect(user_for_invalid_password).to eq false }
-    end
-  end
-
-  # Email Format
-  describe "when email format is invalid" do
-    it "should be invalid" do
-      addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-                     foo@bar_baz.com foo@bar+baz.com]
-      addresses.each do |invalid_address|
-        @user.email = invalid_address
-        expect(@user).not_to be_valid
+        expect(user).to eq false
       end
     end
   end
 
-  describe "when email format is valid" do
-    it "should be valid" do
-      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
-      addresses.each do |valid_address|
-        @user.email = valid_address
-        expect(@user).to be_valid
-      end
-    end
-  end
+  context "squawk associations" do
+    it "returns associated squawks in descending order of creation" do
+      user = create(:user)
+      older = create(:squawk, user: user, created_at: 1.year.ago)
+      old = create(:squawk, user: user, created_at: 1.day.ago)
+      new = create(:squawk, user: user, created_at: 1.hour.ago)
 
-  # Email Uniqueness
-  describe "when email address is already taken" do
-    before do
-      user_with_same_email = @user.dup
-      user_with_same_email.save
-    end
-
-    it { is_expected.not_to be_valid }
-  end
-
-  # Squawks
-  describe "squawk associations" do
-    before { @user.save }
-
-    let!(:older_squawk) do
-      FactoryGirl.create(:squawk, user: @user, created_at: 1.day.ago)
-    end
-
-    let!(:newer_squawk) do
-      FactoryGirl.create(:squawk, user: @user, created_at: 1.hour.ago)
-    end
-
-    it "should have the right squawks in the right order" do
-      expect(@user.squawks.to_a).to eq [newer_squawk, older_squawk]
+      expect(user.squawks.to_a).to eq [new, old, older]
     end
 
     it "should destroy associated squawks" do
-      squawks = @user.squawks.to_a
-      @user.destroy
-      expect(squawks).not_to be_empty
-      squawks.each do |squawk|
-        expect(Squawk.where(id: squawk.id)).to be_empty
-      end
+      user = create(:user)
+      3.times { create(:squawk, user: user) }
+      in_memory_squawks = user.squawks.to_a
+
+      user.destroy
+      persisted_squawks = Squawk.where(id: in_memory_squawks.map(&:id))
+
+      expect(in_memory_squawks.count).to eq 3
+      expect(persisted_squawks).to be_empty
+    end
+  end
+
+  describe "#follow!" do
+    it "creates a follower association on the receiver" do
+      followed = create(:user)
+      follower = create(:user)
+      non_follower = create(:user)
+
+      follower.follow!(followed)
+
+      users = followed.followers
+      expect(users).to include(follower)
+      expect(users).to_not include(non_follower)
+      expect(follower).to be_following(followed)
+      expect(non_follower).to_not be_following(followed)
     end
 
-    describe "status" do
-      let(:unfollowed_post) do
-        FactoryGirl.create(:squawk, user: FactoryGirl.create(:user))
-      end
-      let(:followed_user) { FactoryGirl.create(:user) }
+    context "given a follower relationship already exists" do
+      it "does not allow persisting a new record" do
+        followed = create(:user)
+        follower = create(:user)
+        follower.follow!(followed)
 
-      before do
-        @user.follow!(followed_user)
-        3.times { followed_user.squawks.create!(content: "Lorem ipsum") }
-      end
+        duplicate_following = -> { follower.follow!(followed) }
 
-      describe "#feed" do
-        subject { super().feed }
-        it { is_expected.to include(newer_squawk) }
-      end
-
-      describe "#feed" do
-        subject { super().feed }
-        it { is_expected.to include(older_squawk) }
-      end
-
-      describe "#feed" do
-        subject { super().feed }
-        it { is_expected.not_to include(unfollowed_post) }
-      end
-
-      describe "#feed" do
-        subject { super().feed }
-        it do
-          followed_user.squawks.each do |squawk|
-            is_expected.to include(squawk)
-          end
-        end
+        expect { duplicate_following.call }
+          .to raise_error(ActiveRecord::RecordInvalid)
       end
     end
-  end # squawk associations
+  end
 
-  describe "following" do
-    let(:other_user) { FactoryGirl.create(:user) }
+  describe "#unfollow!" do
+    it "destroys the follower association, returning the relationship record" do
+      followed = create(:user)
+      former_follower = create(:user)
+      former_follower.follow!(followed)
 
-    before do
-      @user.save
-      @user.follow!(other_user)
+      result = former_follower.unfollow!(followed)
+
+      expect(result.follower).to eq former_follower
+      expect(followed.followers).to_not include(former_follower)
+      expect(former_follower).to_not be_following(followed)
     end
 
-    it { is_expected.to be_following(other_user) }
+    context "given no follower relationship already exists" do
+      it "does not allow persisting a new record" do
+        followed = create(:user)
+        follower = create(:user)
 
-    describe "#followed_users" do
-      subject { super().followed_users }
-      it { is_expected.to include(other_user) }
-    end
+        result = follower.unfollow!(followed)
 
-    describe "followed user" do
-      subject { other_user }
-
-      describe "#followers" do
-        subject { super().followers }
-        it { is_expected.to include(@user) }
+        expect(result).to be_nil
       end
     end
-
-    describe "unfollowing" do
-      before { @user.unfollow!(other_user) }
-      it { is_expected.not_to be_following(other_user) }
-
-      describe "#followed_users" do
-        subject { super().followed_users }
-        it { is_expected.not_to include(other_user) }
-      end
-    end
-  end # following
+  end
 end

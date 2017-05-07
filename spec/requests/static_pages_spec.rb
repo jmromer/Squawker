@@ -7,8 +7,8 @@ describe "Static pages" do
 
   describe "Home page" do
     before { visit root_path }
-    it { is_expected.to have_content("squawker") }
-    it { is_expected.to have_title(full_title("")) }
+    it { should have_content("squawker") }
+    it { should have_title(full_title("")) }
     it { is_expected.not_to have_title("| Home") }
 
     describe "for signed-in users" do
@@ -27,15 +27,15 @@ describe "Static pages" do
           visit root_path
         end
 
-        it { is_expected.to have_link("0 following", href: following_user_path(user)) }
-        it { is_expected.to have_link("1 followers", href: followers_user_path(user)) }
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers", href: followers_user_path(user)) }
       end
     end
   end
 
   describe "About page" do
     before { visit about_path }
-    it { is_expected.to have_content("About") }
-    it { is_expected.to have_title(full_title("About")) }
+    it { should have_content("About") }
+    it { should have_title(full_title("About")) }
   end
 end

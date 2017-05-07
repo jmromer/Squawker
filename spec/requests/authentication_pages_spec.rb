@@ -8,8 +8,8 @@ describe "Authentication" do
   describe "signin page" do
     before { visit signin_path }
 
-    it { is_expected.to have_content("Sign In") }
-    it { is_expected.to have_title("Sign In") }
+    it { should have_content("Sign In") }
+    it { should have_title("Sign In") }
 
     describe "signin" do
       before { visit signin_path }
@@ -17,18 +17,18 @@ describe "Authentication" do
       describe "with invalid information" do
         before { click_button "Sign In" }
 
-        it { is_expected.to have_title("Sign In") }
-        it { is_expected.to have_selector("div.alert.alert-error", text: "Invalid") }
+        it { should have_title("Sign In") }
+        it { should have_selector("div.alert.alert-error", text: "Invalid") }
       end
 
       describe "with valid information" do
         let(:user) { FactoryGirl.create(:user) }
         before { sign_in user }
 
-        it { is_expected.to have_title user.name }
-        it { is_expected.to have_link "Profile",     href: user_path(user) }
-        it { is_expected.to have_link "Settings",    href: edit_user_path(user) }
-        it { is_expected.to have_link "Sign Out",    href: signout_path }
+        it { should have_title user.name }
+        it { should have_link "Profile",     href: user_path(user) }
+        it { should have_link "Settings",    href: edit_user_path(user) }
+        it { should have_link "Sign Out",    href: signout_path }
         it { is_expected.not_to have_link "Sign In", href: signin_path }
       end
     end
@@ -53,17 +53,17 @@ describe "Authentication" do
       describe "in the Users controller" do
         describe "visiting the following page" do
           before { visit following_user_path(user) }
-          it { is_expected.to have_title("Sign In") }
+          it { should have_title("Sign In") }
         end
 
         describe "visiting the followers page" do
           before { visit followers_user_path(user) }
-          it { is_expected.to have_title("Sign In") }
+          it { should have_title("Sign In") }
         end
 
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
-          it { is_expected.to have_title "Sign In" }
+          it { should have_title "Sign In" }
         end
 
         describe "submitting to the update action" do
@@ -73,7 +73,7 @@ describe "Authentication" do
 
         describe "visiting the user index" do
           before { visit users_path }
-          it { is_expected.to have_title("Sign In") }
+          it { should have_title("Sign In") }
         end
       end # users controller
 
