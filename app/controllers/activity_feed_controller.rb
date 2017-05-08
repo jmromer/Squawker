@@ -4,7 +4,7 @@ class ActivityFeedController < ApplicationController
   layout false
 
   def index
-    render :index, locals: { feed_items: current_user_feed }
+    render :index, locals: { squawks: current_user_feed }
   end
 
   private

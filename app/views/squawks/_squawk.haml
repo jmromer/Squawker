@@ -1,12 +1,17 @@
-%li
-  %span.content
-    = formatted squawk.content
-  %span.timestamp
-    = time_ago_in_words(squawk.created_at)
-    ago.
-  - if current_user?(squawk.user)
-    = link_to trash_can_icon, squawk, |
-      method: :delete, |
-      title: "Delete", |
-      class: "delete-item",
-      data: { confirm: "Are you sure you want to delete?" }
+%li.group{ id: squawk.id }
+  .squawk-gravatar
+    = link_to(avatar_for(squawk.user, size: 73), squawk.user)
+  .squawk-content
+    %span.user
+      = link_to(squawk.user.name, squawk.user)
+    %span.timestamp
+      = time_ago_in_words(squawk.created_at)
+      ago
+    %span.text
+      = formatted squawk.content
+      - if current_user? squawk.user
+        = link_to trash_can_icon, squawk, |
+          method: :delete,                   |
+          title: "delete",                   |
+          class: 'delete-item',              |
+          data: {confirm: "Are you sure you want to delete?"}
