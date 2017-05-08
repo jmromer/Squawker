@@ -8,14 +8,14 @@
   margin: 0;
 
   li {
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid $gray-lighter;
     display: inline-block;
     overflow: auto;
     padding: 10px 0;
     width: 240px;
 
     &:last-child {
-      border-bottom: 1px solid $grayLighter;
+      border-bottom: 1px solid $gray-lighter;
     }
 
     img {
