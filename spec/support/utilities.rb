@@ -28,5 +28,5 @@ def sign_in_via_ui(user)
 end
 
 def json
-  JSON.parse(response.body)
+  JSON.parse(response.body, symbolize_names: true)
 end
