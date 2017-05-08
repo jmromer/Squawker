@@ -1,4 +1,4 @@
-## frozen_string_literal: true
+# frozen_string_literal: true
 
 class Like < ActiveRecord::Base
   belongs_to :liker,
@@ -11,4 +11,8 @@ class Like < ActiveRecord::Base
 
   validates :liker, presence: true
   validates :liked_squawk, presence: true
+
+  def as_json(_)
+    { user_id: liker.id, squawk_id: liked_squawk.id }
+  end
 end

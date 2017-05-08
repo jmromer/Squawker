@@ -4,16 +4,15 @@ Squawker::Application.routes.draw do
   resources :sessions, only: %i[new create destroy]
   resources :relationships, only: %i[create destroy]
   resources :password_resets
-  resources :likes, only: %[create destroy]
 
   resources :users do
     member { get :following, :followers }
-    member { get :likes }
     member { get :feed }
+    resources :likes, only: %i[index]
   end
 
-  resources :squawks, only: %i[create destroy] do
-    member { get :likers }
+  resources :squawks, only: %i[new show create destroy] do
+    resources :likes, only: %i[index create destroy]
   end
 
   root "static_pages#home"
