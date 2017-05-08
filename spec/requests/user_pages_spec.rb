@@ -179,8 +179,8 @@ describe "User pages" do
     end
 
     describe "delete links" do
-      # it { should_not have_link "delete" }
-      it { is_expected.not_to have_css(".trashcan") }
+      it { should_not have_link "Delete this" }
+      it { is_expected.not_to have_css(".delete-item") }
 
       describe "as an admin user" do
         let(:admin) { create(:admin) }
@@ -189,7 +189,7 @@ describe "User pages" do
           sign_in admin, via_ui: true
           visit users_path
         end
-        it { should have_css(".trashcan") }
+        it { should have_css(".delete-item") }
         it "should be able to delete another user" do
           expect { find(".delete-item").click }.to change(User, :count).by(-1)
         end
