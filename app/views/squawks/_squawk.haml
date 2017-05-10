@@ -10,12 +10,26 @@
     %span.text
       = formatted squawk.content
     .item-controls
-      = link_to "", "", title: "Like this", class: "like-item"
-      = link_to "", "", title: "Flag this", class: "flag-item"
+      - if current_user.likes?(squawk)
+        = link_to "", squawk_likes_path(squawk),
+                  method: :delete,
+                  remote: true,
+                  title: "Unlike this",
+                  class: "like-item active"
+      - else
+        = link_to "", squawk_likes_path(squawk),
+                  method: :post,
+                  remote: true,
+                  title: "Like this",
+                  class: "like-item"
+
+      = link_to "", "",
+                title: "Flag this",
+                class: "flag-item"
+
       - if current_user?(squawk.user)
-        = link_to "",           |
-          squawk,               |
-          method: :delete,      |
-          title: "Delete this", |
-          class: "delete-item", |
-          data: {confirm: "Are you sure you want to delete?"}
+        = link_to "", squawk,
+                  method: :delete,
+                  remote: true,
+                  title: "Delete this",
+                  class: "delete-item"
