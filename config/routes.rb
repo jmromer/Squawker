@@ -16,6 +16,8 @@ Squawker::Application.routes.draw do
     resource :likes, only: %i[create destroy]
   end
 
+  resources :usernames, only: %[index]
+
   root "static_pages#home"
   get "/home", to: "static_pages#home"
   get "/about", to: "static_pages#about"
