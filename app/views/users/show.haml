@@ -9,8 +9,10 @@
       %h2.sidebar-admin
         = user.admin? ? "(Administrator)" : ""
     %section
-      = render partial: "shared/stats", locals: { user: user }
-      = render partial: "follow_form", locals: { user: user } if signed_in?
+      = render partial: "shared/stats",
+               locals: { user: user }
+      = render partial: "follow_form",
+               locals: { user: user } if signed_in?
   .span8
     %h3= "squawks (#{user.squawks.count})"
     %ul#js-squawk-list.squawks

@@ -1,5 +1,7 @@
 - if squawks.any?
-  - cache(cache_key_for_collection(squawks)) do
-    - squawks.each do |squawk|
+  - squawks.each do |squawk|
+    %li.group{ id: squawk.id }
       - cache(squawk) do
         = render squawk
+      = render partial: "shared/item_controls",
+               locals: { squawk: squawk }
