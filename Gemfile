@@ -21,7 +21,6 @@ gem "multi_json", "~> 1.12"
 gem "newrelic_rpm"
 gem "pg"
 gem "quiet_assets"
-gem "rack-timeout"
 gem "rails", "~> 4.2.0"
 gem "sass-rails", "~> 5.0.1"
 gem "sprockets-es6"
@@ -49,6 +48,7 @@ end
 
 group :production do
   gem "rails_12factor"
+  gem "rack-timeout"
 end
 
 # refactor for Rails 4
