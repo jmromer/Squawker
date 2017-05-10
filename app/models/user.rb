@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
            class_name: "Relationship",
            dependent: :destroy
 
-  has_many :likes
+  has_many :likes, counter_cache: true
 
   self.per_page = 20
 
