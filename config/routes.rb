@@ -12,7 +12,8 @@ Squawker::Application.routes.draw do
   end
 
   resources :squawks, only: %i[new show create destroy] do
-    resource :likes, only: %i[index create destroy]
+    resources :likes, only: :index
+    resource :likes, only: %i[create destroy]
   end
 
   root "static_pages#home"

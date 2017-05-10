@@ -2,9 +2,9 @@
 
 class LikesController < ApplicationController
   def index
-    if (user = User.find(params[:user_id]))
+    if (user = User.find_by(id: params[:user_id]))
       render json: user.likes
-    elsif (squawk = Squawk.find(params[:squawk_id]))
+    elsif (squawk = Squawk.find_by(id: params[:squawk_id]))
       render json: squawk.likes
     else
       head :unprocessable_entity
