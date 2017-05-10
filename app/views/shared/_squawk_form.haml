@@ -1,6 +1,4 @@
-= form_for(@squawk) do |f|
+= form_for(@squawk,
+    html: { id: "js-squawk-form" }) do |f|
   = render 'shared/error_messages', object: f.object
-  .field
-    = f.text_field :content, placeholder: "squawk it!"
-  #countdown
-  = f.submit "squawk it!", class: "btn btn-primary offscreen", id: "submit-squawk"
+  = react_component "SquawkBox"

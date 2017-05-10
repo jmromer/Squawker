@@ -94,15 +94,16 @@ aside {
   }
 }
 
-#squawk_content {
+.squawk-form {
   text-align: center;
   width: 200px;
 }
 
-#countdown {
+.squawk-form-countdown {
   color: auto;
   font-size: 90%;
-  margin-right: 5px;
-  margin-top: -5px;
+  margin: -5px 0 0 0;
+  padding: 0;
   text-align: right;
+  width: 200px;
 }
