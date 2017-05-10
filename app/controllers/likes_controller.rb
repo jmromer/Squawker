@@ -23,7 +23,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    like = Like.find_by(squawk_id: params[:squawk_id], liker: current_user)
+    like = current_user.likes.find_by(squawk_id: params[:squawk_id])
 
     if like.try(:destroy)
       head :ok

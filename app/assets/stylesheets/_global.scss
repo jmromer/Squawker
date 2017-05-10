@@ -167,9 +167,11 @@ textarea {
   a {
     color: $gray-medium-light;
     margin: 0 3px;
+    text-decoration: none;
 
     &:hover {
       color: $blue;
+      text-decoration: none;
     }
   }
 }
