@@ -108,6 +108,10 @@ class User < ActiveRecord::Base
     username
   end
 
+  def likes?(squawk)
+    likes.where(liked_squawk: squawk).exists?
+  end
+
   private
 
   def create_tokens
