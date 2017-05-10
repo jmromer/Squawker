@@ -10,7 +10,7 @@ class SquawkBox extends React.Component {
     return <field>
       <textarea cols="30"
                 placeholder="sing the song of yourself"
-                className="squawk-form"
+                className="squawk-form-content"
                 name="squawk[content]"
                 onKeyDown={this.updateCountdown}
                 onFocus={this.updateCountdown}
