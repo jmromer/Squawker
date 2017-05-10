@@ -174,3 +174,30 @@ textarea {
     }
   }
 }
+
+.suggestion-list {
+  background-color: white;
+  border: 1px solid black;
+  list-style: none;
+  max-height: 300px;
+  overflow: hidden;
+  padding: 5px;
+  position: absolute;
+  width: 300px;
+  z-index: 30;
+}
+
+.suggestion-item {
+  width: 300px;
+}
+
+.suggestion-name {
+  color: $gray;
+  display: inline-block;
+  margin-left: .2rem;
+}
+
+.suggestion-username {
+  display: inline-block;
+  font-weight: bold;
+}
