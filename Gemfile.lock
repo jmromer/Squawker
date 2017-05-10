@@ -118,6 +118,9 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    glyphicons-rails (0.1.2)
+      sass (~> 3.3)
+      sass-rails
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -336,6 +339,7 @@ DEPENDENCIES
   elasticsearch-rails
   factory_girl_rails (~> 4.8)
   fake_friends (~> 1.0.4)
+  glyphicons-rails
   haml-rails
   jazz_fingers
   jbuilder (= 1.0.2)

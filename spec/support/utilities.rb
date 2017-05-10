@@ -9,18 +9,24 @@ def full_title(page_title)
   end
 end
 
-def sign_in(user, options = {})
+def sign_in(user, via_ui: false)
   raise ArgumentError if user.nil?
+  return sign_in_via_ui(user) if via_ui
 
-  if options[:no_capybara]
-    # Sign in when not using Capybara.
-    remember_token = User.new_token
-    cookies[:remember_token] = remember_token
-    user.update_attribute(:remember_token, User.encrypt(remember_token))
-  else
-    visit signin_path
-    fill_in "session_email",    with: user.email
-    fill_in "session_password", with: user.password
-    click_button "Sign In"
-  end
+  remember_token = User.new_token
+  cookies[:remember_token] = remember_token
+  user.update_attribute(:remember_token, User.encrypt(remember_token))
+  user
+end
+
+def sign_in_via_ui(user)
+  visit signin_path
+  fill_in "session_email", with: user.email
+  fill_in "session_password", with: user.password
+  click_button "Sign In"
+  user
+end
+
+def json
+  JSON.parse(response.body, symbolize_names: true)
 end

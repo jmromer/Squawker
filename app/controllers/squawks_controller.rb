@@ -15,9 +15,13 @@ class SquawksController < ApplicationController
   end
 
   def destroy
-    @squawk = correct_user
-    @squawk.destroy
-    redirect_to session[:return_to]
+    squawk = current_user.squawks.find(params[:id])
+
+    if squawk.destroy
+      head 200
+    else
+      head :unprocessable_entity
+    end
   end
 
   private

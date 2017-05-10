@@ -14,8 +14,8 @@
 // ------------------------------------
 //  Miscellany
 // ------------------------------------
-.debug_dump {
-  @include box_size('border-box');
+.debug-dump {
+  @include box-size('border-box');
   clear: both;
   float: left;
   margin-top: 45px;
@@ -25,10 +25,12 @@
 // ------------------------------------
 //  Clearfix
 // ------------------------------------
-.group:after {
-  clear: both;
-  content: '';
-  display: table;
+.group {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
 }
 
 .cf:before,

@@ -3,10 +3,10 @@
 require "rails_helper"
 
 describe RelationshipsController do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:other_user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
 
-  before { sign_in user, no_capybara: true }
+  before { sign_in user }
 
   describe "creating a relationship with Ajax" do
     it "should increment the Relationship count" do

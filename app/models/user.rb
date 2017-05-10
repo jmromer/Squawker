@@ -17,8 +17,8 @@
 #  image_url            :string(255)
 #
 class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
-  before_save { self.username = username.upcase }
+  before_save { self.email = email.try(:downcase) }
+  before_save { self.username = username.try(:upcase) }
   before_create :create_tokens
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -32,10 +32,10 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 8 }
   validates :password_confirmation, presence: true
 
-  validates :remember_token, uniqueness: true
+  validates :remember_token, uniqueness: { case_sensitive: false }
   validates :password_reset_token, uniqueness: true
 
   # provides presence validation, password and password_confirmation attributes,
@@ -46,11 +46,16 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
 
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :relationships,
+           foreign_key: "follower_id",
+           dependent: :destroy
+
   has_many :reverse_relationships,
            foreign_key: "followed_id",
            class_name: "Relationship",
            dependent: :destroy
+
+  has_many :likes
 
   self.per_page = 20
 
@@ -91,7 +96,8 @@ class User < ActiveRecord::Base
   end
 
   def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy!
+    relationship = relationships.find_by(followed_id: other_user.id)
+    relationship.try(:destroy!)
   end
 
   def dummy?
@@ -100,6 +106,10 @@ class User < ActiveRecord::Base
 
   def to_param
     username
+  end
+
+  def likes?(squawk)
+    likes.where(liked_squawk: squawk).exists?
   end
 
   private

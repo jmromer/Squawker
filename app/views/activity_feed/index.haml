@@ -1,6 +1,5 @@
-- if feed_items.any?
-  - cache(cache_key_for_collection(feed_items)) do
-    - feed_items.each do |feed_item|
-      - cache(feed_item) do
-        = render "shared/feed_item",
-          feed_item: feed_item
+- if squawks.any?
+  - cache(cache_key_for_collection(squawks)) do
+    - squawks.each do |squawk|
+      - cache(squawk) do
+        = render squawk

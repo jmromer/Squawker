@@ -121,3 +121,57 @@ textarea {
   text-align: center;
   width: 175px;
 }
+
+// ------------------------------------
+//  Item controls
+// ------------------------------------
+.item-controls {
+  margin: 5px 0 0 0;
+
+  .like-item {
+    @extend %glyphicon-heart;
+
+    &.active {
+      color: $pale-pink;
+    }
+
+    &:hover {
+      color: $pale-pink;
+    }
+  }
+
+  .flag-item {
+    @extend %glyphicon-flag;
+
+    &.active {
+      color: $pale-yellow;
+    }
+
+    &:hover {
+      color: $pale-yellow;
+    }
+  }
+
+  .delete-item {
+    @extend %glyphicon-trash;
+
+    &.active {
+      color: $pale-red;
+    }
+
+    &:hover {
+      color: $pale-red;
+    }
+  }
+
+  a {
+    color: $gray-medium-light;
+    margin: 0 3px;
+    text-decoration: none;
+
+    &:hover {
+      color: $blue;
+      text-decoration: none;
+    }
+  }
+}

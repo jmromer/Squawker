@@ -17,4 +17,9 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
+
+  factory :like do
+    liker factory: :user
+    liked_squawk factory: :squawk
+  end
 end

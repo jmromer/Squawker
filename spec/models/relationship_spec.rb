@@ -14,26 +14,28 @@
 require "rails_helper"
 
 describe Relationship do
-  let(:follower) { FactoryGirl.create(:user) }
-  let(:followed) { FactoryGirl.create(:user) }
+  it { should validate_uniqueness_of(:follower_id).scoped_to(:followed_id) }
+
+  let(:follower) { create(:user) }
+  let(:followed) { create(:user) }
   let(:relationship) { follower.relationships.build(followed_id: followed.id) }
 
   subject { relationship }
 
-  it { is_expected.to be_valid }
+  it { should be_valid }
 
   describe "follower methods" do
-    it { is_expected.to respond_to(:follower) }
-    it { is_expected.to respond_to(:followed) }
+    it { should respond_to(:follower) }
+    it { should respond_to(:followed) }
 
     describe "#follower" do
       subject { super().follower }
-      it { is_expected.to eq follower }
+      it { should eq follower }
     end
 
     describe "#followed" do
       subject { super().followed }
-      it { is_expected.to eq followed }
+      it { should eq followed }
     end
   end
 

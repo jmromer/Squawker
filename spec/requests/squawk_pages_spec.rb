@@ -5,8 +5,8 @@ require "rails_helper"
 describe "Squawk pages" do
   subject { page }
 
-  let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
+  let(:user) { create(:user) }
+  before { sign_in user, via_ui: true }
 
   describe "squawk creation" do
     before { visit root_path }
@@ -18,7 +18,7 @@ describe "Squawk pages" do
 
       describe "error messages" do
         before { click_button "squawk it!" }
-        it { is_expected.to have_content("error") }
+        it { should have_content("error") }
       end
     end
 

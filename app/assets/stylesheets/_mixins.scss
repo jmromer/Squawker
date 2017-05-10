@@ -1,16 +1,18 @@
 // ------------------------------------
 //  Mixins, Variables, etc
 // ------------------------------------
-$grayMediumLight: #eaeaea;
-$grayLighter: rgb(238, 238, 238);
-$grayLight: rgb(153, 153, 153);
+@import 'glyphicons';
+
+$gray-medium-light: #eaeaea;
+$gray-lighter: rgb(238, 238, 238);
+$gray-light: rgb(153, 153, 153);
 $blue: #049cdb;
 $gray: rgb(85, 85, 85);
-$grayDarker: rgb(34, 34, 34);
-$pale-red: rgba(185, 9, 9, 0.63);
+$gray-darker: rgb(34, 34, 34);
+$pale-red: rgba(185, 9, 9, .63);
+$pale-yellow: rgba(226, 175, 50, .88);
+$pale-pink: rgba(232, 85, 85, .67);
 
-@mixin box_size($bs) {
-  -moz-box-sizing: $bs;
-  -webkit-box-sizing: $bs;
+@mixin box-size($bs) {
   box-sizing: $bs;
 }
