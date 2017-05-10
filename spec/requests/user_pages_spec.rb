@@ -154,49 +154,6 @@ describe "User pages" do
     end
   end # edit
 
-  describe "index" do
-    let(:user) { create(:user) }
-
-    before(:each) do
-      sign_in user, via_ui: true
-      visit users_path
-    end
-
-    it { should have_title("Squawkers") }
-    it { should have_content("Squawkers") }
-
-    describe "pagination" do
-      before(:all) { 30.times { create(:user) } }
-      after(:all)  { User.delete_all }
-
-      it { should have_selector("div.pagination") }
-
-      it "should list each user" do
-        User.paginate(page: 1).each do |user|
-          expect(page).to have_selector("li", text: user.name)
-        end
-      end
-    end
-
-    describe "delete links" do
-      it { should_not have_link "Delete this" }
-      it { is_expected.not_to have_css(".delete-item") }
-
-      describe "as an admin user" do
-        let(:admin) { create(:admin) }
-
-        before do
-          sign_in admin, via_ui: true
-          visit users_path
-        end
-        it { should have_css(".delete-item") }
-        it "should be able to delete another user" do
-          expect { find(".delete-item").click }.to change(User, :count).by(-1)
-        end
-      end
-    end
-  end # index
-
   describe "following/followers indicator" do
     it "displays users the current user follows" do
       user = create(:user)

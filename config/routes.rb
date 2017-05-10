@@ -5,7 +5,7 @@ Squawker::Application.routes.draw do
   resources :relationships, only: %i[create destroy]
   resources :password_resets
 
-  resources :users do
+  resources :users, except: %i[index] do
     member { get :following, :followers }
     member { get :feed }
     resources :likes, only: %i[index]

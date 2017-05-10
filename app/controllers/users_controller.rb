@@ -6,11 +6,6 @@ class UsersController < ApplicationController
   before_action :set_friendly_return_page, only: :show
   before_action :correct_user, only: %i[edit update]
 
-  def index
-    @page = params[:page]
-    @users = User.paginate(page: @page)
-  end
-
   def new
     @user = User.new
   end
