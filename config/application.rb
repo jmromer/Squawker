@@ -31,5 +31,8 @@ module Squawker
     services = Dir[Rails.root.join("app", "services", "*.rb")].each { |f| require(f) }
     config.autoload_paths += extensions
     config.autoload_paths += services
+
+    # Asset paths
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end
