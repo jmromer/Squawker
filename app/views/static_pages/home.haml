@@ -18,7 +18,7 @@
 
 :javascript
   let scrollManager = new ScrollManager({ window: window })
-  let feedFetcher = new FeedFetcher({ endpoint: "/activity_feed/index" })
+  let feedFetcher = new FeedFetcher({ endpoint: "/activity-feed" })
 
   feedFetcher.fetchInitialPages({ scrollManager: scrollManager })
 
