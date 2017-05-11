@@ -1,4 +1,3 @@
-= form_for(@squawk,
-    html: { id: "js-squawk-form" }) do |f|
-  = render 'shared/error_messages', object: f.object
+= form_for(@squawk, html: { id: "js-squawk-form" }) do |f|
   = react_component "SquawkBox"
+  = render "shared/error_messages", object: f.object
