@@ -15,6 +15,8 @@ class SquawkBox extends React.Component {
     this.suggestCompletions = this.suggestCompletions.bind(this)
     this.updateCountdown = this.updateCountdown.bind(this)
     this.submitForm = this.submitForm.bind(this)
+    this.navigateDown = this.navigateDown.bind(this)
+    this.navigateUp = this.navigateUp.bind(this)
   }
 
   render() {
@@ -47,11 +49,27 @@ class SquawkBox extends React.Component {
   }
 
   handleKeyDown(event) {
+    let arrowUp = 38
+    let arrowDown = 40
+
+    if (this.state.filtering) {
+      if (event.which === arrowUp) {
+        this.navigateUp(event)
+        return
+      }
+
+      if (event.which === arrowDown) {
+        this.navigateDown(event)
+        return
+      }
+    }
+
     // cmd+enter or ctrl+enter to submit
     if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
       this.submitForm()
       return
     }
+
     this.suggestCompletions(event)
   }
 
@@ -113,6 +131,7 @@ class SquawkBox extends React.Component {
     if (this.state.filtering && breaks.includes(event.keyCode || event.which)) {
       this.state.filtering = false
       this.state.candidates = []
+      return
     }
 
     // suggestion selection
@@ -124,6 +143,7 @@ class SquawkBox extends React.Component {
       event.preventDefault()
       this.state.filtering = false
       // TODO: inject suggestion to text field
+      return
     }
   }
 
@@ -146,5 +166,45 @@ class SquawkBox extends React.Component {
 
   clearCountdown() {
     this.setState({remainingChars: ""})
+  }
+
+  navigateUp(event) {
+    let field = event.target.parentElement
+    let allItems = field.getElementsByTagName("li")
+    let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
+
+    if (!selectedItem) { return }
+
+    let prevItemNum = parseInt(selectedItem.dataset.itemNumber, 10) - 1
+    let itemsArray = Array.from(allItems)
+    let prevItem = itemsArray.filter(e => e.dataset.itemNumber == prevItemNum)[0]
+
+    if (prevItem) {
+      itemsArray.forEach(e => e.classList.remove("suggestion-focus"))
+      prevItem.classList.add("suggestion-focus")
+    }
+  }
+
+  navigateDown(event) {
+    let field = event.target.parentElement
+    let allItems = field.getElementsByTagName("li")
+    let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
+
+    if (!selectedItem) {
+      let firstSuggestion = allItems[0]
+
+      if (firstSuggestion) {
+        firstSuggestion.classList.add("suggestion-focus")
+      }
+    } else {
+      let nextItemNum = 1 + parseInt(selectedItem.dataset.itemNumber, 10)
+      let itemsArray = Array.from(allItems)
+      let nextItem = itemsArray.filter(e => e.dataset.itemNumber == nextItemNum)[0]
+
+      if (nextItem) {
+        itemsArray.forEach(e => e.classList.remove("suggestion-focus"))
+        nextItem.classList.add("suggestion-focus")
+      }
+    }
   }
 }
