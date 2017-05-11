@@ -153,7 +153,12 @@ class SquawkBox extends React.Component {
       let currPosn = textarea.selectionEnd
       let slice = currVal.slice(0, currPosn)
       let match = slice.match(/@(\w+)$/)
-      if (!match) { return }
+
+      // once we delete the '@', cancel filtering
+      if (!match) {
+        this.state.candidates = []
+        return
+      }
 
       let seed = match[1]
       this.state.searchSeed = seed
