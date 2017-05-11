@@ -92,13 +92,19 @@ class SquawkBox extends React.Component {
         return
       }
 
-      if (event.which === arrowUp) {
+      let letterN = 78
+      let letterP = 80
+      let letterJ = 74
+      let letterK = 75
+      if (event.which === arrowUp ||
+          event.ctrlKey && (event.keyCode == letterP || event.keyCode == letterK)) {
         event.preventDefault()
         this.navigateUp(event)
         return
       }
 
-      if (event.which === arrowDown) {
+      if (event.which === arrowDown ||
+          event.ctrlKey && (event.keyCode == letterN || event.keyCode == letterJ)) {
         event.preventDefault()
         this.navigateDown(event)
         return
