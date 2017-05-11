@@ -19,7 +19,7 @@ class SquawkBox extends React.Component {
 
   render() {
     return (
-      <field>
+      <field style={{position: "relative", display: "block"}}>
         <textarea cols="30"
                   placeholder="sing the song of yourself"
                   className="squawk-form-content"
@@ -32,7 +32,7 @@ class SquawkBox extends React.Component {
         </textarea>
 
         <div className="squawk-form-countdown"
-            style={{color: this.state.color}}>
+             style={{color: this.state.color}}>
           {this.state.remainingChars}
         </div>
 

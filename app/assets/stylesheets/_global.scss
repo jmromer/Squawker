@@ -94,10 +94,6 @@ body {
   margin-left: 150px;
 }
 
-section {
-  overflow: auto;
-}
-
 textarea {
   resize: vertical;
 }
@@ -175,29 +171,75 @@ textarea {
   }
 }
 
+// -----------------------
+// at-mentions suggestions
+// -----------------------
+.suggestions-container {
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  z-index: 30;
+}
+
+.suggestions {
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #dfe2e5;
+  box-shadow: 0 0 5px rgba(27,31,35,0.1);
+  left: 0;
+  margin-top: 20px;
+  min-width: 180px;
+  position: relative;
+  top: 0;
+}
+
 .suggestion-list {
   background-color: white;
-  border: 1px solid black;
+  border: 0;
   list-style: none;
   max-height: 300px;
   overflow: hidden;
-  padding: 5px;
+  padding: 0;
+  margin: 0;
+  min-width: 240px;
   position: absolute;
-  width: 300px;
   z-index: 30;
 }
 
 .suggestion-item {
-  width: 300px;
+  padding: 5px 10px;
+  font-weight: 600;
+  border-bottom: 1px solid #dfe2e5;
+
+  &:focus {
+    background: #0366d6;
+    outline: none;
+    color: white;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+}
+
+.suggestion-focus {
+  background: #0366d6;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+
+.suggestion-username {
+  display: inline-block;
+  font-weight: bold;
 }
 
 .suggestion-name {
   color: $gray;
   display: inline-block;
   margin-left: .2rem;
-}
-
-.suggestion-username {
-  display: inline-block;
-  font-weight: bold;
+  font-size: 80%;
 }
