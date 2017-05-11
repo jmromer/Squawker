@@ -4,10 +4,10 @@ squawker
 [![Code Climate Badge][]][Code Climate]
 [![Build Status Badge][]][Build Status]
 
-[Code Climate Badge]: https://codeclimate.com/github/jkrmr/Squawker/badges/gpa.svg
-[Code Climate]: https://codeclimate.com/github/jkrmr/Squawker
-[Build Status Badge]: https://travis-ci.org/jkrmr/Squawker.svg?branch=master
-[Build Status]: https://travis-ci.org/jkrmr/Squawker
+[Code Climate Badge]: https://codeclimate.com/github/jkrmr/squawker/badges/gpa.svg
+[Code Climate]: https://codeclimate.com/github/jkrmr/squawker
+[Build Status Badge]: https://travis-ci.org/jkrmr/squawker.svg?branch=master
+[Build Status]: https://travis-ci.org/jkrmr/squawker
 
 Features
 --------
