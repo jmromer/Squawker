@@ -17,6 +17,19 @@ class SquawkBox extends React.Component {
     this.submitForm = this.submitForm.bind(this)
     this.navigateDown = this.navigateDown.bind(this)
     this.navigateUp = this.navigateUp.bind(this)
+    this.beginFiltering = this.beginFiltering.bind(this)
+    this.endFiltering = this.endFiltering.bind(this)
+  }
+
+  beginFiltering(textarea) {
+    this.state.filtering = true
+    this.state.cursorPosition = textarea.selectionEnd
+  }
+
+  endFiltering() {
+    this.state.candidates = []
+    this.state.filtering = false
+    this.state.cursorPosition = null
   }
 
   render() {
@@ -51,15 +64,53 @@ class SquawkBox extends React.Component {
   handleKeyDown(event) {
     let arrowUp = 38
     let arrowDown = 40
+    let returnKey = 13
+    let textarea = event.target
 
     if (this.state.filtering) {
+      this.state.cursorPosition = textarea.selectionEnd
+
+      // suggestion completion
+      if (event.keyCode === returnKey) {
+        event.preventDefault()
+        let field = textarea.parentElement
+        let allItems = field.getElementsByTagName("li")
+        let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
+        let handle = selectedItem.getElementsByClassName("suggestion-username")[0]
+
+        let currVal = textarea.value
+        let originalPosn = this.state.cursorPosition
+
+        let strToRemove = "@" + this.state.searchSeed
+        let selectedHandle = "@" + handle.textContent
+        textarea.value = textarea.value.replace(strToRemove, selectedHandle)
+
+        let newPosn = originalPosn - strToRemove.length + selectedHandle.length
+        textarea.setSelectionRange(newPosn, newPosn)
+
+        this.endFiltering()
+        return
+      }
+
       if (event.which === arrowUp) {
+        event.preventDefault()
         this.navigateUp(event)
         return
       }
 
       if (event.which === arrowDown) {
+        event.preventDefault()
         this.navigateDown(event)
+        return
+      }
+
+      let comma = 188
+      let space = 32
+      let colon = 186
+      let breaks = [comma, space, colon]
+      // terminate suggestion mode on specific word break chars
+      if (breaks.includes(event.keyCode || event.which)) {
+        this.endFiltering()
         return
       }
     }
@@ -88,22 +139,18 @@ class SquawkBox extends React.Component {
   // 2. display filter results in the ui
   // 3. handle suggestion selection and completion
   suggestCompletions(event) {
-    let atSign = 50
-    let comma = 188
-    let space = 32
-    let colon = 186
-    let returnKey = 13
-    let breaks = [comma, space, colon]
+    let textarea = event.target
 
     // if we're in filtering mode, filter
     if (this.state.filtering) {
-      let currVal = event.target.value
-      let currPosn = event.target.selectionEnd
+      let currVal = textarea.value
+      let currPosn = textarea.selectionEnd
       let slice = currVal.slice(0, currPosn)
       let match = slice.match(/@(\w+)$/)
       if (!match) { return }
 
       let seed = match[1]
+      this.state.searchSeed = seed
       let seedRegex = new RegExp(seed, "i")
 
       let candidates = this.state.users.reduce((acc, [index, user]) => {
@@ -115,35 +162,16 @@ class SquawkBox extends React.Component {
     }
 
     // if at-sign typed, query for user data and begin filtering
+    let atSign = 50
     if (event.keyCode === atSign) {
       if (this.state.users) {
-        this.state.filtering = true
-        return
+        this.beginFiltering(textarea)
+      } else {
+        $.getJSON("/usernames", (users) => {
+          this.state.users = users
+          this.beginFiltering(textarea)
+        })
       }
-
-      $.getJSON("/usernames", (users) => {
-        this.state.users = users
-        this.state.filtering = true
-      })
-    }
-
-    // terminate suggestion mode on specific word break chars
-    if (this.state.filtering && breaks.includes(event.keyCode || event.which)) {
-      this.state.filtering = false
-      this.state.candidates = []
-      return
-    }
-
-    // suggestion selection
-    // TODO: if in suggestion mode and arrow key pressed
-    // if (arrow key pressed)
-
-    // suggestion completion
-    if (this.state.filtering && event.keyCode === returnKey) {
-      event.preventDefault()
-      this.state.filtering = false
-      // TODO: inject suggestion to text field
-      return
     }
   }
 
