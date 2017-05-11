@@ -11,10 +11,11 @@ class Suggestions extends React.Component {
         <div className="suggestions-container">
           <div className="suggestions">
             <ul className="suggestion-list">
-              {this.props.list.map(
-                (e) =>
+              {
+                this.props.list.map((e, i) =>
                   <li key={e.handle}
                       className="suggestion-item"
+                      data-item-number={i}
                       tabIndex="0">
                     <span className="suggestion-username">
                       {e.handle}
@@ -22,7 +23,7 @@ class Suggestions extends React.Component {
                     <span className="suggestion-name">
                       {e.name}
                     </span>
-                    </li>)
+                  </li>)
               }
             </ul>
           </div>
