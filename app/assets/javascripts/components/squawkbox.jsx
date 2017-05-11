@@ -123,7 +123,7 @@ class SquawkBox extends React.Component {
 
     // cmd+enter or ctrl+enter to submit
     if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
-      this.submitForm()
+      this.submitForm(event)
       return
     }
 
@@ -186,8 +186,9 @@ class SquawkBox extends React.Component {
     }
   }
 
-  submitForm() {
-    document.getElementById("js-squawk-form").submit()
+  submitForm(event) {
+    let form = event.target.closest("#js-squawk-form")
+    form.submit()
   }
 
   updateCountdown(event) {
