@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(username: params[:id])
+    @user = correct_user
   end
 
   def update
-    @user = User.find_by(username: params[:id])
+    @user = correct_user
 
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
@@ -71,17 +71,19 @@ class UsersController < ApplicationController
   end
 
   def following
-    @user = User.find_by(username: params[:id])
-    @title = "Following"
-    @users = @user.followed_users.paginate(page: params[:page])
-    render "show_follow"
+    title = "Following"
+    user = User.find_by(username: params[:id])
+    users = user.followed_users.paginate(page: params[:page])
+    render "show_follow",
+           locals: { title: title, user: user, users: users }
   end
 
   def followers
-    @user = User.find_by(username: params[:id])
-    @title = "Followers"
-    @users = @user.followers.paginate(page: params[:page])
-    render "show_follow"
+    title = "Followers"
+    user = User.find_by(username: params[:id])
+    users = user.followers.paginate(page: params[:page])
+    render "show_follow",
+           locals: { title: title, user: user, users: users }
   end
 
   private
@@ -94,7 +96,8 @@ class UsersController < ApplicationController
 
   def correct_user
     user = User.find_by(username: params[:id])
-    redirect_to(root_url) unless current_user?(user)
+    return redirect_to(root_url) unless current_user?(user)
+    user
   end
 
   def admin_user

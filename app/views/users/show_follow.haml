@@ -1,26 +1,26 @@
-- provide(:title, @title)
+- provide(:title, title)
 .row
   %aside.span4
     %section
       .sidebar-gravatar
-        = avatar_for @user
-      %h1.sidebar-name= @user.name
+        = avatar_for(user)
+      %h1.sidebar-name= user.name
       .sidebar-profile-link
-        = link_to "view my profile", @user
+        = link_to "view my profile", user
       .sidebar-squawks
-        - squawks = @user.squawks.count
+        - squawks = user.squawks.count
         = squawks
         = "squawk".pluralize(squawks)
     %section
-      = render 'shared/stats'
-      - if @users.any?
+      = render "shared/stats"
+      - if users.any?
         #follower_avatars
-          - @users.each do |user|
+          - users.each do |user|
             = link_to avatar_for(user), user
   .span8
-    %h3= @title
-    - if @users.any?
+    %h3= title
+    - if users.any?
       %ul#follower_listing.users
-        = render @users
+        = render users
       .paginate
-        = will_paginate @users, page_links: false
+        = will_paginate users, page_links: false
