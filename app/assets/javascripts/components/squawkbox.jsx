@@ -1,11 +1,15 @@
 class SquawkBox extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      remainingChars: "",
-      color: "black",
       candidates: [],
-      numLines: 1
+      cursorPosition: null,
+      color: "black",
+      filtering: false,
+      numLines: 1,
+      remainingChars: "",
+      users: null
     }
 
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -13,13 +17,6 @@ class SquawkBox extends React.Component {
     this.handleFocus = this.handleFocus.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.suggestCompletions = this.suggestCompletions.bind(this)
-    this.updateCountdown = this.updateCountdown.bind(this)
-    this.submitForm = this.submitForm.bind(this)
-    this.navigateDown = this.navigateDown.bind(this)
-    this.navigateUp = this.navigateUp.bind(this)
-    this.beginFiltering = this.beginFiltering.bind(this)
-    this.endFiltering = this.endFiltering.bind(this)
   }
 
   beginFiltering(textarea) {
@@ -69,8 +66,6 @@ class SquawkBox extends React.Component {
       return this.submitForm(event)
     }
 
-    let arrowUp = 38
-    let arrowDown = 40
     let returnKey = 13
     let textarea = event.target
 
@@ -100,19 +95,12 @@ class SquawkBox extends React.Component {
         return this.endFiltering()
       }
 
-      let letterN = 78
-      let letterP = 80
-      let letterJ = 74
-      let letterK = 75
-      if (event.which === arrowUp ||
-          event.ctrlKey && (event.keyCode == letterP || event.keyCode == letterK)) {
-        event.preventDefault()
+
+      if (this.isNavigationUp(event)) {
         return this.navigateUp(event)
       }
 
-      if (event.which === arrowDown ||
-          event.ctrlKey && (event.keyCode == letterN || event.keyCode == letterJ)) {
-        event.preventDefault()
+      if (this.isNavigationDown(event)) {
         return this.navigateDown(event)
       }
 
@@ -127,6 +115,24 @@ class SquawkBox extends React.Component {
     }
 
     this.suggestCompletions(event)
+  }
+
+  isNavigationUp(event) {
+    let key = event.keyCode || event.which
+    let letterK = 75
+    let letterP = 80
+    let arrowUp = 38
+    return key === arrowUp ||
+           event.ctrlKey && (key === letterP || key === letterK)
+  }
+
+  isNavigationDown(event) {
+    let key = event.keyCode || event.which
+    let letterN = 78
+    let letterJ = 74
+    let arrowDown = 40
+    return key === arrowDown ||
+           event.ctrlKey && (key === letterN || key == letterJ)
   }
 
   handleFocus(event) {
@@ -209,6 +215,7 @@ class SquawkBox extends React.Component {
   }
 
   navigateUp(event) {
+    event.preventDefault()
     let field = event.target.parentElement
     let allItems = field.getElementsByTagName("li")
     let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
@@ -226,6 +233,7 @@ class SquawkBox extends React.Component {
   }
 
   navigateDown(event) {
+    event.preventDefault()
     let field = event.target.parentElement
     let allItems = field.getElementsByTagName("li")
     let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
