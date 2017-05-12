@@ -11,7 +11,7 @@ $gray: rgb(85, 85, 85);
 $gray-darker: rgb(34, 34, 34);
 $pale-red: rgba(185, 9, 9, .63);
 $pale-yellow: rgba(226, 175, 50, .88);
-$pale-pink: rgba(232, 85, 85, .67);
+$pale-pink: rgba(232, 85, 85, 1);
 
 @mixin box-size($bs) {
   box-sizing: $bs;
