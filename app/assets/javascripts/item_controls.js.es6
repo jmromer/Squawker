@@ -23,8 +23,10 @@ $(document).ready(() => {
   })
 
   // Delete item handling
-  $("body").on("ajax:success", ".delete-item", (e, status) => {
+  $("body").on("ajax:beforeSend", ".delete-item", (e, status) => {
     let $li = $(e.target).closest("li")
     $li.remove()
+  }).on("ajax:error", ".delete-item", (e) => {
+    console.error("Could not delete that item")
   })
 })

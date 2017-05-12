@@ -2,15 +2,18 @@
 
 class SquawksController < ApplicationController
   before_action :signed_in_user, only: %i[create destroy]
+  layout false
 
   def create
-    @squawk = current_user.squawks.build(squawk_params)
+    squawk = current_user.squawks.build(squawk_params)
 
-    if @squawk.save
-      redirect_to root_url
+    if squawk.save
+      render template: "activity_feed/index",
+             locals: { squawks: [squawk] },
+             status: :ok
     else
-      @feed_items = []
-      render "static_pages/home"
+      render text: squawk.errors.full_messages.first,
+             status: :unprocessable_entity
     end
   end
 

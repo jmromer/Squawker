@@ -16,6 +16,8 @@ Squawker::Application.routes.draw do
     resource :likes, only: %i[create destroy]
   end
 
+  resources :usernames, only: %i[index]
+
   root "static_pages#home"
   get "/home", to: "static_pages#home"
   get "/about", to: "static_pages#about"
@@ -24,5 +26,5 @@ Squawker::Application.routes.draw do
   delete "/signout", to: "sessions#destroy"
   get "/trial", to: "sessions#trial"
   get "/search", to: "search#show"
-  get "/activity_feed/index", to: "activity_feed#index"
+  get "/activity-feed", to: "activity_feed#index"
 end

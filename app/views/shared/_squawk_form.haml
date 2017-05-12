@@ -1,6 +1,6 @@
-= form_for(@squawk) do |f|
-  = render 'shared/error_messages', object: f.object
-  .field
-    = f.text_field :content, placeholder: "squawk it!"
-  #countdown
-  = f.submit "squawk it!", class: "btn btn-primary offscreen", id: "submit-squawk"
+= form_for squawk,
+           html: { id: "js-squawk-form", "data-type" => :html },
+           remote: true  do |f|
+  = hidden_field_tag "authenticity_token", form_authenticity_token
+  = react_component "SquawkBox"
+  #js-squawk-form-error.alert.alert-error.hide

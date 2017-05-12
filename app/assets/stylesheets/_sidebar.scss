@@ -90,19 +90,22 @@ aside {
   overflow: auto;
 
   .gravatar {
-    margin: 1px 1px;
+    margin: 1px;
   }
 }
 
-#squawk_content {
+.squawk-form-content {
+  height: 32px;
+  padding-top: 15px;
   text-align: center;
   width: 200px;
 }
 
-#countdown {
+.squawk-form-countdown {
   color: auto;
   font-size: 90%;
-  margin-right: 5px;
-  margin-top: -5px;
+  margin: -5px 0 0;
+  padding: 0;
   text-align: right;
+  width: 210px;
 }
