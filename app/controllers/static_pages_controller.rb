@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
 
   def home
     return unless signed_in?
-    @squawk = current_user.squawks.build
+    render :home, locals: { squawk: current_user.squawks.build }
   end
 
   def about; end

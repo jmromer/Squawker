@@ -185,8 +185,9 @@ class SquawkBox extends React.Component {
   }
 
   submitForm(event) {
-    let form = event.target.closest("#js-squawk-form")
-    form.submit()
+    event.preventDefault()
+    let $form = $(event.target).closest("#js-squawk-form")
+    $form.submit()
   }
 
   updateCountdown(event) {

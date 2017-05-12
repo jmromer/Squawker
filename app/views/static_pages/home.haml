@@ -3,7 +3,7 @@
     %aside.span4
       %section= render "shared/user_info"
       %section= render "shared/stats"
-      %section= render "shared/squawk_form"
+      %section= render partial: "shared/squawk_form", locals: { squawk: squawk }
     .span8
       %h3 recent activity
       %ul#js-squawk-list.squawks
@@ -26,3 +26,25 @@
     if (!scrollManager.isAtBottom()) { return }
     feedFetcher.fetchNextPage()
   })
+
+  $(document)
+    .on("ajax:send", "#js-squawk-form", (e) => {
+      let $textarea = $(e.target).find("textarea")
+      window.inProgressSquawk = $textarea.val()
+      $textarea.val("")
+    })
+    .on("ajax:success", "#js-squawk-form", (_, template) => {
+      $("#js-squawk-list").prepend(template)
+    })
+    .on("ajax:error", "#js-squawk-form", (event, xhr) => {
+      let $textarea = $(event.target).find("textarea")
+      $textarea.val(window.inProgressSquawk)
+      $("#js-squawk-form-error").text(xhr.responseText).show(300, () => {
+        this.setTimeout(() => {
+        $("#js-squawk-form-error").text("").hide(150)
+        }, 1500)
+      })
+    })
+    .on("ajax:complete", "#js-squawk-form", (event) => {
+      window.inProgressSquawk = undefined
+    })

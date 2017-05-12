@@ -1,4 +1,6 @@
-= form_for(@squawk, html: { id: "js-squawk-form" }, remote: true) do |f|
+= form_for squawk,
+           html: { id: "js-squawk-form", "data-type" => :html },
+           remote: true  do |f|
   = hidden_field_tag "authenticity_token", form_authenticity_token
   = react_component "SquawkBox"
-  = render "shared/error_messages", object: f.object
+  #js-squawk-form-error.alert.alert-error.hide
