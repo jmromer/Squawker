@@ -22,8 +22,9 @@ class SquawkBox extends React.Component {
   }
 
   componentDidMount() {
-    this.state.squawkForm = document.getElementById("js-squawk-form")
-    this.state.squawkForm.addEventListener("suggestion:click", this.handleSuggestionClick)
+    let squawkForm = document.getElementById("js-squawk-form")
+    squawkForm.addEventListener("suggestion:click", this.handleSuggestionClick)
+    this.state.squawkForm = squawkForm
   }
 
   // Render text area with Suggestions child component
@@ -133,7 +134,7 @@ class SquawkBox extends React.Component {
   // ===============
   submitForm(event) {
     event.preventDefault()
-    $(this.props.squawkForm).submit()
+    $(this.state.squawkForm).submit()
   }
 
   // Countdown methods
