@@ -71,11 +71,7 @@ class SquawkBox extends React.Component {
     let cmdOrCtrl = event.metaKey || event.ctrlKey
     let textarea = event.target
     let atSign = 50
-    let colon = 186
-    let comma = 188
     let returnKey = 13
-    let space = 32
-    let breaks = [comma, space, colon]
 
     // if at-sign typed, query for user data and begin filtering
     if (event.keyCode === atSign) {
@@ -96,11 +92,10 @@ class SquawkBox extends React.Component {
 
     // if not filtering, begin filtering
     if (!this.state.filtering) {
-      this.filterSuggestedAtMentions(event)
-      return
+      return this.filterSuggestedAtMentions(event)
     }
 
-    // store the current cursor position
+    // store the current cursor position (+1 for mobile, for some reason)
     this.setState({ cursorPosition: textarea.selectionEnd + 1 })
 
     if (event.keyCode === returnKey) {
@@ -119,7 +114,7 @@ class SquawkBox extends React.Component {
     }
 
     // terminate suggestion mode on specific word break chars
-    if (breaks.includes(event.keyCode || event.which)) {
+    if (this.isWordBreak(event)) {
       return this.endFiltering()
     }
   }
@@ -179,6 +174,16 @@ class SquawkBox extends React.Component {
     let arrowDown = 40
     return key === arrowDown ||
            event.ctrlKey && (key === letterN || key == letterJ)
+  }
+
+  isWordBreak(event) {
+    let key = event.keyCode || event.which
+    let comma = 188
+    let space = 32
+    let colon = 186
+    let breaks = [comma, space, colon]
+
+    breaks.includes(key)
   }
 
   navigate({ direction, event }) {
