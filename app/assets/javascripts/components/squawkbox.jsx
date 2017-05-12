@@ -82,7 +82,7 @@ class SquawkBox extends React.Component {
         this.beginFiltering(textarea)
       } else {
         $.getJSON("/usernames", (users) => {
-          this.state.users = users
+          this.setState({ users: users })
           this.beginFiltering(textarea)
         })
       }
@@ -100,7 +100,7 @@ class SquawkBox extends React.Component {
     }
 
     // store the current cursor position
-    this.state.cursorPosition = textarea.selectionEnd
+    this.setState({ cursorPosition: textarea.selectionEnd + 1 })
 
     if (event.keyCode === returnKey) {
       event.preventDefault()
