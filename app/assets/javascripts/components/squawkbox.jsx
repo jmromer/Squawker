@@ -4,7 +4,8 @@ class SquawkBox extends React.Component {
     this.state = {
       remainingChars: "",
       color: "black",
-      candidates: []
+      candidates: [],
+      numLines: 1
     }
 
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -51,7 +52,8 @@ class SquawkBox extends React.Component {
           {this.state.remainingChars}
         </div>
 
-        <Suggestions list={this.state.candidates}/>
+        <Suggestions list={this.state.candidates}
+                     numLines={this.state.numLines}/>
       </field>
     )
   }
@@ -76,8 +78,10 @@ class SquawkBox extends React.Component {
         let field = textarea.parentElement
         let allItems = field.getElementsByTagName("li")
         let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
-        let handle = selectedItem.getElementsByClassName("suggestion-username")[0]
 
+        if (!selectedItem) { return this.endFiltering() }
+
+        let handle = selectedItem.getElementsByClassName("suggestion-username")[0]
         let currVal = textarea.value
         let originalPosn = this.state.cursorPosition
 
@@ -88,8 +92,7 @@ class SquawkBox extends React.Component {
         let newPosn = originalPosn - strToRemove.length + selectedHandle.length
         textarea.setSelectionRange(newPosn, newPosn)
 
-        this.endFiltering()
-        return
+        return this.endFiltering()
       }
 
       let letterN = 78
@@ -99,15 +102,13 @@ class SquawkBox extends React.Component {
       if (event.which === arrowUp ||
           event.ctrlKey && (event.keyCode == letterP || event.keyCode == letterK)) {
         event.preventDefault()
-        this.navigateUp(event)
-        return
+        return this.navigateUp(event)
       }
 
       if (event.which === arrowDown ||
           event.ctrlKey && (event.keyCode == letterN || event.keyCode == letterJ)) {
         event.preventDefault()
-        this.navigateDown(event)
-        return
+        return this.navigateDown(event)
       }
 
       let comma = 188
@@ -116,15 +117,13 @@ class SquawkBox extends React.Component {
       let breaks = [comma, space, colon]
       // terminate suggestion mode on specific word break chars
       if (breaks.includes(event.keyCode || event.which)) {
-        this.endFiltering()
-        return
+        return this.endFiltering()
       }
     }
 
     // cmd+enter or ctrl+enter to submit
     if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
-      this.submitForm(event)
-      return
+      return <this className="submitForm"></this>
     }
 
     this.suggestCompletions(event)
@@ -156,8 +155,7 @@ class SquawkBox extends React.Component {
 
       // once we delete the '@', cancel filtering
       if (!match) {
-        this.state.candidates = []
-        return
+        return this.state.candidates = []
       }
 
       let seed = match[1]
@@ -194,6 +192,7 @@ class SquawkBox extends React.Component {
   updateCountdown(event) {
     let maxLength = 160
     let currentLength = event.target.value.length
+    this.state.numLines = Math.ceil(currentLength / 37)
     let remaining = maxLength - currentLength
     let color = (remaining <= 10) ? "red" : "black"
 

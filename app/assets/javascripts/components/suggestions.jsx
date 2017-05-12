@@ -9,7 +9,9 @@ class Suggestions extends React.Component {
     } else {
       return (
         <div className="suggestions-container">
-          <div className="suggestions">
+          <div className="suggestions"
+               style={{top: `${this.props.numLines * 13}px`,
+                       left: "15px"}}>
             <ul className="suggestion-list">
               {
                 this.props.list.map((e, i) =>
