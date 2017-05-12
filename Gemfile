@@ -14,20 +14,20 @@ gem "elasticsearch-rails"
 gem "fake_friends", "~> 1.0.4"
 gem "haml-rails"
 gem "jbuilder", "1.0.2"
-gem "jquery-rails", "4.0.3"
+gem "jquery-rails", "~> 4.3.1"
 gem "markdown-rails"
 gem "multi_json", "~> 1.12"
 gem "newrelic_rpm"
 gem "pg"
 gem "quiet_assets"
 gem "rails", "~> 4.2.0"
-gem "react-rails"
+gem "react-rails", "~> 2.2.0"
 gem "sass-rails", "~> 5.0.1"
 gem "sprockets-es6"
 gem "twitter", "~> 6.1.0"
 gem "uglifier", "~> 3.2.0"
 gem "unicorn"
-gem "will_paginate", "3.0.4"
+gem "will_paginate", "~> 3.1.5"
 
 group :development, :test do
   gem "annotate"
@@ -47,8 +47,8 @@ group :test do
 end
 
 group :production do
-  gem "rails_12factor"
   gem "rack-timeout"
+  gem "rails_12factor"
 end
 
 # refactor for Rails 4
