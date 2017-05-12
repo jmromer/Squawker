@@ -1,6 +1,7 @@
 class Suggestions extends React.Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   render() {
@@ -18,7 +19,8 @@ class Suggestions extends React.Component {
                   <li key={e.handle}
                       className="suggestion-item"
                       data-item-number={i}
-                      tabIndex="0">
+                      tabIndex="0"
+                      onClick={this.handleClick}>
                     <span className="suggestion-username">
                       {e.handle}
                     </span>
@@ -31,5 +33,21 @@ class Suggestions extends React.Component {
           </div>
         </div>)
     }
+  }
+
+  handleClick(event) {
+    event.preventDefault()
+
+    if (event.target.tagName === "LI") {
+      var selectedItem = event.target
+    } else {
+      var selectedItem = event.target.parentElement
+    }
+
+    let suggestionClickEvent = new CustomEvent("suggestion:click", {
+      bubbles: true
+    })
+
+    selectedItem.dispatchEvent(suggestionClickEvent)
   }
 }

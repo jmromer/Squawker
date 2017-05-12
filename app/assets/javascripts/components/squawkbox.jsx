@@ -10,13 +10,20 @@ class SquawkBox extends React.Component {
       numLines: 1,
       remainingChars: "",
       users: null,
-      searchSeed: null
+      searchSeed: null,
+      squawkForm: null
     }
 
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.handleSuggestionClick = this.handleSuggestionClick.bind(this)
+  }
+
+  componentDidMount() {
+    this.state.squawkForm = document.getElementById("js-squawk-form")
+    this.state.squawkForm.addEventListener("suggestion:click", this.handleSuggestionClick)
   }
 
   // Render text area with Suggestions child component
@@ -116,12 +123,17 @@ class SquawkBox extends React.Component {
     }
   }
 
+  handleSuggestionClick(event) {
+    let selectedItem = event.target
+    let textarea = this.state.squawkForm.getElementsByTagName("textarea")[0]
+    this.completeSelectedSuggestion(textarea, selectedItem)
+  }
+
   // Form submission
   // ===============
   submitForm(event) {
     event.preventDefault()
-    let $form = $(event.target).closest("#js-squawk-form")
-    $form.submit()
+    $(this.props.squawkForm).submit()
   }
 
   // Countdown methods
@@ -221,7 +233,7 @@ class SquawkBox extends React.Component {
 
     // once we delete the '@', cancel filtering
     if (!match) {
-      return this.state.candidates = []
+      return this.setState({ candidates: [] })
     }
 
     let seed = match[1]
@@ -233,13 +245,14 @@ class SquawkBox extends React.Component {
       return acc
     }, [])
 
-    this.state.candidates = candidates
+    this.setState({ candidates: candidates })
   }
 
-  completeSelectedSuggestion(textarea) {
+  completeSelectedSuggestion(textarea, selectedItem) {
     let field = textarea.parentElement
     let allItems = field.getElementsByTagName("li")
-    let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
+    selectedItem = selectedItem ||
+                   field.getElementsByClassName("suggestion-focus")[0]
 
     if (!selectedItem) { return this.endFiltering() }
 
@@ -258,13 +271,18 @@ class SquawkBox extends React.Component {
   }
 
   beginFiltering(textarea) {
-    this.state.filtering = true
-    this.state.cursorPosition = textarea.selectionEnd
+    this.setState({
+      filtering: true,
+      cursorPosition: textarea.selectionEnd
+    })
+
   }
 
   endFiltering() {
-    this.state.candidates = []
-    this.state.filtering = false
-    this.state.cursorPosition = null
+    this.setState({
+      candidates: [],
+      filtering: false,
+      cursorPosition: null
+    })
   }
 }
