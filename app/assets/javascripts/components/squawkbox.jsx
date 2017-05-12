@@ -14,6 +14,21 @@ class SquawkBox extends React.Component {
       squawkForm: null
     }
 
+    this.KEYS = {
+      at: 50,
+      return: 13,
+      k: 75,
+      p: 80,
+      n: 78,
+      j: 74,
+      up: 38,
+      down: 40,
+      comma: 188,
+      space: 32,
+      colon: 186,
+      wordBreaks: [this.comma, this.space, this.colon]
+    }
+
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -68,13 +83,12 @@ class SquawkBox extends React.Component {
 
   handleKeyDown(event) {
     this.updateCountdown(event)
-    let cmdOrCtrl = event.metaKey || event.ctrlKey
+
     let textarea = event.target
-    let atSign = 50
-    let returnKey = 13
+    let cmdOrCtrl = event.metaKey || event.ctrlKey
 
     // if at-sign typed, query for user data and begin filtering
-    if (event.keyCode === atSign) {
+    if (event.keyCode === this.KEYS.at) {
       if (this.state.users) {
         this.beginFiltering(textarea)
       } else {
@@ -86,7 +100,7 @@ class SquawkBox extends React.Component {
     }
 
     // cmd+enter or ctrl+enter to submit the form
-    if (cmdOrCtrl && event.keyCode == returnKey) {
+    if (cmdOrCtrl && event.keyCode == this.KEYS.return) {
       return this.submitForm(event)
     }
 
@@ -98,7 +112,7 @@ class SquawkBox extends React.Component {
     // store the current cursor position (+1 for mobile, for some reason)
     this.setState({ cursorPosition: textarea.selectionEnd + 1 })
 
-    if (event.keyCode === returnKey) {
+    if (event.keyCode === this.KEYS.return) {
       event.preventDefault()
       this.completeSelectedSuggestion(textarea)
     }
@@ -159,31 +173,22 @@ class SquawkBox extends React.Component {
   // Event -> Boolean
   isNavigationUp(event) {
     let key = event.keyCode || event.which
-    let letterK = 75
-    let letterP = 80
-    let arrowUp = 38
-    return key === arrowUp ||
-           event.ctrlKey && (key === letterP || key === letterK)
+    let upKeys = (key === this.KEYS.p || key === this.KEYS.k)
+
+    return key === this.KEYS.up || event.ctrlKey && upKeys
   }
 
   // Event -> Boolean
   isNavigationDown(event) {
     let key = event.keyCode || event.which
-    let letterN = 78
-    let letterJ = 74
-    let arrowDown = 40
-    return key === arrowDown ||
-           event.ctrlKey && (key === letterN || key == letterJ)
+    let downKeys = (key === this.KEYS.n || key == this.KEYS.j)
+
+    return key === this.KEYS.down || event.ctrlKey && downKeys
   }
 
   isWordBreak(event) {
     let key = event.keyCode || event.which
-    let comma = 188
-    let space = 32
-    let colon = 186
-    let breaks = [comma, space, colon]
-
-    breaks.includes(key)
+    this.KEYS.wordBreaks.includes(key)
   }
 
   navigate({ direction, event }) {
@@ -277,18 +282,11 @@ class SquawkBox extends React.Component {
   }
 
   beginFiltering(textarea) {
-    this.setState({
-      filtering: true,
-      cursorPosition: textarea.selectionEnd
-    })
-
+    let curr = textarea.selectionEnd
+    this.setState({ cursorPosition: curr, filtering: true })
   }
 
   endFiltering() {
-    this.setState({
-      candidates: [],
-      filtering: false,
-      cursorPosition: null
-    })
+    this.setState({ candidates: [], cursorPosition: null, filtering: false })
   }
 }
