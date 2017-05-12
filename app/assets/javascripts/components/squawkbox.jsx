@@ -64,6 +64,11 @@ class SquawkBox extends React.Component {
   }
 
   handleKeyDown(event) {
+    // cmd+enter or ctrl+enter to submit
+    if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
+      return this.submitForm(event)
+    }
+
     let arrowUp = 38
     let arrowDown = 40
     let returnKey = 13
@@ -119,11 +124,6 @@ class SquawkBox extends React.Component {
       if (breaks.includes(event.keyCode || event.which)) {
         return this.endFiltering()
       }
-    }
-
-    // cmd+enter or ctrl+enter to submit
-    if ((event.metaKey || event.ctrlKey) && event.keyCode == 13) {
-      return <this className="submitForm"></this>
     }
 
     this.suggestCompletions(event)
