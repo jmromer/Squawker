@@ -62,11 +62,24 @@ class SquawkBox extends React.Component {
     this.updateCountdown(event)
     let cmdOrCtrl = event.metaKey || event.ctrlKey
     let textarea = event.target
-    let returnKey = 13
-    let comma = 188
-    let space = 32
+    let atSign = 50
     let colon = 186
+    let comma = 188
+    let returnKey = 13
+    let space = 32
     let breaks = [comma, space, colon]
+
+    // if at-sign typed, query for user data and begin filtering
+    if (event.keyCode === atSign) {
+      if (this.state.users) {
+        this.beginFiltering(textarea)
+      } else {
+        $.getJSON("/usernames", (users) => {
+          this.state.users = users
+          this.beginFiltering(textarea)
+        })
+      }
+    }
 
     // cmd+enter or ctrl+enter to submit the form
     if (cmdOrCtrl && event.keyCode == returnKey) {
@@ -197,44 +210,30 @@ class SquawkBox extends React.Component {
 
   // Suggester Methods
   filterSuggestedAtMentions(event) {
+    // if we're not in filtering mode, no-op
+    if (!this.state.filtering) { return }
+
     let textarea = event.target
-    let atSign = 50
+    let currVal = textarea.value
+    let currPosn = textarea.selectionEnd
+    let slice = currVal.slice(0, currPosn)
+    let match = slice.match(/@(\w+)$/)
 
-    // if we're in filtering mode, filter
-    if (this.state.filtering) {
-      let currVal = textarea.value
-      let currPosn = textarea.selectionEnd
-      let slice = currVal.slice(0, currPosn)
-      let match = slice.match(/@(\w+)$/)
-
-      // once we delete the '@', cancel filtering
-      if (!match) {
-        return this.state.candidates = []
-      }
-
-      let seed = match[1]
-      this.state.searchSeed = seed
-      let seedRegex = new RegExp(seed, "i")
-
-      let candidates = this.state.users.reduce((acc, [index, user]) => {
-        if (index.match(seedRegex)) { acc.push(user) }
-        return acc
-      }, [])
-
-      this.state.candidates = candidates
+    // once we delete the '@', cancel filtering
+    if (!match) {
+      return this.state.candidates = []
     }
 
-    // if at-sign typed, query for user data and begin filtering
-    if (event.keyCode === atSign) {
-      if (this.state.users) {
-        this.beginFiltering(textarea)
-      } else {
-        $.getJSON("/usernames", (users) => {
-          this.state.users = users
-          this.beginFiltering(textarea)
-        })
-      }
-    }
+    let seed = match[1]
+    this.state.searchSeed = seed
+    let seedRegex = new RegExp(seed, "i")
+
+    let candidates = this.state.users.reduce((acc, [index, user]) => {
+      if (index.match(seedRegex)) { acc.push(user) }
+      return acc
+    }, [])
+
+    this.state.candidates = candidates
   }
 
   completeSelectedSuggestion(textarea) {
@@ -255,7 +254,7 @@ class SquawkBox extends React.Component {
     let newPosn = originalPosn - strToRemove.length + selectedHandle.length
     textarea.setSelectionRange(newPosn, newPosn)
 
-    return this.endFiltering()
+    this.endFiltering()
   }
 
   beginFiltering(textarea) {
