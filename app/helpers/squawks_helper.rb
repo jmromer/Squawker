@@ -38,7 +38,7 @@ module SquawksHelper
     wrapped = content.split.map { |str| wrap_if_needed(max_length, str) }
     wrapped_string = wrapped.join(" ")
 
-    sanitize(raw(wrapped_string))
+    wrapped_string.html_safe
   end
 
   def wrap_if_needed(max, str)
