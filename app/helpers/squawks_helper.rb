@@ -29,7 +29,11 @@ module SquawksHelper
   end
 
   def formatted(str)
-    parse_hashtags(parse_mentions(parse_urls(wrap(str))))
+    str = wrap(str)
+    str = parse_urls(str)
+    str = parse_mentions(str)
+    str = parse_hashtags(str)
+    str
   end
 
   def wrap(content, options = { max_length: 70 })
