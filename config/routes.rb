@@ -14,6 +14,7 @@ Squawker::Application.routes.draw do
   resources :squawks, only: %i[new show create destroy] do
     resources :likes, only: :index
     resource :likes, only: %i[create destroy]
+    resource :flags, only: %i[create destroy]
   end
 
   resources :usernames, only: %i[index]

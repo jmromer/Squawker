@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
            dependent: :destroy
 
   has_many :likes, dependent: :destroy
+  has_many :flags, dependent: :destroy
 
   self.per_page = 20
 
@@ -110,6 +111,18 @@ class User < ActiveRecord::Base
 
   def likes?(squawk)
     likes.where(liked_squawk: squawk).exists?
+  end
+
+  def flagged?(squawk)
+    flags.where(flagged_squawk: squawk).exists?
+  end
+
+  def display_flagged_squawks?
+    true
+  end
+
+  def display_squawk?(squawk)
+    display_flagged_squawks? || !flagged?(squawk)
   end
 
   private

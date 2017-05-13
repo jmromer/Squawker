@@ -15,3 +15,10 @@
         = content_tag(:div, value, class: "alert alert-#{key}")
       = yield
       = render "layouts/footer"
+
+    :javascript
+      window.Squawker = {
+        config: {
+          displayFlaggedSquawks: #{current_user.display_flagged_squawks?}
+        }
+      }
