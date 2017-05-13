@@ -22,4 +22,9 @@ FactoryGirl.define do
     liker factory: :user
     liked_squawk factory: :squawk
   end
+
+  factory :flag do
+    flagger factory: :user
+    flagged_squawk  factory: :squawk
+  end
 end

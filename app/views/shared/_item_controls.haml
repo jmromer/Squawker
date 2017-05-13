@@ -12,9 +12,18 @@
               title: "Like this",
               class: "like-item"
 
-  = link_to "", "",
-            title: "Flag this",
-            class: "flag-item"
+  - if current_user.flagged?(squawk)
+    = link_to "", squawk_flags_path(squawk),
+              method: :delete,
+              remote: true,
+              title: "Un-flag this",
+              class: "flag-item active"
+  - else
+    = link_to "", squawk_flags_path(squawk),
+              method: :post,
+              remote: true,
+              title: "Flag this",
+              class: "flag-item"
 
   - if current_user?(squawk.user)
     = link_to "", squawk_path(squawk),

@@ -8,6 +8,7 @@ RSpec.describe LikesController, type: :controller do
       it "returns http 200 and renders json" do
         like = create(:like)
         user = like.liker
+        sign_in(user)
         squawk = like.liked_squawk
 
         get :index, user_id: user.id
@@ -22,6 +23,7 @@ RSpec.describe LikesController, type: :controller do
       it "returns http 200 and renders json" do
         like = create(:like)
         user = like.liker
+        sign_in(user)
         squawk = like.liked_squawk
 
         get :index, squawk_id: squawk.id
@@ -36,6 +38,7 @@ RSpec.describe LikesController, type: :controller do
       it "returns http 422 and renders errors json" do
         like = create(:like)
         user = like.liker
+        sign_in(user)
         squawk = like.liked_squawk
 
         get :index, squawk_id: squawk.id
@@ -56,7 +59,7 @@ RSpec.describe LikesController, type: :controller do
 
         request = -> { xhr :post, :create, squawk_id: squawk.id }
 
-        expect { request.call }.to change { Like.count }.by(+1)
+        expect { request.call }.to change { Like.count }.by(1)
         expect(response).to be_ok
       end
     end

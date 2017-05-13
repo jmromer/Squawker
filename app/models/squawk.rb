@@ -23,8 +23,11 @@ class Squawk < ActiveRecord::Base
 
   before_save :transform_text
   belongs_to :user
-  has_many :likes, counter_cache: true
+
+  has_many :likes, dependent: :destroy
   has_many :likers, through: :likes
+  has_many :flags, dependent: :destroy
+  has_many :flaggers, through: :flags
 
   default_scope -> { order("created_at DESC") }
 
@@ -70,10 +73,10 @@ class Squawk < ActiveRecord::Base
       where(is_followee_or_self, user_id: user)
     end
 
-    def squawked_text(st)
-      st.partition(/(https?.*)/i)
-        .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }
-        .join
+    def squawked_text(str)
+      str.partition(/(https?.*)/i)
+         .map { |i| i =~ %r{(https?:\/\/.*)}i ? i : i.upcase }
+         .join
     end
   end
 end
