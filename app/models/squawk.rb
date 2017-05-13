@@ -23,7 +23,8 @@ class Squawk < ActiveRecord::Base
 
   before_save :transform_text
   belongs_to :user
-  has_many :likes, counter_cache: true
+
+  has_many :likes, dependent: :destroy
   has_many :likers, through: :likes
 
   default_scope -> { order("created_at DESC") }

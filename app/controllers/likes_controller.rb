@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
+  before_action :signed_in_user
+
   def index
     if (user = User.find_by(id: params[:user_id]))
       render json: user.likes
