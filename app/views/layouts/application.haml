@@ -19,6 +19,6 @@
     :javascript
       window.Squawker = {
         config: {
-          displayFlaggedSquawks: #{current_user.display_flagged_squawks?}
+          displayFlaggedSquawks: #{current_user.try(:display_flagged_squawks?)}
         }
       }
