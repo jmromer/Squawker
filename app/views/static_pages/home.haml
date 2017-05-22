@@ -3,6 +3,10 @@
     %section= render "shared/user_info"
     %section= render "shared/stats"
     %section= render partial: "shared/squawk_form", locals: { squawk: squawk }
+    %section#recommendations.hide
+      You might also like:
+      %ul.squawks.recommendations-list
+        .js-recs-list
   .span8
     %h3 recent activity
     %ul#js-squawk-list.squawks
