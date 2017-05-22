@@ -13,6 +13,10 @@
                locals: { user: user }
       = render partial: "follow_form",
                locals: { user: user } if signed_in?
+    %section#recommendations.hide
+      You might also like:
+      %ul.squawks.recommendations-list
+        .js-recs-list
   .span8
     %h3= "squawks (#{user.squawks.count})"
     %ul#js-squawk-list.squawks

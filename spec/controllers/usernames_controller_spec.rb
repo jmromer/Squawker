@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UsernamesController do
+RSpec.describe UsernamesController, type: :controller do
   describe "GET #index" do
     it "responds with HTTP 200, renders json" do
       user1 = create(:user)

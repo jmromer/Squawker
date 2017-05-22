@@ -2,5 +2,5 @@
 
 require "rails_helper"
 
-RSpec.describe UsersController do
+RSpec.describe UsersController, type: :controller do
 end

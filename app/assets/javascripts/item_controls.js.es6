@@ -16,6 +16,24 @@ $(document).ready(() => {
       .data("method", newMethod)
   }
 
+  const requestRecommendations = e => {
+    e.preventDefault()
+    let $squawkLi = targetSquawk(e)
+    let squawkId = $squawkLi.attr("id")
+
+    $.ajax({
+      url: `/recommendations?squawk_id=${squawkId}`
+    }).done(resp => {
+      let $recs = $("#recommendations")
+      let $list = $($recs.find(".js-recs-list")[0])
+      $recs.show()
+      $list.html(resp)
+    })
+  }
+
+  $("body")
+    .on("ajax:beforeSend", ".like-item:not('.active')", requestRecommendations)
+
   // Like item handling
   // Flip optimistically, revert on failure
   $("body")

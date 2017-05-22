@@ -67,7 +67,8 @@ class UsersController < ApplicationController
   def feed
     user = User.find_by(username: params[:id])
     squawks = user.squawks.paginate(page: params[:page])
-    render :feed, locals: { squawks: squawks }, layout: false
+    render "activity_feed/index",
+           locals: { squawks: squawks }, layout: false
   end
 
   def following
