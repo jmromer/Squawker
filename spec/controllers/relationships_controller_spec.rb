@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe RelationshipsController do
+describe RelationshipsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
