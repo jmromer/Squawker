@@ -1,8 +1,0 @@
-- if squawks.any?
-  - squawks.each do |squawk|
-    - next unless current_user.display_squawk?(squawk)
-    %li.group{ id: squawk.id }
-      - cache(squawk) do
-        = render squawk
-      = render partial: "shared/item_controls",
-                locals: { squawk: squawk }
