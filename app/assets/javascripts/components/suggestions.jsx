@@ -4,6 +4,22 @@ class Suggestions extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  renderListItem() {
+    return this.props.list.map((e, i) =>
+      <li key={e.handle}
+          className="suggestion-item"
+          data-item-number={i}
+          tabIndex="0"
+          onClick={this.handleClick}>
+        <span className="suggestion-username">
+          {e.handle}
+        </span>
+        <span className="suggestion-name">
+          {e.name}
+        </span>
+      </li>)
+  }
+
   render() {
     if (this.props.list.length === 0) {
       return <div></div>
@@ -11,24 +27,9 @@ class Suggestions extends React.Component {
       return (
         <div className="suggestions-container">
           <div className="suggestions"
-               style={{top: `${this.props.numLines * 13}px`,
-                       left: "15px"}}>
+               style={{top: `${this.props.numLines * 13}px`, left: "15px"}}>
             <ul className="suggestion-list">
-              {
-                this.props.list.map((e, i) =>
-                  <li key={e.handle}
-                      className="suggestion-item"
-                      data-item-number={i}
-                      tabIndex="0"
-                      onClick={this.handleClick}>
-                    <span className="suggestion-username">
-                      {e.handle}
-                    </span>
-                    <span className="suggestion-name">
-                      {e.name}
-                    </span>
-                  </li>)
-              }
+              {this.renderListItem()}
             </ul>
           </div>
         </div>)
@@ -38,16 +39,10 @@ class Suggestions extends React.Component {
   handleClick(event) {
     event.preventDefault()
 
-    if (event.target.tagName === "LI") {
-      var selectedItem = event.target
-    } else {
-      var selectedItem = event.target.parentElement
-    }
+    const target = event.target
+    const selectedItem = target.tagName === "LI" ?
+                         target : target.parentElement
 
-    let suggestionClickEvent = new CustomEvent("suggestion:click", {
-      bubbles: true
-    })
-
-    selectedItem.dispatchEvent(suggestionClickEvent)
+    this.props.handleSuggestionClick(selectedItem)
   }
 }
