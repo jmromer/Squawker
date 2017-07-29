@@ -38,16 +38,10 @@ class Suggestions extends React.Component {
   handleClick(event) {
     event.preventDefault()
 
-    if (event.target.tagName === "LI") {
-      var selectedItem = event.target
-    } else {
-      var selectedItem = event.target.parentElement
-    }
+    const target = event.target
+    const selectedItem = target.tagName === "LI" ?
+                         target : target.parentElement
 
-    let suggestionClickEvent = new CustomEvent("suggestion:click", {
-      bubbles: true
-    })
-
-    selectedItem.dispatchEvent(suggestionClickEvent)
+    this.props.handleSuggestionClick(selectedItem)
   }
 }

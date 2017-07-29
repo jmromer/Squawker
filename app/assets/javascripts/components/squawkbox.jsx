@@ -10,10 +10,10 @@ class SquawkBox extends React.Component {
       numLines: 1,
       remainingChars: "",
       users: null,
-      searchSeed: null,
-      squawkForm: null
+      searchSeed: null
     }
 
+    // Key codes
     this.KEYS = {
       at: 50,
       return: 13,
@@ -36,12 +36,6 @@ class SquawkBox extends React.Component {
     this.handleSuggestionClick = this.handleSuggestionClick.bind(this)
   }
 
-  componentDidMount() {
-    let squawkForm = document.getElementById("js-squawk-form")
-    squawkForm.addEventListener("suggestion:click", this.handleSuggestionClick)
-    this.state.squawkForm = squawkForm
-  }
-
   // Render text area with Suggestions child component
   render() {
     return (
@@ -62,7 +56,8 @@ class SquawkBox extends React.Component {
         </div>
 
         <Suggestions list={this.state.candidates}
-                     numLines={this.state.numLines}/>
+                     numLines={this.state.numLines}
+                     handleSuggestionClick={this.handleSuggestionClick} />
       </field>
     )
   }
@@ -133,9 +128,9 @@ class SquawkBox extends React.Component {
     }
   }
 
-  handleSuggestionClick(event) {
-    let selectedItem = event.target
-    let textarea = this.state.squawkForm.getElementsByTagName("textarea")[0]
+  handleSuggestionClick(selectedItem) {
+    const squawkForm = document.getElementById("js-squawk-form")
+    const textarea = squawkForm.getElementsByTagName("textarea")[0]
     this.completeSelectedSuggestion(textarea, selectedItem)
   }
 
@@ -143,7 +138,8 @@ class SquawkBox extends React.Component {
   // ===============
   submitForm(event) {
     event.preventDefault()
-    $(this.state.squawkForm).submit()
+    let squawkForm = document.getElementById("js-squawk-form")
+    $(squawkForm).submit()
   }
 
   // Countdown methods
