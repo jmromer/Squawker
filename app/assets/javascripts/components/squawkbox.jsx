@@ -6,7 +6,7 @@ class SquawkBox extends React.Component {
       candidates: [],
       cursorPosition: null,
       color: "black",
-      filtering: false,
+      isFiltering: false,
       numLines: 1,
       remainingChars: "",
       users: null,
@@ -28,12 +28,6 @@ class SquawkBox extends React.Component {
       colon: 186,
       wordBreaks: [this.comma, this.space, this.colon]
     }
-
-    this.handleBlur = this.handleBlur.bind(this)
-    this.handleFocus = this.handleFocus.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.handleKeyUp = this.handleKeyUp.bind(this)
-    this.handleSuggestionClick = this.handleSuggestionClick.bind(this)
   }
 
   // Render text area with Suggestions child component
@@ -44,10 +38,10 @@ class SquawkBox extends React.Component {
                   className="squawk-form-content"
                   name="squawk[content]"
                   placeholder="sing the song of yourself"
-                  onBlur={this.handleBlur}
-                  onFocus={this.handleFocus}
-                  onKeyDown={this.handleKeyDown}
-                  onKeyUp={this.handleKeyUp}>
+                  onBlur={this.handleBlur.bind(this)}
+                  onFocus={this.handleFocus.bind(this)}
+                  onKeyDown={this.handleKeyDown.bind(this)}
+                  onKeyUp={this.handleKeyUp.bind(this)}>
         </textarea>
 
         <div className="squawk-form-countdown"
@@ -55,9 +49,10 @@ class SquawkBox extends React.Component {
           {this.state.remainingChars}
         </div>
 
-        <Suggestions list={this.state.candidates}
-                     numLines={this.state.numLines}
-                     handleSuggestionClick={this.handleSuggestionClick} />
+        <Suggestions
+          list={this.state.candidates}
+          numLines={this.state.numLines}
+          handleSuggestionClick={this.handleSuggestionClick.bind(this)} />
       </field>
     )
   }
@@ -79,8 +74,8 @@ class SquawkBox extends React.Component {
   handleKeyDown(event) {
     this.updateCountdown(event)
 
-    let textarea = event.target
-    let cmdOrCtrl = event.metaKey || event.ctrlKey
+    const textarea = event.target
+    const cmdOrCtrl = event.metaKey || event.ctrlKey
 
     // if at-sign typed, query for user data and begin filtering
     if (event.keyCode === this.KEYS.at) {
@@ -88,7 +83,7 @@ class SquawkBox extends React.Component {
         this.beginFiltering(textarea)
       } else {
         $.getJSON("/usernames", (users) => {
-          this.setState({ users: users })
+          this.setState({ users })
           this.beginFiltering(textarea)
         })
       }
@@ -100,7 +95,7 @@ class SquawkBox extends React.Component {
     }
 
     // if not filtering, begin filtering
-    if (!this.state.filtering) {
+    if (!this.state.isFiltering) {
       return this.filterSuggestedAtMentions(event)
     }
 
@@ -138,17 +133,17 @@ class SquawkBox extends React.Component {
   // ===============
   submitForm(event) {
     event.preventDefault()
-    let squawkForm = document.getElementById("js-squawk-form")
+    const squawkForm = document.getElementById("js-squawk-form")
     $(squawkForm).submit()
   }
 
   // Countdown methods
   // ==================
   updateCountdown(event) {
-    let maxChars = 160
-    let currentLength = event.target.value.length
-    let remainingChars = maxChars - currentLength
-    let color = (remainingChars <= 10) ? "red" : "black"
+    const maxChars = 160
+    const currentLength = event.target.value.length
+    const remainingChars = maxChars - currentLength
+    const color = (remainingChars <= 10) ? "red" : "black"
 
     if (remainingChars === maxChars) {
       this.clearCountdown()
@@ -157,7 +152,7 @@ class SquawkBox extends React.Component {
     }
 
     // set approx number of lines entered for Suggestions prop
-    this.state.numLines = Math.ceil(currentLength / 37)
+    this.setState({numLines: Math.ceil(currentLength / 37)})
   }
 
   clearCountdown() {
@@ -168,31 +163,31 @@ class SquawkBox extends React.Component {
   // ==================
   // Event -> Boolean
   isNavigationUp(event) {
-    let key = event.keyCode || event.which
-    let upKeys = (key === this.KEYS.p || key === this.KEYS.k)
+    const key = event.keyCode || event.which
+    const upKeys = (key === this.KEYS.p || key === this.KEYS.k)
 
     return key === this.KEYS.up || event.ctrlKey && upKeys
   }
 
   // Event -> Boolean
   isNavigationDown(event) {
-    let key = event.keyCode || event.which
-    let downKeys = (key === this.KEYS.n || key == this.KEYS.j)
+    const key = event.keyCode || event.which
+    const downKeys = (key === this.KEYS.n || key == this.KEYS.j)
 
     return key === this.KEYS.down || event.ctrlKey && downKeys
   }
 
   isWordBreak(event) {
-    let key = event.keyCode || event.which
+    const key = event.keyCode || event.which
     this.KEYS.wordBreaks.includes(key)
   }
 
   navigate({ direction, event }) {
-    let field = event.target.parentElement
-    let selectedItem = field.getElementsByClassName("suggestion-focus")[0]
+    const field = event.target.parentElement
+    const selectedItem = field.getElementsByClassName("suggestion-focus")[0]
 
-    let allItems = field.getElementsByTagName("li")
-    let itemsArray = Array.from(allItems)
+    const allItems = field.getElementsByTagName("li")
+    const itemsArray = Array.from(allItems)
 
     if (direction === "up") {
       this.navigateUp(selectedItem, itemsArray)
@@ -203,8 +198,8 @@ class SquawkBox extends React.Component {
 
   navigateUp(selectedItem, itemsArray) {
     if (!selectedItem) { return }
-    let prevItemNum = parseInt(selectedItem.dataset.itemNumber, 10) - 1
-    let prevItem = itemsArray.filter(e => e.dataset.itemNumber == prevItemNum)[0]
+    const prevItemNum = parseInt(selectedItem.dataset.itemNumber, 10) - 1
+    const prevItem = itemsArray.filter(e => e.dataset.itemNumber == prevItemNum)[0]
 
     if (!prevItem) { return }
     itemsArray.forEach(e => e.classList.remove("suggestion-focus"))
@@ -213,14 +208,14 @@ class SquawkBox extends React.Component {
 
   navigateDown(selectedItem, itemsArray) {
     if (!selectedItem) {
-      let firstSuggestion = itemsArray[0]
+      const firstSuggestion = itemsArray[0]
       if (!firstSuggestion) { return }
       firstSuggestion.classList.add("suggestion-focus")
       return
     }
 
-    let nextItemNum = parseInt(selectedItem.dataset.itemNumber, 10) + 1
-    let nextItem = itemsArray.filter(e => e.dataset.itemNumber == nextItemNum)[0]
+    const nextItemNum = parseInt(selectedItem.dataset.itemNumber, 10) + 1
+    const nextItem = itemsArray.filter(e => e.dataset.itemNumber == nextItemNum)[0]
 
     if (!nextItem) { return }
     itemsArray.forEach(e => e.classList.remove("suggestion-focus"))
@@ -230,24 +225,24 @@ class SquawkBox extends React.Component {
   // Suggester Methods
   filterSuggestedAtMentions(event) {
     // if we're not in filtering mode, no-op
-    if (!this.state.filtering) { return }
+    if (!this.state.isFiltering) { return }
 
-    let textarea = event.target
-    let currVal = textarea.value
-    let currPosn = textarea.selectionEnd
-    let slice = currVal.slice(0, currPosn)
-    let match = slice.match(/@(\w+)$/)
+    const textarea = event.target
+    const currVal = textarea.value
+    const currPosn = textarea.selectionEnd
+    const slice = currVal.slice(0, currPosn)
+    const match = slice.match(/@(\w+)$/)
 
     // once we delete the '@', cancel filtering
     if (!match) {
       return this.setState({ candidates: [] })
     }
 
-    let seed = match[1]
-    this.state.searchSeed = seed
-    let seedRegex = new RegExp(seed, "i")
+    const seed = match[1]
+    this.setState({searchSeed: seed})
+    const seedRegex = new RegExp(seed, "i")
 
-    let candidates = this.state.users.reduce((acc, [index, user]) => {
+    const candidates = this.state.users.reduce((acc, [index, user]) => {
       if (index.match(seedRegex)) { acc.push(user) }
       return acc
     }, [])
@@ -256,33 +251,33 @@ class SquawkBox extends React.Component {
   }
 
   completeSelectedSuggestion(textarea, selectedItem) {
-    let field = textarea.parentElement
-    let allItems = field.getElementsByTagName("li")
+    const field = textarea.parentElement
+    const allItems = field.getElementsByTagName("li")
     selectedItem = selectedItem ||
                    field.getElementsByClassName("suggestion-focus")[0]
 
     if (!selectedItem) { return this.endFiltering() }
 
-    let handle = selectedItem.getElementsByClassName("suggestion-username")[0]
-    let currVal = textarea.value
-    let originalPosn = this.state.cursorPosition
+    const handle = selectedItem.getElementsByClassName("suggestion-username")[0]
+    const currVal = textarea.value
+    const originalPosn = this.state.cursorPosition
 
-    let strToRemove = "@" + this.state.searchSeed
-    let selectedHandle = "@" + handle.textContent
+    const strToRemove = "@" + this.state.searchSeed
+    const selectedHandle = "@" + handle.textContent
     textarea.value = textarea.value.replace(strToRemove, selectedHandle)
 
-    let newPosn = originalPosn - strToRemove.length + selectedHandle.length
+    const newPosn = originalPosn - strToRemove.length + selectedHandle.length
     textarea.setSelectionRange(newPosn, newPosn)
 
     this.endFiltering()
   }
 
   beginFiltering(textarea) {
-    let curr = textarea.selectionEnd
-    this.setState({ cursorPosition: curr, filtering: true })
+    const curr = textarea.selectionEnd
+    this.setState({ cursorPosition: curr, isFiltering: true })
   }
 
   endFiltering() {
-    this.setState({ candidates: [], cursorPosition: null, filtering: false })
+    this.setState({ candidates: [], cursorPosition: null, isFiltering: false })
   }
 }
