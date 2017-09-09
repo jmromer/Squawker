@@ -38,6 +38,7 @@ group :development, :test do
   gem "meta_request"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.5"
+  gem "rubocop", "~> 0.48.1"
 end
 
 group :test do
